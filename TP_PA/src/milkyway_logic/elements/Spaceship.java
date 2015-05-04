@@ -1,4 +1,4 @@
-package elements;
+package milkyway_logic.elements;
 
 import java.util.List;
 

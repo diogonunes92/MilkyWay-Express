@@ -1,4 +1,4 @@
-package actions;
+package milkyway_logic.actions;
 
 /**
  *

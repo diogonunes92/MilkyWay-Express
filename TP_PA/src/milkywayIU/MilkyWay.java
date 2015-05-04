@@ -1,6 +1,8 @@
-package main;
+package milkywayIU;
 
-import gameplanner.Game;
+
+
+import milkyway_logic.gameplanner.Game;
 
 /**
  *

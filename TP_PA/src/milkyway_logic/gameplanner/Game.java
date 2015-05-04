@@ -1,4 +1,4 @@
-package gameplanner;
+package milkyway_logic.gameplanner;
 
 /**
  *

@@ -1,4 +1,4 @@
-package gameboard;
+package milkyway_logic.gameboard;
 
 /**
  *

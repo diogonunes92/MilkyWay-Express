@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elements;
+package milkywayIU;
+
+import milkyway_logic.gameplanner.Game;
 
 /**
  *
- * @author marcobarbosa
+ * @author Diogo
  */
-public class Cube {
+public class IuTexto {
+    Game game;
     
 }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package states;
+package milkyway_logic.elements;
 
 /**
  *
- * @author Diogo
+ * @author marcobarbosa
  */
-public class Move {
+public class Cube {
     
 }
