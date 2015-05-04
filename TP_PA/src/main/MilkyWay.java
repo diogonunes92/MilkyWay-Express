@@ -11,7 +11,6 @@ public class MilkyWay {
     public static void main(String[] args) {
         
         Game mGame = new Game();
-        
         mGame.newGame();
     }
 }

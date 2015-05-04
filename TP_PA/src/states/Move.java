@@ -7,9 +7,8 @@ package states;
 
 /**
  *
- * @author marcobarbosa
+ * @author Diogo
  */
-public interface States {
+public class Move {
     
-
 }

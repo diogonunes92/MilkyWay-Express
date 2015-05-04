@@ -7,16 +7,17 @@ import java.util.List;
  *
  * @author marcobarbosa
  */
-public class Planet {
+public class Planet{
     
     private List<Cube> cubeList;
     private HashMap<String, Integer> prices;
-    private boolean isVisited;
+    private boolean isTurned;
 
-    public Planet(List<Cube> cubeList, HashMap<String, Integer> prices, boolean isVisited) {
+    public Planet(List<Cube> cubeList, HashMap<String, Integer> prices, boolean isTurned) {
         this.cubeList = cubeList;
         this.prices = prices;
-        this.isVisited = isVisited;
+        this.isTurned = isTurned;
+        
     }
 
     public List<Cube> getCubeList() {
@@ -35,11 +36,11 @@ public class Planet {
         this.prices = prices;
     }
 
-    public boolean isIsVisited() {
-        return isVisited;
+    public boolean getIsTurned() {
+        return isTurned;
     }
 
-    public void setIsVisited(boolean isVisited) {
-        this.isVisited = isVisited;
+    public void setIsTurned(boolean isTurned) {
+        this.isTurned = isTurned;
     }         
 }

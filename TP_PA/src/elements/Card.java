@@ -4,6 +4,6 @@ package elements;
  *
  * @author marcobarbosa
  */
-public class Card {
-    
+public interface Card {
+
 }
