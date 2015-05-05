@@ -3,13 +3,15 @@ package milkyway_logic.elements;
 import java.util.HashMap;
 import java.util.List;
 
-public class Planet{
+public class Planet extends Card{
     
     private List<Cube> cubeList;
     private HashMap<String, Integer> prices;
     private boolean isTurned;
+    
 
     public Planet(List<Cube> cubeList, HashMap<String, Integer> prices, boolean isTurned) {
+        super(isTurned);
         this.cubeList = cubeList;
         this.prices = prices;
         this.isTurned = isTurned;

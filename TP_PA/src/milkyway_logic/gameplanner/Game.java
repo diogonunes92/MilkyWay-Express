@@ -14,7 +14,7 @@ public final class Game {
 
     public Game() {
 
-        mState = new StartGame();
+        mState = new StartGame(this);
         totalCoins = 30;
         myCoins = 0;
     }
@@ -46,5 +46,9 @@ public final class Game {
 
     public static void setMyCoins(int myCoins) {
         Game.myCoins = myCoins;
+    }
+
+    public void constructGame() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
