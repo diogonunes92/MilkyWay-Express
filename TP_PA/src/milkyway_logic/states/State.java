@@ -1,0 +1,22 @@
+package milkyway_logic.states;
+
+import milkyway_logic.gameplanner.Game;
+
+public abstract class State {
+
+    private Game mGame;
+
+    public State(Game game) {
+        this.mGame = game;
+    }
+
+    public Game getGame() {
+        return this.mGame;
+    }
+
+    abstract public State constructGame();
+
+    abstract public State move(int lin, int col);
+    
+    
+}

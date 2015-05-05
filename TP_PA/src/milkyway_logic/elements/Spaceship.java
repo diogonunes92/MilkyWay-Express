@@ -2,10 +2,6 @@ package milkyway_logic.elements;
 
 import java.util.List;
 
-/**
- *
- * @author marcobarbosa
- */
 public class Spaceship {
     
     private final int id;
