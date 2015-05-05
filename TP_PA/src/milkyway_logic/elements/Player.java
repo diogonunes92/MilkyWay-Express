@@ -1,9 +1,5 @@
 package milkyway_logic.elements;
 
-/**
- *
- * @author marcobarbosa
- */
 public class Player {
     
     private final int id;
@@ -30,9 +26,5 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-    
-    
-    
-    
+    } 
 }
