@@ -11,7 +11,7 @@ public abstract class Card{
         this.isTurned = isTurned;
     }
     
-    public boolean isIsTurned() {
+    public boolean getIsTurned() {
         return isTurned;
     }
 

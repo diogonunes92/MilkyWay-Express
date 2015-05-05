@@ -5,24 +5,23 @@ import java.util.List;
 
 public class Planet extends Card{
     
-    private List<Cube> cubeList;
+    private Cube[] cubeList;
     private HashMap<String, Integer> prices;
-    private boolean isTurned;
+    private boolean isPirate;
     
 
-    public Planet(List<Cube> cubeList, HashMap<String, Integer> prices, boolean isTurned) {
+    public Planet(HashMap<String, Integer> prices, boolean isTurned, boolean isPirate) {
         super(isTurned);
-        this.cubeList = cubeList;
+        this.cubeList = new Cube[2];
         this.prices = prices;
-        this.isTurned = isTurned;
-        
+        this.isPirate = isPirate;
     }
 
-    public List<Cube> getCubeList() {
+    public Cube[] getCubeList() {
         return cubeList;
     }
 
-    public void setCubeList(List<Cube> cubeList) {
+    public void setCubeList(Cube[] cubeList) {
         this.cubeList = cubeList;
     }
 
@@ -33,12 +32,4 @@ public class Planet extends Card{
     public void setPrices(HashMap<String, Integer> prices) {
         this.prices = prices;
     }
-
-    public boolean getIsTurned() {
-        return isTurned;
-    }
-
-    public void setIsTurned(boolean isTurned) {
-        this.isTurned = isTurned;
-    }         
 }

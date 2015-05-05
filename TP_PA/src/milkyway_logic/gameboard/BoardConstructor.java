@@ -14,7 +14,6 @@ public class BoardConstructor {
         
        this.gameBoard = new Card[7][9];
        
-       if(gameBoard[0][0] == null)
     }
     
     

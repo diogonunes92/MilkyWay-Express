@@ -1,17 +1,22 @@
 package milkyway_logic.elements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Spaceship {
     
-    private final int id;
+    private static int id = 0;
     private int power;
+    private int posY;
+    private int posX;
     private List<String> cargo;
 
-    public Spaceship(int id, int power, List<String> cargo) {
-        this.id = id;
-        this.power = power;
-        this.cargo = cargo;
+    public Spaceship() {
+        Spaceship.id++;
+        this.power = 3;
+        this.cargo = new ArrayList<>();
+        this.posX = 0;
+        this.posY = 0;
     }
 
     public int getId() {

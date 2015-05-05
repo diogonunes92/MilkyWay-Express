@@ -1,16 +1,19 @@
 package milkyway_logic.gameplanner;
 
 import milkyway_logic.elements.Player;
+import milkyway_logic.elements.Spaceship;
+import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
 
 public final class Game {
 
     private State mState;
-    private Player mPlayer;
-    
+    private BoardConstructor mBoard;
+    private Spaceship mSpaceship;
     private static int totalCoins;
     private static int myCoins;
+    
 
     public Game() {
 
@@ -49,6 +52,7 @@ public final class Game {
     }
 
     public void constructGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.mSpaceship = new Spaceship();
+        this.mBoard = new BoardConstructor();
     }
 }
