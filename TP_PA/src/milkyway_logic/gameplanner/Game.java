@@ -1,6 +1,5 @@
 package milkyway_logic.gameplanner;
 
-import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
 import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.states.StartGame;
@@ -30,11 +29,6 @@ public final class Game {
         this.mState = mState;
     }
 
-    public static void newGame() {
-        totalCoins = 20;
-        myCoins = 10;
-    }
-
     public static int getTotalCoins() {
         return totalCoins;
     }
@@ -55,4 +49,33 @@ public final class Game {
         this.mSpaceship = new Spaceship();
         this.mBoard = new BoardConstructor();
     }
+    
+    
+    public void move(){
+        
+    };
+    
+    public void upgrade(){
+        
+    };
+    
+    public void buyCargo(String carga){
+         boolean existsCargo = false;
+         
+         if(mSpaceship.getCargo().size() > 2 && !mSpaceship.isIsCargoUpdated()){
+             
+         }
+    };
+    
+    public void sellCargo(String carga){
+        
+    };
+    
+    public void isFinished(){
+        
+    };
+    
+    public void pirateAtack(){
+        
+    };
 }

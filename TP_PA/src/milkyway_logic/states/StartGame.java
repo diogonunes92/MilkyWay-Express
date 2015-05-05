@@ -20,7 +20,7 @@ public class StartGame extends State{
     @Override
     public State constructGame() {
             getGame().constructGame();
-            return this;
+            return new Move(getGame());
     }
 
     @Override
@@ -36,6 +36,21 @@ public class StartGame extends State{
     @Override
     public State sellCargo(String carga) {
         return this;
+    }
+
+    @Override
+    public State upgrade() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public State isFinished() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public State pirateAtack() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

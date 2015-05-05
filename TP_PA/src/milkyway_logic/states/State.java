@@ -16,7 +16,10 @@ public abstract class State {
 
     abstract public State constructGame();
     abstract public State move();
+    abstract public State upgrade();
     abstract public State buyCargo(String carga);
     abstract public State sellCargo(String carga);
-    
+    abstract public State isFinished();
+    abstract public State pirateAtack();
+
 }

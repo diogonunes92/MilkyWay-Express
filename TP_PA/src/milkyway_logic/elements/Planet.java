@@ -1,13 +1,12 @@
 package milkyway_logic.elements;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class Planet extends Card{
     
     private Cube[] cubeList;
     private HashMap<String, Integer> prices;
-    private boolean isPirate;
+    private final boolean isPirate;
     
 
     public Planet(HashMap<String, Integer> prices, boolean isTurned, boolean isPirate) {

@@ -11,9 +11,9 @@ import milkyway_logic.gameplanner.Game;
  *
  * @author Diogo
  */
-public class Move extends State{
+public class Replenish extends State{
 
-    public Move(Game game) {
+    public Replenish(Game game) {
         super(game);
     }
 
