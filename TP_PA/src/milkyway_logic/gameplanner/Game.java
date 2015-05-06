@@ -41,6 +41,18 @@ public final class Game {
         return myCoins;
     }
 
+    public State getmState() {
+        return mState;
+    }
+
+    public BoardConstructor getmBoard() {
+        return mBoard;
+    }
+
+    public Spaceship getmSpaceship() {
+        return mSpaceship;
+    }
+
     public static void setMyCoins(int myCoins) {
         Game.myCoins = myCoins;
     }
@@ -62,12 +74,17 @@ public final class Game {
     public void buyCargo(String carga){
          boolean existsCargo = false;
          
-         if(mSpaceship.getCargo().size() > 2 && !mSpaceship.isIsCargoUpdated()){
+         if(mSpaceship.getCargo().size() < 2 || !mSpaceship.isIsCargoUpdated() && mSpaceship.getCargo().size() < 3){
              
          }
     };
     
     public void sellCargo(String carga){
+        boolean existsCargo = false;
+         
+        if(!mSpaceship.getCargo().isEmpty()){
+             
+         }
         
     };
     
