@@ -7,14 +7,14 @@ public class Planet extends Card {
 
     private String planetName;
     private List<Cube> cubeList;
+    private boolean isPirate;
     private HashMap<String, Integer> prices;
 
-    public Planet(String planetName) {
+    public Planet(String planetName, HashMap<String, Integer> prices, boolean isPirate) {
         super();
         this.planetName = planetName;
-        this.cubeList = cubeList;
         this.prices = prices;
-
+        this.isPirate = isPirate;
     }
 
     public List<Cube> getCubeList() {
