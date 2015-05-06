@@ -46,6 +46,18 @@ public final class Game {
         return myCoins;
     }
 
+    public State getmState() {
+        return mState;
+    }
+
+    public BoardConstructor getmBoard() {
+        return mBoard;
+    }
+
+    public Spaceship getmSpaceship() {
+        return mSpaceship;
+    }
+
     public static void setMyCoins(int myCoins) {
         Game.myCoins = myCoins;
     }
@@ -53,4 +65,41 @@ public final class Game {
     public void constructGame() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+<<<<<<< HEAD
+=======
+    
+    
+    public void move(){
+        
+    };
+    
+    public void upgrade(){
+        
+    };
+    
+    public void buyCargo(String carga){
+         boolean existsCargo = false;
+         
+         if(mSpaceship.getCargo().size() < 2 || !mSpaceship.isIsCargoUpdated() && mSpaceship.getCargo().size() < 3){
+             
+         }
+    };
+    
+    public void sellCargo(String carga){
+        boolean existsCargo = false;
+         
+        if(!mSpaceship.getCargo().isEmpty()){
+             
+         }
+        
+    };
+    
+    public void isFinished(){
+        
+    };
+    
+    public void pirateAtack(){
+        
+    };
+>>>>>>> diogo_developer
 }
