@@ -10,11 +10,13 @@ public class Planet extends Card{
     private boolean isTurned;
     
 
-    public Planet(List<Cube> cubeList, HashMap<String, Integer> prices, boolean isTurned) {
+    public Planet(String nomedoplaneta) {
         super(isTurned);
         this.cubeList = cubeList;
         this.prices = prices;
         this.isTurned = isTurned;
+        
+        planetConstructor(nomedoplaneta);
         
     }
 
@@ -41,4 +43,10 @@ public class Planet extends Card{
     public void setIsTurned(boolean isTurned) {
         this.isTurned = isTurned;
     }         
+
+    private void planetConstructor(String nomedoplaneta) {
+        
+    
+        
+    }
 }

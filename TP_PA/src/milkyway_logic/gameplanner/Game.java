@@ -1,5 +1,6 @@
 package milkyway_logic.gameplanner;
 
+import milkyway_logic.elements.Planet;
 import milkyway_logic.elements.Player;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
@@ -17,6 +18,7 @@ public final class Game {
         mState = new StartGame(this);
         totalCoins = 30;
         myCoins = 0;
+
     }
 
     public State getState() {
