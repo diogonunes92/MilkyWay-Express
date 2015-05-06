@@ -21,5 +21,6 @@ public abstract class State {
     abstract public State sellCargo(String carga);
     abstract public State isFinished();
     abstract public State pirateAtack();
-
+    abstract public State turnCards();
+    
 }
