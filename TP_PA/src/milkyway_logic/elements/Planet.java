@@ -7,7 +7,7 @@ public class Planet extends Card {
 
     private String planetName;
     private List<Cube> cubeList;
-    private boolean isPirate;
+    private final boolean isPirate;
     private HashMap<String, Integer> prices;
 
     public Planet(String planetName, HashMap<String, Integer> prices, boolean isPirate) {
@@ -17,27 +17,28 @@ public class Planet extends Card {
         this.isPirate = isPirate;
     }
 
+    @Override
     public List<Cube> getCubeList() {
         return cubeList;
     }
 
+    @Override
     public void setCubeList(List<Cube> cubeList) {
         this.cubeList = cubeList;
     }
 
+    @Override
     public HashMap<String, Integer> getPrices() {
         return prices;
     }
 
-    public void setPrices(HashMap<String, Integer> prices) {
-        this.prices = prices;
-    }
-
+    @Override
     public String getPlanetName() {
         return planetName;
     }
 
-    public void setPlanetName(String planetName) {
-        this.planetName = planetName;
+    @Override
+    public boolean isPirate() {
+        return isPirate;
     }
 }
