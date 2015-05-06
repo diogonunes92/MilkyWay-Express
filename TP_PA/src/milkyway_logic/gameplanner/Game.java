@@ -2,6 +2,8 @@ package milkyway_logic.gameplanner;
 
 import milkyway_logic.elements.Planet;
 import milkyway_logic.elements.Player;
+import milkyway_logic.elements.Spaceship;
+import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
 
@@ -9,7 +11,8 @@ public final class Game {
 
     private State mState;
     private Player mPlayer;
-    
+    private Spaceship mSpaceship;
+    private BoardConstructor mBoard;
     private static int totalCoins;
     private static int myCoins;
 
@@ -65,8 +68,6 @@ public final class Game {
     public void constructGame() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-<<<<<<< HEAD
-=======
     
     
     public void move(){
@@ -101,5 +102,4 @@ public final class Game {
     public void pirateAtack(){
         
     };
->>>>>>> diogo_developer
 }
