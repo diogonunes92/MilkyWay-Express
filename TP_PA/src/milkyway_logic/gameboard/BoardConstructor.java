@@ -6,12 +6,13 @@ import java.util.List;
 import milkyway_logic.elements.Card;
 import milkyway_logic.elements.Planet;
 import milkyway_logic.elements.Wormhole;
+import util.Constants;
 
 public class BoardConstructor {
 
     private Card[][] gameBoard;
 
-    private List cardShuffle = new ArrayList<Card>();
+    private ArrayList<Card> cardShuffle = new ArrayList<Card>();
 
     private final Planet planetGether;
     private final Planet planetKiber;
@@ -47,6 +48,8 @@ public class BoardConstructor {
         this.mWormhole4 = new Wormhole();
         this.gameBoard[7][0] = mWormhole1;
         this.gameBoard[0][9] = mWormhole2;
+        
+        // TODO: Create free places. i forgot, kurwa 
 
         setCardShuffleArray();
 
@@ -67,10 +70,16 @@ public class BoardConstructor {
         cardShuffle.add(planetAsperta);
         cardShuffle.add(mWormhole4);
         cardShuffle.add(mWormhole4);
+        
+        
     }
 
     private void fillGameBoard() {
-        this.gameBoard = new Card[7][9];
+
+        for (int i = 0; i < cardShuffle.size(); i++) {
+
+            gameBoard[Constants.BOARD_POSITION_X[i]][Constants.BOARD_POSITION_X[i]] = cardShuffle.get(i);
+        }
     }
 
     public Card[][] getGameBoard() {
