@@ -6,16 +6,17 @@ import java.util.List;
 public class Spaceship {
     
     private int power;
+    private int capacity;
     private int posY;
     private int posX;
     private List<Cube> cargo;
-    private boolean isCargoUpdated;
-
+    
     public Spaceship() {
         this.power = 3;
         this.cargo = new ArrayList<>();
         this.posX = 0;
         this.posY = 0;
+        this.capacity = 2;
     }
 
     public int getPosY() {
@@ -34,14 +35,15 @@ public class Spaceship {
         this.posX = posX;
     }
 
-    public boolean isIsCargoUpdated() {
-        return isCargoUpdated;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setIsCargoUpdated(boolean isCargoUpdated) {
-        this.isCargoUpdated = isCargoUpdated;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
+    
     public int getPower() {
         return power;
     }

@@ -1,5 +1,8 @@
 package milkyway_logic.states;
 
+import java.util.HashMap;
+import java.util.List;
+import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Planet;
 import milkyway_logic.gameplanner.Game;
 
@@ -31,13 +34,37 @@ public class Sell extends State{
         }
         else if(getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()] instanceof Planet){
             //If spaceship is on planet ortherwise it can't sell
-            getGame().sellCargo(carga);
-        }
-        
-        return this;
-    
-    }
+            
+        int cargoPrice;
+        HashMap<String,Integer> prices = getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()].getPrices();
+        List<Cube> cubeListPlanet = getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()].getCubeList();
 
+         
+        if(!getGame().getmSpaceship().getCargo().isEmpty()){
+            
+            List<Cube> cubesSpaceship = getGame().getmSpaceship().getCargo();
+            cargoPrice = prices.get(carga);
+            if(cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() == carga){
+                getGame().setMyCoins(+prices.get(carga));
+                cubesSpaceship.remove(new Cube(carga));
+                getGame().getmSpaceship().setCargo(cubesSpaceship);
+            }
+            else if((cubeListPlanet.get(0).getColor() != carga && cubeListPlanet.get(1).getColor() == carga) || (cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() != carga)){
+                getGame().setMyCoins(getGame().getMyCoins()+prices.get(carga)+1);
+                cubesSpaceship.remove(new Cube(carga));
+                getGame().getmSpaceship().setCargo(cubesSpaceship);
+            }
+            else{
+                getGame().setMyCoins(getGame().getMyCoins()+prices.get(carga)+2);
+                cubesSpaceship.remove(new Cube(carga));
+                getGame().getmSpaceship().setCargo(cubesSpaceship);
+            }
+         }
+        
+    }
+    return this;
+
+    }
 
     @Override
     public State isFinished() {
@@ -56,17 +83,27 @@ public class Sell extends State{
 
     @Override
     public State upgradeWeapon() {
-        if(getGame().getTotalCoins() == 0){
-            return new StartGame(getGame());
+        if(getGame().getMyCoins()== 0){
+            return new StartGame(getGame()); 
         }
+        
+        if(getGame().getmSpaceship().getPower() <6 && getGame().getMyCoins() >=4){
+            getGame().getmSpaceship().setPower(+1);
+        }
+        
         return this;
     }
 
     @Override
     public State upgradeCargo() {
-        if(getGame().getTotalCoins() == 0){
+        if(getGame().getMyCoins() == 0){
             return new StartGame(getGame());
         }
+        
+        if(getGame().getmSpaceship().getCargo().size() == 2){
+            getGame().getmSpaceship().setCapacity(+1);
+        }
+        
         return this;   
     }
 

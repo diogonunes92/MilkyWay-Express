@@ -20,7 +20,7 @@ public class StartGame extends State{
 
     @Override
     public State constructGame() {
-            getGame().constructGame();
+            getGame().initialize();
             return new Move(getGame());
     }
 
@@ -42,32 +42,36 @@ public class StartGame extends State{
 
     @Override
     public State isFinished() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(getGame().getMyCoins() == 0){
+            System.exit(0);
+        }
+        
+        return this;
     }
 
     @Override
     public State pirateAtack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     @Override
     public State turnCards() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     @Override
     public State upgradeWeapon() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     @Override
     public State upgradeCargo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     @Override
     public State replenishMarkets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     

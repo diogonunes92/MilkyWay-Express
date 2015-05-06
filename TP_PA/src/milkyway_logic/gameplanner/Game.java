@@ -17,7 +17,7 @@ public final class Game {
     private Spaceship mSpaceship;
     private BoardConstructor mBoard;
     private static int totalCoins;
-    private static int myCoins;
+    private int myCoins;
 
     public Game() {
 
@@ -35,9 +35,13 @@ public final class Game {
         this.mState = mState;
     }
 
-    public static void newGame() {
+    public void newGame() {
         totalCoins = 20;
         myCoins = 10;
+    }
+    
+    public void initialize() {
+
     }
 
     public static int getTotalCoins() {
@@ -48,7 +52,7 @@ public final class Game {
         Game.totalCoins = totalCoins;
     }
 
-    public static int getMyCoins() {
+    public int getMyCoins() {
         return myCoins;
     }
 
@@ -64,74 +68,42 @@ public final class Game {
         return mSpaceship;
     }
 
-    public static void setMyCoins(int myCoins) {
-        Game.myCoins = myCoins;
+    public void setMyCoins(int myCoins) {
+        this.myCoins = myCoins;
     }
 
     public void constructGame() {
-
+        this.mState = mState.constructGame();
     }
     
     
     public void move(){
-        
+        this.mState = mState.move();
     };
     
-    public void upgrade(){
-        
+    public void upgradeWeapon(){
+        this.mState = mState.upgradeWeapon();
+    };
+    
+    public void upgradeCargo(){
+        this.mState = mState.upgradeCargo();
     };
     
     public void buyCargo(String carga){
-        boolean existsCargo = false;
-        int cargoPrice;
-        HashMap<String,Integer> prices;
-        List<Cube> cubeList = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getCubeList();
-         
-            prices = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getPrices();
-            
-            List<Cube> cubesSpaceship = mSpaceship.getCargo();
-            cargoPrice = prices.get(carga);
-            if(getMyCoins() >= cargoPrice){
-                setMyCoins(-cargoPrice);
-                cubesSpaceship.add(new Cube(carga));
-                mSpaceship.setCargo(cubesSpaceship);
-                cubeList.remove(new Cube(carga));
-                this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].setCubeList(cubeList);
-            }
+        this.mState = mState.buyCargo(carga);
     };
     
     public void sellCargo(String carga){
-        boolean existsCargo = false;
-        int cargoPrice;
-        HashMap<String,Integer> prices = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getPrices();
-        List<Cube> cubeListPlanet = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getCubeList();
-
-         
-        if(!mSpaceship.getCargo().isEmpty()){
-            
-            List<Cube> cubesSpaceship = mSpaceship.getCargo();
-            cargoPrice = prices.get(carga);
-            if(cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() == carga){
-                setMyCoins(+prices.get(carga));
-                cubesSpaceship.remove(new Cube(carga));
-            }
-            else if((cubeListPlanet.get(0).getColor() != carga && cubeListPlanet.get(1).getColor() == carga) || (cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() != carga)){
-                setMyCoins(getMyCoins()+prices.get(carga)+1);
-                cubesSpaceship.remove(new Cube(carga));
-            }
-            else{
-                setMyCoins(getMyCoins()+prices.get(carga)+2);
-                cubesSpaceship.remove(new Cube(carga));
-            }
-         }
-        
+        this.mState = mState.sellCargo(carga);
     };
     
     public void isFinished(){
-        
+        this.mState = mState.isFinished();
     };
     
     public void pirateAtack(){
-        
+        this.mState = mState.pirateAtack();
     };
+
+
 }
