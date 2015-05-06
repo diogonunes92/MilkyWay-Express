@@ -8,14 +8,12 @@ public class Planet extends Card {
     private String planetName;
     private List<Cube> cubeList;
     private HashMap<String, Integer> prices;
-    private boolean isTurned;
 
     public Planet(String planetName) {
         super();
         this.planetName = planetName;
         this.cubeList = cubeList;
         this.prices = prices;
-        this.isTurned = false;
 
     }
 
@@ -33,14 +31,6 @@ public class Planet extends Card {
 
     public void setPrices(HashMap<String, Integer> prices) {
         this.prices = prices;
-    }
-
-    public boolean getIsTurned() {
-        return isTurned;
-    }
-
-    public void setIsTurned(boolean isTurned) {
-        this.isTurned = isTurned;
     }
 
     public String getPlanetName() {

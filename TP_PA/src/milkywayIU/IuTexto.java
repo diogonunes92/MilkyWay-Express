@@ -47,7 +47,7 @@ public class IuTexto {
     void run() {
 
         while (!isExit) {
-            State mState = new StartGame();
+            State mState = new StartGame(this.game);
 
             if (mState instanceof StartGame) {
 

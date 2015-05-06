@@ -1,5 +1,8 @@
 package milkyway_logic.gameplanner;
 
+import java.util.HashMap;
+import java.util.List;
+import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Planet;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
@@ -20,7 +23,7 @@ public final class Game {
 
         mState = new StartGame(this);
         totalCoins = 30;
-        myCoins = 0;
+        myCoins = 10;
 
     }
 
@@ -66,7 +69,7 @@ public final class Game {
     }
 
     public void constructGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
     
     
@@ -79,18 +82,47 @@ public final class Game {
     };
     
     public void buyCargo(String carga){
-         boolean existsCargo = false;
+        boolean existsCargo = false;
+        int cargoPrice;
+        HashMap<String,Integer> prices;
+        List<Cube> cubeList = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getCubeList();
          
-         if(mSpaceship.getCargo().size() < 2 || !mSpaceship.isIsCargoUpdated() && mSpaceship.getCargo().size() < 3){
-             
-         }
+            prices = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getPrices();
+            
+            List<Cube> cubesSpaceship = mSpaceship.getCargo();
+            cargoPrice = prices.get(carga);
+            if(getMyCoins() >= cargoPrice){
+                setMyCoins(-cargoPrice);
+                cubesSpaceship.add(new Cube(carga));
+                mSpaceship.setCargo(cubesSpaceship);
+                cubeList.remove(new Cube(carga));
+                this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].setCubeList(cubeList);
+            }
     };
     
     public void sellCargo(String carga){
         boolean existsCargo = false;
+        int cargoPrice;
+        HashMap<String,Integer> prices = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getPrices();
+        List<Cube> cubeListPlanet = this.mBoard.getGameBoard()[this.mSpaceship.getPosX()][this.mSpaceship.getPosX()].getCubeList();
+
          
         if(!mSpaceship.getCargo().isEmpty()){
-             
+            
+            List<Cube> cubesSpaceship = mSpaceship.getCargo();
+            cargoPrice = prices.get(carga);
+            if(cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() == carga){
+                setMyCoins(+prices.get(carga));
+                cubesSpaceship.remove(new Cube(carga));
+            }
+            else if((cubeListPlanet.get(0).getColor() != carga && cubeListPlanet.get(1).getColor() == carga) || (cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() != carga)){
+                setMyCoins(getMyCoins()+prices.get(carga)+1);
+                cubesSpaceship.remove(new Cube(carga));
+            }
+            else{
+                setMyCoins(getMyCoins()+prices.get(carga)+2);
+                cubesSpaceship.remove(new Cube(carga));
+            }
          }
         
     };
