@@ -7,8 +7,8 @@ package milkyway_logic.elements;
 public abstract class Card{
     private boolean isTurned;
 
-    public Card(boolean isTurned) {
-        this.isTurned = isTurned;
+    public Card() {
+        this.isTurned = false;
     }
     
     public boolean getIsTurned() {
