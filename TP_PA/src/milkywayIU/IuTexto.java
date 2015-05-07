@@ -19,7 +19,6 @@ public class IuTexto {
 
         printMenu();
         
-
             System.out.println(" Option:");
             Scanner mScanner = new Scanner(System.in);
             int option = mScanner.nextInt();

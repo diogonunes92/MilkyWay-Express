@@ -8,6 +8,8 @@ public class MilkyWay {
 
         IuTexto mIuTexto = new IuTexto();
         mIuTexto.start();
+//        
+        // BoardConstructor s = new BoardConstructor(null);
 
     }
 }

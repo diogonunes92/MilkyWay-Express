@@ -12,17 +12,17 @@ import util.Constants;
 
 public class BoardConstructor {
 
-    private Card[][] gameBoard;
-    private ArrayList<Card> cardShuffle = new ArrayList<Card>();
+    private final Card[][] gameBoard;
+    private ArrayList<Card> cardShuffle = new ArrayList<>();
     private HashMap<String, Integer> prices;
-    Game game;
+    private Game game;
 
-    public BoardConstructor(Game g) {
+    public BoardConstructor(Game game) {
 
         this.gameBoard = new Card[7][9];
-        this.game = g;
-        setCardShuffleArray();
+        this.game = game;
 
+        setCardShuffleArray();
         fillGameBoard();
         getUIGameBoard();
     }
@@ -30,13 +30,14 @@ public class BoardConstructor {
     private void setCardShuffleArray() {
 
         for (int i = 0; i < Constants.PLANET_NAMES.length; i++) {
-//            for (int k = 0; k < 4; k++) {
-//                prices = new HashMap<String, Integer>();
-//                prices.put(Constants.NON_PIRATE_CUBE_COLOR[k], Constants.NON_PIRATE_CUBE_PRICE[i][k]);
-//            }
-            cardShuffle.add(new Planet(Constants.PLANET_NAMES[i], null, Constants.isPIRATE[i]));
+            prices = new HashMap<>();
+
+            for (int k = 0; k < 4; k++) {
+                prices.put(Constants.PLANET_CUBE_COLOR_NAME[k], Constants.PLANET_CUBE_COLOR_PRICES[i][k]);
+            }
+            cardShuffle.add(new Planet(Constants.PLANET_NAMES[i], prices, Constants.isPIRATE[i]));
         }
-        // Because two of them are going to be declares and added later
+
         for (int j = 0; j < 2; j++) {
             cardShuffle.add(new Wormhole());
         }
@@ -54,9 +55,8 @@ public class BoardConstructor {
 
             // TODO: Fix this problem. This is returning the position number, and not the content value
             gameBoard[Constants.BOARD_POSITIONS[row][0]][Constants.BOARD_POSITIONS[row][1]] = cardShuffle.get(row);
-
         }
-        
+
         this.gameBoard[6][0] = new Wormhole();
         this.gameBoard[0][8] = new Wormhole();
     }
@@ -67,11 +67,11 @@ public class BoardConstructor {
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
-                
-                if(this.game.getmSpaceship().getPosX() == i && this.game.getmSpaceship().getPosY() == j){
-                    UIGameBoard[i][j] = "[ S ]";
-                }    
-                else if (gameBoard[i][j] == null) {
+
+//                if(this.game.getmSpaceship().getPosX() == i && this.game.getmSpaceship().getPosY() == j){
+//                    UIGameBoard[i][j] = "[ S ]";
+//                }    
+                if (gameBoard[i][j] == null) {
                     UIGameBoard[i][j] = "  *  ";
                 } else if (gameBoard[i][j] instanceof Planet) {
                     UIGameBoard[i][j] = "[ P ]";
@@ -86,6 +86,7 @@ public class BoardConstructor {
             System.out.println("");
         }
 
+        System.out.print("\033[31m OLA MUNDO  \033[0m");
         return UIGameBoard;
     }
 

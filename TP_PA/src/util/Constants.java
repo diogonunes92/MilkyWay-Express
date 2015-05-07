@@ -1,14 +1,5 @@
 package util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-/**
- *
- * @author marcobarbosa
- */
 public class Constants {
 
     //Game initiation
@@ -25,11 +16,23 @@ public class Constants {
     public static final String[] PLANET_NAMES = {"Gether", "Kiber", "Reverie", "Tiamat", "Lamarckia", "Arrakis", "Whirl", "Striterax", "Asperta"};//You Can Add More Names
     public static final boolean[] isPIRATE = {false, false, false, false, false, false, true, true, true};//You Can Add More Amount
 
-    public static final int[][] BOARD_POSITIONS = new int[][]{{1, 3}, {1, 8}, {2, 2}, {2, 3}, {2, 4}, {2, 6},
-                                                    {2, 7}, {2, 8}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5},
-                                                    {3, 6}, {3, 7}, {4, 0}, {4, 1}, {4, 2}, {4, 4}, {4, 5},
-                                                    {4, 6}, {5, 0}, {5, 5}};
+    public static final int[][] BOARD_POSITIONS = {
+        {1, 3}, {1, 8}, {2, 2}, {2, 3}, {2, 4}, {2, 6},
+        {2, 7}, {2, 8}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5},
+        {3, 6}, {3, 7}, {4, 0}, {4, 1}, {4, 2}, {4, 4}, {4, 5},
+        {4, 6}, {5, 0}, {5, 5}};
 
-    public static final String[] NON_PIRATE_CUBE_COLOR = {"blue", "yellow", "red", "black"};
+    public static final String[] PLANET_CUBE_COLOR_NAME = {"blue", "yellow", "red", "black"};
+
+    public static final int[][] PLANET_CUBE_COLOR_PRICES
+          ={{1, 3, 2, 3},
+            {3, 1, 2, 3},
+            {1, 2, 3, 3},
+            {3, 2, 1, 3},
+            {2, 3, 1, 3},
+            {2, 1, 3, 3},
+            {0, 3, 0, 0},
+            {0, 0, 3, 0},
+            {1, 0, 0, 0}};
 
 }
