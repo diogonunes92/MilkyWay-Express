@@ -36,10 +36,10 @@ public class EmptySpace extends Card {
     }
 
     @Override
-    public boolean getIsPirate() {
+    public boolean isPirate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void setPrices(HashMap<String, Integer> prices) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
