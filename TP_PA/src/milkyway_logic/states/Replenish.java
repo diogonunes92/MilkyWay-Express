@@ -17,11 +17,6 @@ public class Replenish extends State {
     }
 
     @Override
-    public State move() {
-        return this;
-    }
-
-    @Override
     public State buyCargo(String carga) {
         return this;
     }
@@ -104,6 +99,16 @@ public class Replenish extends State {
         }
         //TODO: Turn cards;
         return new Sell(getGame());
+    }
+
+    @Override
+    public State move(String move) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public State nextState() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

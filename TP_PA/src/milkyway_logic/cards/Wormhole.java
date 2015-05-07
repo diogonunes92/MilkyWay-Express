@@ -37,7 +37,12 @@ public class Wormhole  extends Card{
     }
 
     @Override
-    public boolean getIsPirate() {
+    public void setPrices(HashMap<String, Integer> prices) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setPlanetName(String planetName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

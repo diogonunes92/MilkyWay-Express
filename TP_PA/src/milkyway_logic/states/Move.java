@@ -77,5 +77,10 @@ public class Move extends State{
         
         return new Replenish(getGame());
     }
+
+    @Override
+    public State nextState() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -46,4 +46,9 @@ public class Planet extends Card {
     public void setPlanetName(String planetName) {
         this.planetName = planetName;
     }
+
+    @Override
+    public boolean isPirate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

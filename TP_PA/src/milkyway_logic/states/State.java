@@ -24,6 +24,7 @@ public abstract class State {
     abstract public State pirateAtack();
     abstract public State turnCards();
     abstract public State replenishMarkets();
+    abstract public State nextState();
     
     
 }
