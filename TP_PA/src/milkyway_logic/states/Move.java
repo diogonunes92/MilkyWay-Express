@@ -1,6 +1,6 @@
 package milkyway_logic.states;
 
-import milkyway_logic.elements.Card;
+import milkyway_logic.cards.Card;
 import milkyway_logic.gameplanner.Game;
 
 public class Move extends State{

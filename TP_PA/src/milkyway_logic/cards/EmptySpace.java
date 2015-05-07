@@ -2,7 +2,6 @@ package milkyway_logic.cards;
 
 import java.util.HashMap;
 import java.util.List;
-import milkyway_logic.elements.Card;
 import milkyway_logic.elements.Cube;
 
 public class EmptySpace extends Card {

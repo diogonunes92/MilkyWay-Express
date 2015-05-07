@@ -1,12 +1,9 @@
-package milkyway_logic.elements;
+package milkyway_logic.cards;
 
 import java.util.HashMap;
 import java.util.List;
+import milkyway_logic.elements.Cube;
 
-/**
- *
- * @author marcobarbosa
- */
 public abstract class Card{
     private boolean isTurned;
 

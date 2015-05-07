@@ -2,7 +2,6 @@ package milkyway_logic.cards;
 
 import java.util.HashMap;
 import java.util.List;
-import milkyway_logic.elements.Card;
 import milkyway_logic.elements.Cube;
 
 public class Wormhole  extends Card{
@@ -32,17 +31,17 @@ public class Wormhole  extends Card{
     }
 
     @Override
-    public boolean getIsPirate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void setPrices(HashMap<String, Integer> prices) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setPlanetName(String planetName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isPirate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

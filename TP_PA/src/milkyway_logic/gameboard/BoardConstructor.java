@@ -6,7 +6,7 @@ import java.util.HashMap;
 import milkyway_logic.cards.EmptySpace;
 import milkyway_logic.cards.Planet;
 import milkyway_logic.cards.Wormhole;
-import milkyway_logic.elements.Card;
+import milkyway_logic.cards.Card;
 import milkyway_logic.gameplanner.Game;
 import util.Constants;
 
