@@ -1,5 +1,6 @@
 package milkyway_logic.states;
 
+import milkyway_logic.cards.Planet;
 import java.util.List;
 import milkyway_logic.elements.*;
 import milkyway_logic.gameplanner.Game;

@@ -3,7 +3,7 @@ package milkyway_logic.states;
 import java.util.HashMap;
 import java.util.List;
 import milkyway_logic.elements.Cube;
-import milkyway_logic.elements.Planet;
+import milkyway_logic.cards.Planet;
 import milkyway_logic.gameplanner.Game;
 
 public class Sell extends State{
