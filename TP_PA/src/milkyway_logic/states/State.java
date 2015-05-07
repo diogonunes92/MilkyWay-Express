@@ -15,7 +15,7 @@ public abstract class State {
     }
 
     abstract public State constructGame();
-    abstract public State move();
+    abstract public State move(String move);
     abstract public State upgradeWeapon();
     abstract public State upgradeCargo();
     abstract public State buyCargo(String carga);

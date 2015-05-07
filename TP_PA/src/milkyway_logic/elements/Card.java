@@ -27,5 +27,6 @@ public abstract class Card{
     public abstract HashMap<String, Integer> getPrices();
     public abstract void setPrices(HashMap<String, Integer> prices);
     public abstract String getPlanetName();
+    public abstract boolean getIsPirate();
     public abstract void setPlanetName(String planetName);
 }

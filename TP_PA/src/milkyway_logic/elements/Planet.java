@@ -21,6 +21,10 @@ public class Planet extends Card {
         return cubeList;
     }
 
+    public boolean getIsPirate() {
+        return isPirate;
+    }
+    
     public void setCubeList(List<Cube> cubeList) {
         this.cubeList = cubeList;
     }

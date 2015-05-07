@@ -41,7 +41,7 @@ public final class Game {
     }
     
     public void initialize() {
-
+        mBoard = new BoardConstructor();
     }
 
     public static int getTotalCoins() {
@@ -77,8 +77,8 @@ public final class Game {
     }
     
     
-    public void move(){
-        this.mState = mState.move();
+    public void move(String move){
+        this.mState = mState.move(move);
     };
     
     public void upgradeWeapon(){

@@ -17,10 +17,6 @@ public class Buy extends State{
         return this;
     }
 
-    @Override
-    public State move() {
-        return this;
-    }
 
     @Override
     public State buyCargo(String carga) {
@@ -103,6 +99,11 @@ public class Buy extends State{
     @Override
     public State replenishMarkets() {
         return this;
+    }
+
+    @Override
+    public State move(String move) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
