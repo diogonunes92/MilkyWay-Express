@@ -3,7 +3,7 @@ package milkyway_logic.gameplanner;
 import java.util.HashMap;
 import java.util.List;
 import milkyway_logic.elements.Cube;
-import milkyway_logic.elements.Planet;
+import milkyway_logic.cards.Planet;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
 import milkyway_logic.gameboard.BoardConstructor;
