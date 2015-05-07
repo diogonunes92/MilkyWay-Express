@@ -1,9 +1,5 @@
 package milkyway_logic.gameplanner;
 
-import java.util.HashMap;
-import java.util.List;
-import milkyway_logic.elements.Cube;
-import milkyway_logic.cards.Planet;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
 import milkyway_logic.gameboard.BoardConstructor;
@@ -14,6 +10,7 @@ public final class Game {
 
     private State mState;
     private Player mPlayer;
+    
     private Spaceship mSpaceship;
     private BoardConstructor mBoard;
     private static int totalCoins;
@@ -42,7 +39,7 @@ public final class Game {
     }
     
     public void initialize() {
-        mBoard = new BoardConstructor();
+        mBoard = new BoardConstructor(this);
     }
 
     public static int getTotalCoins() {
