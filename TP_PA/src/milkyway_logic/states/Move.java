@@ -28,6 +28,10 @@ public class Move extends State{
 
     @Override
     public State isFinished() {
+        if(getGame().getMyCoins() == 0){
+            System.exit(0);
+        }
+        
         return this;
     }
 

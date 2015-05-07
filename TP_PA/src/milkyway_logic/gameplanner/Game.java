@@ -24,6 +24,7 @@ public final class Game {
         mState = new StartGame(this);
         totalCoins = 30;
         myCoins = 10;
+        mSpaceship = new Spaceship();
 
     }
 

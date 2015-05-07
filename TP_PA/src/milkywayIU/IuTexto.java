@@ -44,8 +44,9 @@ public class IuTexto {
     void run() {
         while (!isExit) {
             State mState = game.getState();
-            
             if (mState instanceof Buy) {
+                iuStart();
+            } else if (mState instanceof Buy) {
                 iuBuy();
             } else if (mState instanceof Sell) {
                 iuSell();
@@ -190,5 +191,11 @@ public class IuTexto {
         while(i<this.game.getmSpaceship().getCargo().size()){
             System.out.println(this.game.getmSpaceship().getCargo().get(i).getColor());
         }
+    }
+
+    private void iuStart() {
+        //this.game.initialize();
+        
+        
     }
 }

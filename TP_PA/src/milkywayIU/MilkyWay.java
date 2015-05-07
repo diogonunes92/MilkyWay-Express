@@ -6,10 +6,10 @@ public class MilkyWay {
 
     public static void main(String[] args) {
         
-//        IuTexto mIuTexto = new IuTexto();
-//        mIuTexto.start();
+        IuTexto mIuTexto = new IuTexto();
+        mIuTexto.start();
         
-        BoardConstructor bc = new BoardConstructor();
+        //BoardConstructor bc = new BoardConstructor();
         
     }
 }
