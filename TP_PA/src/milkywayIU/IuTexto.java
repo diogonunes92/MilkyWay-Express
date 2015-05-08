@@ -43,9 +43,9 @@ public class IuTexto {
 
         while (!isExit) {
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
-            System.out.println(" 1. Iniciar Jogo");
-            System.out.println(" 2. Ver cenas");
-            System.out.println(" 3. Consultar");
+            System.out.println(" 1. Start game");
+            System.out.println(" 2. Load previous game");
+            System.out.println(" 3. Credits");
             System.out.println(" 4. Sair");
 
             System.out.print(" Option: ");
@@ -169,6 +169,15 @@ public class IuTexto {
             }
         }
 
+    }
+    
+    public void iuSaveGame(){
+        
+        System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
+            System.out.println(" Do you wanna save the game?");
+            System.out.println(" 1. Yes");
+            System.out.println(" 2. No");
+        
     }
 
     public void seeCargoForSale() {
