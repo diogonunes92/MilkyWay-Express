@@ -73,7 +73,7 @@ public class StartGame extends State {
 
     @Override
     public State move(String move) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     @Override

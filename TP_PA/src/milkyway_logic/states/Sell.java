@@ -103,17 +103,17 @@ public class Sell extends State{
 
     @Override
     public State replenishMarkets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     @Override
     public State move(String move) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
 
     @Override
     public State nextState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Buy(getGame());
     }
     
 }

@@ -1,5 +1,4 @@
 package milkyway_logic.gameplanner;
-
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
@@ -104,4 +103,13 @@ public final class Game {
     public void nextState(){
         this.state = state.nextState();
     }
+    
+    public void replenishMarkets(){
+        this.state = state.replenishMarkets();
+    }
+    
+    public void turnCards(){
+        this.state = state.turnCards();
+    }
+    
 }

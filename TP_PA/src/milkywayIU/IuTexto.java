@@ -12,7 +12,7 @@ import milkyway_logic.states.*;
 public class IuTexto {
 
     private Game game;
-    private boolean isExit;
+    private boolean isExit, isFinish;
 
     public IuTexto() {
         this.isExit = false;
@@ -23,7 +23,6 @@ public class IuTexto {
     void run() {
         while (!isExit) {
             State mState = game.getState();
-
             if (mState instanceof StartGame) {
                 iuStartGame();
             } else if (mState instanceof Move) {
@@ -32,7 +31,7 @@ public class IuTexto {
                 iuBuy();
             } else if (mState instanceof Sell) {
                 iuSell();
-            }
+            } 
         }
     }
 
@@ -41,7 +40,7 @@ public class IuTexto {
         clearConsole();
         printBoard();
 
-        while (!isExit) {
+        while (!isFinish) {
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
             System.out.println(" 1. Iniciar Jogo");
             System.out.println(" 2. Ver cenas");
@@ -54,14 +53,16 @@ public class IuTexto {
 
             switch (option) {
                 case 1:
-                    game.constructGame(); 
+                    game.constructGame();
+                    isFinish = true;
                     break;
                 case 2:
+                    
                     break;
                 case 3:
                     break;
                 case 4:
-                    isExit = true;
+                    isFinish = true;
                     System.out.println("See you next time, mate!");
                     break;
             }
@@ -72,8 +73,8 @@ public class IuTexto {
 
         clearConsole();
         printBoard();
-
-        while (!isExit) {
+        isFinish = false;
+        while (!isFinish) {
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
             System.out.println(" 1. Mover");
             System.out.println(" 2. Next Fase");
@@ -87,9 +88,13 @@ public class IuTexto {
                     System.out.println(" Option: (Front - F | Back - B | Left - L | Right - R)");
                     String move = mScanner.next();
                     this.game.move(move);
+                    isFinish = true;
                     break;
                 case 2:
-                    this.game.setState(new Replenish(this.game));
+                    this.game.nextState();
+                    this.game.turnCards();
+                    this.game.replenishMarkets();
+                    isFinish = true;
                     break;
             }
         }
@@ -98,10 +103,11 @@ public class IuTexto {
     private void iuSell() {
 
         clearConsole();
+        isFinish = false;
 
-        while (true) {
+        while (!isFinish) {
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
-            System.out.println(" 1. Buy Cargo");
+            System.out.println(" 1. Sell Cargo");
             System.out.println(" 2. See Prices on Planet");
             System.out.println(" 3. See Cargo on Ship");
             System.out.println(" 4. Update Weapon");
@@ -116,7 +122,8 @@ public class IuTexto {
                 case 1:
                     System.out.println("Chose which cargo you want to sell:");
                     String cargo = mScanner.next();
-                    this.game.buyCargo(cargo);
+                    this.game.sellCargo(cargo);
+                    isFinish = true;
                     break;
                 case 2:
                     seePricesOnPlanet();
@@ -126,7 +133,8 @@ public class IuTexto {
                     break;
 
                 case 6:
-                    this.game.setState(new Move(this.game));
+                    this.game.nextState();
+                    isFinish = true;
                     return;
 
             }
@@ -134,8 +142,9 @@ public class IuTexto {
     }
 
     private void iuBuy() {
+        isFinish = false;
 
-        while (true) {
+        while (!isFinish) {
             
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
             System.out.println(" 1. Buy Cargo");
@@ -163,8 +172,9 @@ public class IuTexto {
                     break;
 
                 case 6:
-                    this.game.setState(new Replenish(game));
-                    return;
+                    this.game.nextState();
+                    isFinish = true;
+                    break;
 
             }
         }

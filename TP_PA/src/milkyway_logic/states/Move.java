@@ -76,6 +76,6 @@ public class Move extends State {
 
     @Override
     public State nextState() {
-        return new Sell(getGame());
+        return new Replenish(getGame());
     }
 }

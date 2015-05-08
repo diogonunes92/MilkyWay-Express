@@ -5,6 +5,7 @@ import java.util.List;
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.*;
 import milkyway_logic.gameplanner.Game;
+import util.Constants;
 
 public class Replenish extends State {
 
@@ -53,22 +54,42 @@ public class Replenish extends State {
         int sShip_posX = getGame().getSpaceship().getPosX();
         int sShip_posY = getGame().getSpaceship().getPosY();
 
-        if (getGame().getBoard()[sShip_posX][sShip_posY + 1] instanceof Card) {
-            getGame().getBoard()[sShip_posX][sShip_posY + 1].setIsTurned(true);
+        if(sShip_posY+1 < Constants.BOARD_LIMIT_SUP_Y){
+            if (getGame().getBoard()[sShip_posX][sShip_posY + 1] instanceof Card) {
+                getGame().getBoard()[sShip_posX][sShip_posY + 1].setIsTurned(true);
+            }
+        }
+        
+        if(sShip_posX+1 < Constants.BOARD_LIMIT_SUP_X && sShip_posY+1 < Constants.BOARD_LIMIT_SUP_Y){
+            if (getGame().getBoard()[sShip_posX + 1][sShip_posY + 1] instanceof Card) {
+                getGame().getBoard()[sShip_posX + 1][sShip_posY + 1].setIsTurned(true);
+            }
+        }
+        
+        if(sShip_posX+1 < Constants.BOARD_LIMIT_SUP_X){
+            if (getGame().getBoard()[sShip_posX + 1][sShip_posY] instanceof Card) {
+                getGame().getBoard()[sShip_posX + 1][sShip_posY].setIsTurned(true);
+            }
         }
 
-        if (getGame().getBoard()[sShip_posX + 1][sShip_posY + 1] instanceof Card) {
-            getGame().getBoard()[sShip_posX + 1][sShip_posY + 1].setIsTurned(true);
+        if(sShip_posY-1 > Constants.BOARD_LIMIT_INF_Y){
+            if (getGame().getBoard()[sShip_posX][sShip_posY-1] instanceof Card ) {
+                getGame().getBoard()[sShip_posX][sShip_posY-1].setIsTurned(true);
+            }
         }
-
-        if (getGame().getBoard()[sShip_posX + 1][sShip_posY] instanceof Card) {
-            getGame().getBoard()[sShip_posX + 1][sShip_posY].setIsTurned(true);
+        
+        if(sShip_posY-1 > Constants.BOARD_LIMIT_INF_Y && sShip_posX-1 > Constants.BOARD_LIMIT_INF_X){
+            if (getGame().getBoard()[sShip_posX-1][sShip_posY-1] instanceof Card) {
+                getGame().getBoard()[sShip_posX-1][sShip_posY-1].setIsTurned(true);
+            }
         }
-
-        if (getGame().getBoard()[sShip_posX][sShip_posY] instanceof Card) {
-            getGame().getBoard()[sShip_posX][sShip_posY].setIsTurned(true);
+        
+        if(sShip_posY+1 < Constants.BOARD_LIMIT_SUP_Y && sShip_posX-1 > Constants.BOARD_LIMIT_INF_X){
+            if (getGame().getBoard()[sShip_posX-1][sShip_posY+1] instanceof Card) {
+                getGame().getBoard()[sShip_posX-1][sShip_posY+1].setIsTurned(true);
+            }
         }
-
+    
         return this;
     }
 
@@ -124,11 +145,11 @@ public class Replenish extends State {
 
     @Override
     public State move(String move) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return this;
     }
 
     @Override
     public State nextState() {
-        return new Move(getGame());
+        return this;
     }
 }
