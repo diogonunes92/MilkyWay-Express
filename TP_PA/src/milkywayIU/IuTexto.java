@@ -54,7 +54,10 @@ public class IuTexto {
             switch (option) {
                 case 1:
                     game.constructGame();
+<<<<<<< HEAD
                     isFinish = true;
+=======
+>>>>>>> master
                     break;
                 case 2:
                     
@@ -144,8 +147,13 @@ public class IuTexto {
     private void iuBuy() {
         isFinish = false;
 
+<<<<<<< HEAD
         while (!isFinish) {
             
+=======
+        while (true) {
+
+>>>>>>> master
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
             System.out.println(" 1. Buy Cargo");
             System.out.println(" 2. See Prices on Planet");
@@ -180,14 +188,14 @@ public class IuTexto {
         }
 
     }
-    
-    public void iuSaveGame(){
-        
+
+    public void iuSaveGame() {
+
         System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
-            System.out.println(" Do you wanna save the game?");
-            System.out.println(" 1. Yes");
-            System.out.println(" 2. No");
-        
+        System.out.println(" Do you wanna save the game?");
+        System.out.println(" 1. Yes");
+        System.out.println(" 2. No");
+
     }
 
     public void seeCargoForSale() {
@@ -227,29 +235,33 @@ public class IuTexto {
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 9; j++) {
 
-//                if(this.game.getmSpaceship().getPosX() == i && this.game.getmSpaceship().getPosY() == j){
-//                    UIGameBoard[i][j] = "[ S ]";
-//                }    
                     if (gameBoard[i][j] == null) {
                         UIGameBoard[i][j] = "  *  ";
-                    } else if (gameBoard[i][j] instanceof Planet) {
-                        UIGameBoard[i][j] = "[ P ]";
-                    } else if (gameBoard[i][j] instanceof Wormhole) {
-                        UIGameBoard[i][j] = "[ W ]";
-                    } else if (gameBoard[i][j] instanceof EmptySpace) {
-                        UIGameBoard[i][j] = "[ E ]";
-                    }
 
-                    System.out.print(UIGameBoard[i][j]);
+                    } else if (!gameBoard[i][j].getIsTurned()) {
+                        UIGameBoard[i][j] = "[   ]";
+                    } else {
+
+                        if (gameBoard[i][j] instanceof Planet) {
+                            UIGameBoard[i][j] = "[ P ]";
+                        } else if (gameBoard[i][j] instanceof Wormhole) {
+                            UIGameBoard[i][j] = "[ W ]";
+                        } else if (gameBoard[i][j] instanceof EmptySpace) {
+                            UIGameBoard[i][j] = "[ E ]";
+                        }
+                    }
+                    
+                    if (this.game.getSpaceship().getPosX() == i && this.game.getSpaceship().getPosY() == j) {
+                        System.out.println("\033[31m " + UIGameBoard[i][j] + "\033[0m");
+                    } else {
+                        System.out.print(UIGameBoard[i][j]);
+                    }
                 }
                 System.out.println("");
             }
         } else {
             System.out.println("\033[31m Board doesnt exists \033[0m");
         }
-
-        System.out.print("\033[31m OLA MUNDO  \033[0m");
-
     }
 
     public final static void clearConsole() {
