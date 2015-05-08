@@ -1,6 +1,10 @@
 package milkywayIU;
 
 import java.util.Scanner;
+import milkyway_logic.cards.Card;
+import milkyway_logic.cards.EmptySpace;
+import milkyway_logic.cards.Planet;
+import milkyway_logic.cards.Wormhole;
 import milkyway_logic.gameplanner.Game;
 
 import milkyway_logic.states.*;
@@ -12,67 +16,69 @@ public class IuTexto {
 
     public IuTexto() {
         this.isExit = false;
-
-    }
-
-    public void start() {
-
-        printMenu();
-        
-            System.out.println(" Option:");
-            Scanner mScanner = new Scanner(System.in);
-            int option = mScanner.nextInt();
-
-            switch (option) {
-                case 1:
-                    this.game = new Game();
-                    run();
-                    break;
-                case 2: //vercenas
-
-                case 3: //consultar
-
-                case 4:
-                    System.out.println(" Thank's for being with us, mate!");
-                    isExit = true;
-                    return;
-            }
-        
+        this.game = new Game();
+        this.game.setState(new StartGame(game));
     }
 
     void run() {
         while (!isExit) {
             State mState = game.getState();
-            if (mState instanceof Buy) {
-                iuStart();
+
+            if (mState instanceof StartGame) {
+                iuStartGame();
+            } else if (mState instanceof Move) {
+                iuMove();
             } else if (mState instanceof Buy) {
                 iuBuy();
             } else if (mState instanceof Sell) {
                 iuSell();
-            } else if (mState instanceof Move) {
-                iuMove();
             }
         }
     }
 
-    private void printMenu() {
+    private void iuStartGame() {
 
-        System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
-        System.out.println(" 1. Iniciar Jogo");
-        System.out.println(" 2. Ver cenas");
-        System.out.println(" 3. Consultar");
-        System.out.println(" 4. Sair");
+        clearConsole();
+        printBoard();
+
+        while (!isExit) {
+            System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
+            System.out.println(" 1. Iniciar Jogo");
+            System.out.println(" 2. Ver cenas");
+            System.out.println(" 3. Consultar");
+            System.out.println(" 4. Sair");
+
+            System.out.print(" Option: ");
+            Scanner mScanner = new Scanner(System.in);
+            int option = mScanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    game.constructGame(); 
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    isExit = true;
+                    System.out.println("See you next time, mate!");
+                    break;
+            }
+        }
     }
 
     private void iuMove() {
 
-        System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
-        System.out.println(" 1. Mover");
-        System.out.println(" 2. Next Fase");
-        
-         while (!isExit) {
+        clearConsole();
+        printBoard();
 
-            System.out.println(" Option:");
+        while (!isExit) {
+            System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
+            System.out.println(" 1. Mover");
+            System.out.println(" 2. Next Fase");
+
+            System.out.print(" Option: ");
             Scanner mScanner = new Scanner(System.in);
             int option = mScanner.nextInt();
 
@@ -82,7 +88,7 @@ public class IuTexto {
                     String move = mScanner.next();
                     this.game.move(move);
                     break;
-                case 2: 
+                case 2:
                     this.game.setState(new Replenish(this.game));
                     break;
             }
@@ -91,17 +97,18 @@ public class IuTexto {
 
     private void iuSell() {
 
-        System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
-        System.out.println(" 1. Buy Cargo");
-        System.out.println(" 2. See Prices on Planet");
-        System.out.println(" 3. See Cargo on Ship");
-        System.out.println(" 4. Update Weapon");
-        System.out.println(" 5. Update Cargo");
-        System.out.println(" 6. Next Fase");
-        
-               while (true) {
+        clearConsole();
 
-            System.out.println(" Option:");
+        while (true) {
+            System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
+            System.out.println(" 1. Buy Cargo");
+            System.out.println(" 2. See Prices on Planet");
+            System.out.println(" 3. See Cargo on Ship");
+            System.out.println(" 4. Update Weapon");
+            System.out.println(" 5. Update Cargo");
+            System.out.println(" 6. Next Fase");
+
+            System.out.print(" Option: ");
             Scanner mScanner = new Scanner(System.in);
             int option = mScanner.nextInt();
 
@@ -111,35 +118,34 @@ public class IuTexto {
                     String cargo = mScanner.next();
                     this.game.buyCargo(cargo);
                     break;
-                case 2: 
+                case 2:
                     seePricesOnPlanet();
                     break;
-                case 3: 
+                case 3:
                     seeCargoOnShip();
                     break;
-                    
+
                 case 6:
                     this.game.setState(new Move(this.game));
                     return;
-                    
+
             }
-        }  
-    
+        }
     }
 
     private void iuBuy() {
-        
-        System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
-        System.out.println(" 1. Buy Cargo");
-        System.out.println(" 2. See Prices on Planet");
-        System.out.println(" 3. See Cargo for Sale");
-        System.out.println(" 4. Update Weapon");
-        System.out.println(" 5. Update Cargo");
-        System.out.println(" 6. Next Fase");
-        
-         while (true) {
 
-            System.out.println(" Option:");
+        while (true) {
+            
+            System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
+            System.out.println(" 1. Buy Cargo");
+            System.out.println(" 2. See Prices on Planet");
+            System.out.println(" 3. See Cargo for Sale");
+            System.out.println(" 4. Update Weapon");
+            System.out.println(" 5. Update Cargo");
+            System.out.println(" 6. Next Fase");
+
+            System.out.print(" Option: ");
             Scanner mScanner = new Scanner(System.in);
             int option = mScanner.nextInt();
 
@@ -149,52 +155,95 @@ public class IuTexto {
                     String cargo = mScanner.next();
                     this.game.buyCargo(cargo);
                     break;
-                case 2: 
+                case 2:
                     seePricesOnPlanet();
                     break;
-                case 3: 
+                case 3:
                     seeCargoForSale();
                     break;
-                    
+
                 case 6:
-                    this.game.);
+                    this.game.setState(new Replenish(game));
                     return;
-                    
+
             }
         }
-        
+
     }
 
     public void seeCargoForSale() {
-        int i=0;
-        System.out.println("Planet: " + this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getPlanetName());
-        
-        while(i < this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getCubeList().size()){
-            System.out.println(this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getCubeList().get(i).getColor());
+        int i = 0;
+        System.out.println("Planet: " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPlanetName());
+
+        while (i < this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getCubeList().size()) {
+            System.out.println(this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getCubeList().get(i).getColor());
         }
     }
-    
+
     public void seePricesOnPlanet() {
-        System.out.println("Planet: " + this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getPlanetName());
-        
-        System.out.println("Blue"+" : "+this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getPrices().get("Blue"));
-        System.out.println("Red"+" : "+this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getPrices().get("Red"));
-        System.out.println("Yellow"+" : "+this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getPrices().get("Yellow"));
-        System.out.println("Black"+" : "+this.game.getmBoard().getGameBoard()[this.game.getmSpaceship().getPosX()][this.game.getmSpaceship().getPosY()].getPrices().get("Black"));
+        System.out.println("Planet: " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPlanetName());
+
+        System.out.println("Blue" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Blue"));
+        System.out.println("Red" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Red"));
+        System.out.println("Yellow" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Yellow"));
+        System.out.println("Black" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Black"));
     }
 
     private void seeCargoOnShip() {
         int i = 0;
-        
+
         System.out.println("Cargo On Ship:");
-        while(i<this.game.getmSpaceship().getCargo().size()){
-            System.out.println(this.game.getmSpaceship().getCargo().get(i).getColor());
+        while (i < this.game.getSpaceship().getCargo().size()) {
+            System.out.println(this.game.getSpaceship().getCargo().get(i).getColor());
         }
     }
 
-    private void iuStart() {
-        this.game.
-        return;
-        
+    public void printBoard() {
+
+        Card[][] gameBoard = game.getBoard();
+        String[][] UIGameBoard = new String[7][9];
+
+        if (gameBoard != null) {
+
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 9; j++) {
+
+//                if(this.game.getmSpaceship().getPosX() == i && this.game.getmSpaceship().getPosY() == j){
+//                    UIGameBoard[i][j] = "[ S ]";
+//                }    
+                    if (gameBoard[i][j] == null) {
+                        UIGameBoard[i][j] = "  *  ";
+                    } else if (gameBoard[i][j] instanceof Planet) {
+                        UIGameBoard[i][j] = "[ P ]";
+                    } else if (gameBoard[i][j] instanceof Wormhole) {
+                        UIGameBoard[i][j] = "[ W ]";
+                    } else if (gameBoard[i][j] instanceof EmptySpace) {
+                        UIGameBoard[i][j] = "[ E ]";
+                    }
+
+                    System.out.print(UIGameBoard[i][j]);
+                }
+                System.out.println("");
+            }
+        } else {
+            System.out.println("\033[31m Board doesnt exists \033[0m");
+        }
+
+        System.out.print("\033[31m OLA MUNDO  \033[0m");
+
+    }
+
+    public final static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec("cls");
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (final Exception e) {
+            //  Handle any exceptions.
+        }
     }
 }

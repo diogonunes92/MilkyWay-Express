@@ -1,110 +1,107 @@
 package milkyway_logic.gameplanner;
 
+import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
-import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
 
 public final class Game {
 
-    private State mState;
-    private Player mPlayer;
+    private State state;
+    private Player player;
     
-    private Spaceship mSpaceship;
-    private BoardConstructor mBoard;
-    private static int totalCoins;
+    private Spaceship spaceship;
+    private static int bankCoins;
+    
+    private Card[][] board;
     private int myCoins;
 
     public Game() {
-
-        mState = new StartGame(this);
-        totalCoins = 30;
-        myCoins = 10;
-        mSpaceship = new Spaceship();
-
+        state = new StartGame(this);
     }
 
     public State getState() {
-        return mState;
+        return state;
     }
 
-    public void setState(State mState) {
-        this.mState = mState;
+    public void setState(State state) {
+        this.state = state;
     }
 
-    public void newGame() {
-        totalCoins = 20;
-        myCoins = 10;
-    }
-    
-    public void initialize() {
-        mBoard = new BoardConstructor(this);
+    public Player getPlayer() {
+        return player;
     }
 
-    public static int getTotalCoins() {
-        return totalCoins;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    public static void setTotalCoins(int totalCoins) {
-        Game.totalCoins = totalCoins;
+    public Spaceship getSpaceship() {
+        return spaceship;
+    }
+
+    public void setSpaceship(Spaceship spaceship) {
+        this.spaceship = spaceship;
+    }
+
+    public Card [][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(Card [][] board) {
+        this.board = board;
+    }
+
+    public static int getBankCoins() {
+        return bankCoins;
+    }
+
+    public static void setBankCoins(int bankCoins) {
+        Game.bankCoins = bankCoins;
     }
 
     public int getMyCoins() {
         return myCoins;
     }
 
-    public State getmState() {
-        return mState;
-    }
-
-    public BoardConstructor getmBoard() {
-        return mBoard;
-    }
-
-    public Spaceship getmSpaceship() {
-        return mSpaceship;
-    }
-
     public void setMyCoins(int myCoins) {
         this.myCoins = myCoins;
     }
-
+    
     public void constructGame() {
-        this.mState = mState.constructGame();
+        this.state = state.constructGame();
     }
     
-    
     public void move(String move){
-        this.mState = mState.move(move);
+        this.state = state.move(move);
     };
     
     public void upgradeWeapon(){
-        this.mState = mState.upgradeWeapon();
+        this.state = state.upgradeWeapon();
     };
     
     public void upgradeCargo(){
-        this.mState = mState.upgradeCargo();
+        this.state = state.upgradeCargo();
     };
     
     public void buyCargo(String carga){
-        this.mState = mState.buyCargo(carga);
+        this.state = state.buyCargo(carga);
     };
     
     public void sellCargo(String carga){
-        this.mState = mState.sellCargo(carga);
+        this.state = state.sellCargo(carga);
     };
     
     public void isFinished(){
-        this.mState = mState.isFinished();
+        this.state = state.isFinished();
     };
     
     public void pirateAtack(){
-        this.mState = mState.pirateAtack();
+        this.state = state.pirateAtack();
     };
 
     public void nextState(){
-        this.mState = mState.nextState();
+        this.state = state.nextState();
     }
-
 }

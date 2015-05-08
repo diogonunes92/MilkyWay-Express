@@ -1,29 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package milkyway_logic.states;
 
+import milkyway_logic.elements.Spaceship;
+import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.gameplanner.Game;
+import util.Constants;
 
-/**
- *
- * @author marcobarbosa
- */
-public class StartGame extends State{
+public class StartGame extends State {
 
     public StartGame(Game game) {
         super(game);
     }
 
-
     @Override
     public State constructGame() {
-            getGame().initialize();
-            return new Move(getGame());
-    }
+        // TODO: Faz sentido ter isto no interface? 
 
+        BoardConstructor mBoardConstructor = new BoardConstructor();
+        getGame().setBoard(mBoardConstructor.getGameBoard());
+        getGame().setMyCoins(Constants.INITIAL_PLAYER_COINS);
+        getGame().setBankCoins(Constants.INITIAL_PLAYER_COINS - Constants.INITIAL_PLAYER_COINS);
+        
+        Spaceship mSpaceship = new Spaceship();
+        mSpaceship.setPosX(Constants.INITIAL_SPACESHIP_POSITION_X);
+        mSpaceship.setPosY(Constants.INITIAL_SPACESHIP_POSITION_Y);
+        getGame().setSpaceship(mSpaceship);
+        
+        return new Move(getGame());
+    }
 
     @Override
     public State buyCargo(String carga) {
@@ -35,13 +38,11 @@ public class StartGame extends State{
         return this;
     }
 
-
     @Override
     public State isFinished() {
-        if(getGame().getMyCoins() == 0){
+        if (getGame().getMyCoins() == 0) {
             System.exit(0);
         }
-        
         return this;
     }
 
@@ -79,7 +80,4 @@ public class StartGame extends State{
     public State nextState() {
         return new Move(getGame());
     }
-
-    
-    
 }
