@@ -40,7 +40,7 @@ public class BoardConstructor {
         }
 
         for (int j = 0; j < 2; j++) {
-            cardShuffle.add(new Wormhole());
+            cardShuffle.add(new Wormhole(false));
         }
 
         for (int k = 0; k < 12; k++) {
@@ -53,11 +53,12 @@ public class BoardConstructor {
     private void fillGameBoard() {
 
         for (int row = 0; row < cardShuffle.size(); row++) {
-            
+
             gameBoard[Constants.BOARD_POSITIONS[row][0]][Constants.BOARD_POSITIONS[row][1]] = cardShuffle.get(row);
         }
 
-        this.gameBoard[6][0] = new Wormhole();
-        this.gameBoard[0][8] = new Wormhole();
+        this.gameBoard[6][0] = new Wormhole(true);
+        this.gameBoard[0][8] = new Wormhole(true);
+
     }
 }
