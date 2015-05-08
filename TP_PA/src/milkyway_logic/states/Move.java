@@ -63,15 +63,19 @@ public class Move extends State {
 
         if (move.compareTo("F") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY() + 1] instanceof Card) {
             getGame().getSpaceship().setPosY(+1);
+            getGame().setMyCoins(-1);
         } else if (move.compareTo("B") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY() - 1] instanceof Card) {
             getGame().getSpaceship().setPosY(-1);
+            getGame().setMyCoins(-1);
         } else if (move.compareTo("L") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX() - 1][getGame().getSpaceship().getPosY()] instanceof Card) {
             getGame().getSpaceship().setPosX(-1);
+            getGame().setMyCoins(-1);
         } else if (move.compareTo("R") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX() + 1][getGame().getSpaceship().getPosY()] instanceof Card) {
             getGame().getSpaceship().setPosX(+1);
+            getGame().setMyCoins(-1);
         }
 
-        return new Replenish(getGame());
+        return this;
     }
 
     @Override
