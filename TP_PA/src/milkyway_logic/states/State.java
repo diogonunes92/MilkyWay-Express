@@ -4,14 +4,14 @@ import milkyway_logic.gameplanner.Game;
 
 public abstract class State {
 
-    private Game mGame;
+    private Game game;
 
     public State(Game game) {
-        this.mGame = game;
+        this.game = game;
     }
 
     public Game getGame() {
-        return this.mGame;
+        return this.game;
     }
 
     abstract public State constructGame();
@@ -25,6 +25,5 @@ public abstract class State {
     abstract public State turnCards();
     abstract public State replenishMarkets();
     abstract public State nextState();
-    
-    
+
 }

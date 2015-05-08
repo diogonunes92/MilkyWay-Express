@@ -26,22 +26,31 @@ public class Planet extends Card {
         return isPirate;
     }
     
+    @Override
     public void setCubeList(List<Cube> cubeList) {
         this.cubeList = cubeList;
     }
 
+    @Override
     public HashMap<String, Integer> getPrices() {
         return prices;
     }
 
+    @Override
     public void setPrices(HashMap<String, Integer> prices) {
         this.prices = prices;
     }
 
+    @Override
     public String getPlanetName() {
         return planetName;
     }
 
+    /**
+     *
+     * @param planetName
+     */
+    @Override
     public void setPlanetName(String planetName) {
         this.planetName = planetName;
     }

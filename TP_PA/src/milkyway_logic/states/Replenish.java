@@ -39,8 +39,8 @@ public class Replenish extends State {
         doneAtacks = 0;
         while (doneAtacks < numAtacks) {
             piratePower = 1 + (int) (Math.random() * 6);
-            if (getGame().getmSpaceship().getPower() < piratePower) {
-                getGame().setMyCoins(getGame().getMyCoins() - (piratePower - getGame().getmSpaceship().getPower()));
+            if (getGame().getSpaceship().getPower() < piratePower) {
+                getGame().setMyCoins(getGame().getMyCoins() - (piratePower - getGame().getSpaceship().getPower()));
             }
         }
 
@@ -49,26 +49,26 @@ public class Replenish extends State {
 
     @Override
     public State turnCards() {
-        int sShip_posX = getGame().getmSpaceship().getPosX();
-        int sShip_posY = getGame().getmSpaceship().getPosY();
-        
-        
-        if(getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY+1] instanceof Card){
-            getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY+1].setIsTurned(true);
+
+        int sShip_posX = getGame().getSpaceship().getPosX();
+        int sShip_posY = getGame().getSpaceship().getPosY();
+
+        if (getGame().getBoard()[sShip_posX][sShip_posY + 1] instanceof Card) {
+            getGame().getBoard()[sShip_posX][sShip_posY + 1].setIsTurned(true);
         }
-        
-        if(getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY+1] instanceof Card){
-            getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY+1].setIsTurned(true);
-        }        
-        
-        if(getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY] instanceof Card){
-            getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY].setIsTurned(true);
+
+        if (getGame().getBoard()[sShip_posX + 1][sShip_posY + 1] instanceof Card) {
+            getGame().getBoard()[sShip_posX + 1][sShip_posY + 1].setIsTurned(true);
         }
-        
-        if(getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY] instanceof Card){
-            getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY].setIsTurned(true);
+
+        if (getGame().getBoard()[sShip_posX + 1][sShip_posY] instanceof Card) {
+            getGame().getBoard()[sShip_posX + 1][sShip_posY].setIsTurned(true);
         }
-        
+
+        if (getGame().getBoard()[sShip_posX][sShip_posY] instanceof Card) {
+            getGame().getBoard()[sShip_posX][sShip_posY].setIsTurned(true);
+        }
+
         return this;
     }
 
@@ -88,16 +88,16 @@ public class Replenish extends State {
         int randomNum;
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
-                
-                if (getGame().getmBoard().getGameBoard()[i][j] instanceof Planet) {
-                    
-                    if (getGame().getmBoard().getGameBoard()[i][j].getIsTurned() && !getGame().getmBoard().getGameBoard()[i][j].isPirate()) {
-                        
-                        if (getGame().getmBoard().getGameBoard()[i][j].getCubeList().size() < 2) {
-                            
-                            while (getGame().getmBoard().getGameBoard()[i][j].getCubeList().size() < 2) {
+
+                if (getGame().getBoard()[i][j] instanceof Planet) {
+
+                    if (getGame().getBoard()[i][j].getIsTurned() && !getGame().getBoard()[i][j].isPirate()) {
+
+                        if (getGame().getBoard()[i][j].getCubeList().size() < 2) {
+
+                            while (getGame().getBoard()[i][j].getCubeList().size() < 2) {
                                 randomNum = 1 + (int) (Math.random() * 6);
-                                
+
                                 if (randomNum == 1) {
                                     color = "Red";
                                 } else if (randomNum == 2) {
@@ -109,9 +109,9 @@ public class Replenish extends State {
                                 } else {
                                     color = "White";
                                 }
-                                List<Cube> cubeList = getGame().getmBoard().getGameBoard()[i][j].getCubeList();
+                                List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
                                 cubeList.add(new Cube(color));
-                                getGame().getmBoard().getGameBoard()[i][j].setCubeList(cubeList);
+                                getGame().getBoard()[i][j].setCubeList(cubeList);
                             }
                         }
                     }
@@ -131,5 +131,4 @@ public class Replenish extends State {
     public State nextState() {
         return new Move(getGame());
     }
-
 }

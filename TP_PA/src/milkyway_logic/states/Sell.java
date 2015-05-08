@@ -17,7 +17,6 @@ public class Sell extends State{
         return this;
     }
 
-
     @Override
     public State buyCargo(String carga) {
         return this;
@@ -25,35 +24,34 @@ public class Sell extends State{
 
     @Override
     public State sellCargo(String carga) {
-        if(getGame().getmSpaceship().getCargo().isEmpty()){
+        if(getGame().getSpaceship().getCargo().isEmpty()){
             return new Buy(getGame());
         }
-        else if(getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()] instanceof Planet){
+        else if(getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY()] instanceof Planet){
             //If spaceship is on planet ortherwise it can't sell
             
         int cargoPrice;
-        HashMap<String,Integer> prices = getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()].getPrices();
-        List<Cube> cubeListPlanet = getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()].getCubeList();
+        HashMap<String,Integer> prices = getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY()].getPrices();
+        List<Cube> cubeListPlanet = getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY()].getCubeList();
 
-         
-        if(!getGame().getmSpaceship().getCargo().isEmpty()){
+        if(!getGame().getSpaceship().getCargo().isEmpty()){
             
-            List<Cube> cubesSpaceship = getGame().getmSpaceship().getCargo();
+            List<Cube> cubesSpaceship = getGame().getSpaceship().getCargo();
             cargoPrice = prices.get(carga);
-            if(cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() == carga){
+            if(cubeListPlanet.get(0).getColor().equals(carga) && cubeListPlanet.get(1).getColor().equals(carga)){
                 getGame().setMyCoins(+prices.get(carga));
                 cubesSpaceship.remove(new Cube(carga));
-                getGame().getmSpaceship().setCargo(cubesSpaceship);
+                getGame().getSpaceship().setCargo(cubesSpaceship);
             }
-            else if((cubeListPlanet.get(0).getColor() != carga && cubeListPlanet.get(1).getColor() == carga) || (cubeListPlanet.get(0).getColor() == carga && cubeListPlanet.get(1).getColor() != carga)){
+            else if((!cubeListPlanet.get(0).getColor().equals(carga) && cubeListPlanet.get(1).getColor().equals(carga)) || (cubeListPlanet.get(0).getColor().equals(carga) && !cubeListPlanet.get(1).getColor().equals(carga))){
                 getGame().setMyCoins(getGame().getMyCoins()+prices.get(carga)+1);
                 cubesSpaceship.remove(new Cube(carga));
-                getGame().getmSpaceship().setCargo(cubesSpaceship);
+                getGame().getSpaceship().setCargo(cubesSpaceship);
             }
             else{
                 getGame().setMyCoins(getGame().getMyCoins()+prices.get(carga)+2);
                 cubesSpaceship.remove(new Cube(carga));
-                getGame().getmSpaceship().setCargo(cubesSpaceship);
+                getGame().getSpaceship().setCargo(cubesSpaceship);
             }
          }
         
@@ -83,8 +81,8 @@ public class Sell extends State{
             return new StartGame(getGame()); 
         }
         
-        if(getGame().getmSpaceship().getPower() <6 && getGame().getMyCoins() >=4){
-            getGame().getmSpaceship().setPower(+1);
+        if(getGame().getSpaceship().getPower() <6 && getGame().getMyCoins() >=4){
+            getGame().getSpaceship().setPower(+1);
         }
         
         return this;
@@ -96,8 +94,8 @@ public class Sell extends State{
             return new StartGame(getGame());
         }
         
-        if(getGame().getmSpaceship().getCargo().size() == 2){
-            getGame().getmSpaceship().setCapacity(+1);
+        if(getGame().getSpaceship().getCargo().size() == 2){
+            getGame().getSpaceship().setCapacity(+1);
         }
         
         return this;   

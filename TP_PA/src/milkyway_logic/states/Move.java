@@ -3,7 +3,7 @@ package milkyway_logic.states;
 import milkyway_logic.cards.Card;
 import milkyway_logic.gameplanner.Game;
 
-public class Move extends State{
+public class Move extends State {
 
     public Move(Game game) {
         super(game);
@@ -13,7 +13,6 @@ public class Move extends State{
     public State constructGame() {
         return this;
     }
-
 
     @Override
     public State buyCargo(String carga) {
@@ -25,13 +24,12 @@ public class Move extends State{
         return this;
     }
 
-
     @Override
     public State isFinished() {
-        if(getGame().getMyCoins() == 0){
+        if (getGame().getMyCoins() == 0) {
             System.exit(0);
         }
-        
+
         return this;
     }
 
@@ -62,23 +60,17 @@ public class Move extends State{
 
     @Override
     public State move(String move) {
-        
-        if(move.compareTo("F") == 0 && getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()+1] instanceof Card){
-            getGame().getmSpaceship().setPosY(+1);
+
+        if (move.compareTo("F") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY() + 1] instanceof Card) {
+            getGame().getSpaceship().setPosY(+1);
+        } else if (move.compareTo("B") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY() - 1] instanceof Card) {
+            getGame().getSpaceship().setPosY(-1);
+        } else if (move.compareTo("L") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX() - 1][getGame().getSpaceship().getPosY()] instanceof Card) {
+            getGame().getSpaceship().setPosX(-1);
+        } else if (move.compareTo("R") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX() + 1][getGame().getSpaceship().getPosY()] instanceof Card) {
+            getGame().getSpaceship().setPosX(+1);
         }
-        
-        else if(move.compareTo("B") == 0 && getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()][getGame().getmSpaceship().getPosY()-1] instanceof Card){
-            getGame().getmSpaceship().setPosY(-1);
-        }
-        
-        else if(move.compareTo("L") == 0 && getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()-1][getGame().getmSpaceship().getPosY()] instanceof Card){
-            getGame().getmSpaceship().setPosX(-1);
-        }
-        
-        else if(move.compareTo("R") == 0 && getGame().getmBoard().getGameBoard()[getGame().getmSpaceship().getPosX()+1][getGame().getmSpaceship().getPosY()] instanceof Card){
-            getGame().getmSpaceship().setPosX(+1);
-        }
-        
+
         return new Replenish(getGame());
     }
 
@@ -86,6 +78,4 @@ public class Move extends State{
     public State nextState() {
         return new Sell(getGame());
     }
-
-
 }

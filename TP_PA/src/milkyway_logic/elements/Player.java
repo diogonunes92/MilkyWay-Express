@@ -5,6 +5,7 @@ public class Player {
     private final int id;
     private int coins;
     private String name;
+    private Spaceship spaceship;
 
     public Player(int id, int coins, String name) {
         this.id = id;
@@ -27,4 +28,14 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     } 
+
+    public Spaceship getSpaceship() {
+        return spaceship;
+    }
+
+    public void setSpaceship(Spaceship spaceship) {
+        this.spaceship = spaceship;
+    }
+    
+    
 }
