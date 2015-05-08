@@ -9,7 +9,12 @@ public class Wormhole  extends Card{
     public Wormhole() {
         super();
     }
-
+    
+    public Wormhole(boolean isTurned) {
+        super();
+        super.setIsTurned(isTurned);
+    }
+    
     @Override
     public List<Cube> getCubeList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
