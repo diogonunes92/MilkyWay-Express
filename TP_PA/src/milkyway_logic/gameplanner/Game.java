@@ -103,5 +103,8 @@ public final class Game {
         this.mState = mState.pirateAtack();
     };
 
+    public void nextState(){
+        this.mState = mState.nextState();
+    }
 
 }

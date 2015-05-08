@@ -2,6 +2,7 @@ package milkyway_logic.states;
 
 import milkyway_logic.cards.Planet;
 import java.util.List;
+import milkyway_logic.cards.Card;
 import milkyway_logic.elements.*;
 import milkyway_logic.gameplanner.Game;
 
@@ -48,6 +49,26 @@ public class Replenish extends State {
 
     @Override
     public State turnCards() {
+        int sShip_posX = getGame().getmSpaceship().getPosX();
+        int sShip_posY = getGame().getmSpaceship().getPosY();
+        
+        
+        if(getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY+1] instanceof Card){
+            getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY+1].setIsTurned(true);
+        }
+        
+        if(getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY+1] instanceof Card){
+            getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY+1].setIsTurned(true);
+        }        
+        
+        if(getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY] instanceof Card){
+            getGame().getmBoard().getGameBoard()[sShip_posX+1][sShip_posY].setIsTurned(true);
+        }
+        
+        if(getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY] instanceof Card){
+            getGame().getmBoard().getGameBoard()[sShip_posX][sShip_posY].setIsTurned(true);
+        }
+        
         return this;
     }
 
@@ -108,7 +129,7 @@ public class Replenish extends State {
 
     @Override
     public State nextState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Move(getGame());
     }
 
 }

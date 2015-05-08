@@ -157,7 +157,7 @@ public class IuTexto {
                     break;
                     
                 case 6:
-                    this.game.setState(new Sell(this.game));
+                    this.game.);
                     return;
                     
             }
@@ -193,8 +193,8 @@ public class IuTexto {
     }
 
     private void iuStart() {
-        //this.game.initialize();
-        
+        this.game.
+        return;
         
     }
 }
