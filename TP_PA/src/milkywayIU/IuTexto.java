@@ -54,10 +54,7 @@ public class IuTexto {
             switch (option) {
                 case 1:
                     game.constructGame();
-<<<<<<< HEAD
                     isFinish = true;
-=======
->>>>>>> master
                     break;
                 case 2:
                     
@@ -106,6 +103,7 @@ public class IuTexto {
     private void iuSell() {
 
         clearConsole();
+        printBoard();
         isFinish = false;
 
         while (!isFinish) {
@@ -146,14 +144,9 @@ public class IuTexto {
 
     private void iuBuy() {
         isFinish = false;
+        printBoard();
 
-<<<<<<< HEAD
         while (!isFinish) {
-            
-=======
-        while (true) {
-
->>>>>>> master
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
             System.out.println(" 1. Buy Cargo");
             System.out.println(" 2. See Prices on Planet");
