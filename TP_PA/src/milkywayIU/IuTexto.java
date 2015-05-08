@@ -31,14 +31,13 @@ public class IuTexto {
                 iuBuy();
             } else if (mState instanceof Sell) {
                 iuSell();
-            } 
+            }
         }
     }
 
     private void iuStartGame() {
 
         clearConsole();
-        printBoard();
 
         while (!isFinish) {
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
@@ -57,12 +56,13 @@ public class IuTexto {
                     isFinish = true;
                     break;
                 case 2:
-                    
+
                     break;
                 case 3:
                     break;
                 case 4:
                     isFinish = true;
+                    isExit = true;
                     System.out.println("See you next time, mate!");
                     break;
             }
@@ -74,6 +74,7 @@ public class IuTexto {
         clearConsole();
         printBoard();
         isFinish = false;
+
         while (!isFinish) {
             System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
             System.out.println(" 1. Mover");
@@ -220,32 +221,31 @@ public class IuTexto {
 
     public void printBoard() {
 
-        Card[][] gameBoard = game.getBoard();
         String[][] UIGameBoard = new String[7][9];
 
-        if (gameBoard != null) {
+        if (game.getBoard() != null) {
 
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 9; j++) {
 
-                    if (gameBoard[i][j] == null) {
+                    if (game.getBoard()[i][j] == null) {
                         UIGameBoard[i][j] = "  *  ";
-
-                    } else if (!gameBoard[i][j].getIsTurned()) {
-                        UIGameBoard[i][j] = "[   ]";
                     } else {
 
-                        if (gameBoard[i][j] instanceof Planet) {
-                            UIGameBoard[i][j] = "[ P ]";
-                        } else if (gameBoard[i][j] instanceof Wormhole) {
-                            UIGameBoard[i][j] = "[ W ]";
-                        } else if (gameBoard[i][j] instanceof EmptySpace) {
-                            UIGameBoard[i][j] = "[ E ]";
+                        if (game.getBoard()[i][j].getIsTurned()) {
+                            if (game.getBoard()[i][j] instanceof Planet) {
+                                UIGameBoard[i][j] = "[ P ]";
+                            } else if (game.getBoard()[i][j] instanceof Wormhole) {
+                                UIGameBoard[i][j] = "[ W ]";
+                            } else if (game.getBoard()[i][j] instanceof EmptySpace) {
+                                UIGameBoard[i][j] = "[ E ]";
+                            }
+                        } else {
+                            UIGameBoard[i][j] = "[   ]";
                         }
                     }
-                    
                     if (this.game.getSpaceship().getPosX() == i && this.game.getSpaceship().getPosY() == j) {
-                        System.out.println("\033[31m " + UIGameBoard[i][j] + "\033[0m");
+                        System.out.print("\033[31m" + UIGameBoard[i][j] + "\033[0m");
                     } else {
                         System.out.print(UIGameBoard[i][j]);
                     }
