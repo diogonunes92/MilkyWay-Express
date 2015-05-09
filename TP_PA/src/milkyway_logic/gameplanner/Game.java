@@ -103,14 +103,21 @@ public final class Game {
 
     public void pirateAtack() {
 
-        int piratePower, numAtacks, doneAtacks;
+        int piratePower, numAtacks, doneAtacks, powerDiference;
         numAtacks = 1 + (int) (Math.random() * 3);
+        System.out.println("Number of Attacks: " + numAtacks);
+        System.out.println("Your Power: " + this.player.getSpaceship().getPower());
+        int playerCoins = this.getPlayer().getCoins();
         doneAtacks = 0;
         while (doneAtacks < numAtacks) {
             piratePower = 1 + (int) (Math.random() * 6);
+            System.out.println("Pirate's Power: " + piratePower);
             if (this.getPlayer().getSpaceship().getPower() < piratePower) {
-                this.getPlayer().setCoins(this.getPlayer().getCoins() - (piratePower - this.getPlayer().getSpaceship().getPower()));
+                powerDiference = piratePower - this.getPlayer().getSpaceship().getPower();
+                this.getPlayer().setCoins(playerCoins - powerDiference);
+                System.out.println("Ataque infligindo!");
             }
+            doneAtacks++;
         }
 
     }
@@ -191,12 +198,12 @@ public final class Game {
         }
 
         // LEFT UP
-        if (cardVerifierTurn(posX -1, posY + 1)) {
+        if (cardVerifierTurn(posX - 1, posY + 1)) {
             this.getBoard()[posX - 1][posY + 1].setIsTurned(true);
         }
 
         //RIGHT UP
-        if (cardVerifierTurn(posX+1, posY + 1)) {
+        if (cardVerifierTurn(posX + 1, posY + 1)) {
             this.getBoard()[posX + 1][posY + 1].setIsTurned(true);
         }
     }
@@ -219,6 +226,16 @@ public final class Game {
         }
 
         return false;
+    }
+
+    public boolean verifyPirateAttack() {
+        int isPirateAttack = 1 + (int) (Math.random() * 2);
+        if (isPirateAttack == 1) {
+            System.out.println("You are under a pirate atack!");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean moveSpaceship(String move) {

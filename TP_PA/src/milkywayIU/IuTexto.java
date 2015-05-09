@@ -120,6 +120,9 @@ public class IuTexto {
                 case 2:
                     this.game.nextState();
                     this.game.replenishMarkets();
+                    if(this.game.verifyPirateAttack()){
+                        this.game.pirateAtack();
+                    }
                     this.game.turnCards();
                     isFinish = true;
                     break;
@@ -323,4 +326,6 @@ public class IuTexto {
             //  Handle any exceptions.
         }
     }
+
+
 }
