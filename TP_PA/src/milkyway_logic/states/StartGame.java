@@ -1,10 +1,6 @@
 package milkyway_logic.states;
 
-import milkyway_logic.elements.Player;
-import milkyway_logic.elements.Spaceship;
-import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.gameplanner.Game;
-import util.Constants;
 
 public class StartGame extends State {
 
@@ -15,13 +11,10 @@ public class StartGame extends State {
     @Override
     public State constructGame() {
 
-        BoardConstructor mBoardConstructor = new BoardConstructor();
-        getGame().setBoard(mBoardConstructor.getGameBoard());
-        getGame().setBankCoins(Constants.INITIAL_PLAYER_COINS - Constants.INITIAL_PLAYER_COINS);
-        
-        getGame().setPlayer(new Player(1, "player_1", Constants.INITIAL_PLAYER_COINS, new Spaceship(Constants.INITIAL_SPACESHIP_POSITION_X, Constants.INITIAL_SPACESHIP_POSITION_Y)));
-  
-        return new Move(getGame());
+        if (getGame().initialize()) {
+            return new Move(getGame());
+        }
+        return this;
     }
 
     @Override
