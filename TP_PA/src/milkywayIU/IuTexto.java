@@ -75,7 +75,7 @@ public class IuTexto {
         isFinish = false;
 
         while (!isFinish) {
-            System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
+            System.out.println(" ::::::  MILKY WAY EXPRESS :: MOVE  ::::::::::");
             System.out.println(" 1. Mover");
             System.out.println(" 2. Next Fase");
 
@@ -86,26 +86,26 @@ public class IuTexto {
             switch (option) {
                 case 1:
                     boolean isCorrect = true;
-                    
-                    while(isCorrect){
+
+                    while (isCorrect) {
                         System.out.println(" Option: (Front - F | Back - B | Left - L | Right - R)");
                         String move = mScanner.next();
-                        
-                        if(move.equalsIgnoreCase("f") ||move.equalsIgnoreCase("b")|| move.equalsIgnoreCase("l") || move.equalsIgnoreCase("r")){
+
+                        if (move.equalsIgnoreCase("f") || move.equalsIgnoreCase("b") || move.equalsIgnoreCase("l") || move.equalsIgnoreCase("r")) {
                             isCorrect = false;
 //                            game.isInsideLimits(option, option);
                             this.game.move(move);
-                        } else{
+                        } else {
                             System.out.println(" Incorrect choice");
                         }
                     }
-                    
+
                     isFinish = true;
                     break;
                 case 2:
                     this.game.nextState();
-                    this.game.turnCards();
                     this.game.replenishMarkets();
+                    this.game.turnCards();
                     isFinish = true;
                     break;
             }
@@ -236,12 +236,12 @@ public class IuTexto {
         String[][] UIGameBoard = new String[7][9];
 
         if (game.getBoard() != null) {
-            
+
             System.out.println("----------------------------------------------");
             System.out.println("Player name: " + game.getPlayer().getName());
             System.out.println("Player coins: " + game.getPlayer().getCoins());
             System.out.println("");
-            
+
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 9; j++) {
 
@@ -273,7 +273,7 @@ public class IuTexto {
             System.out.println("Rounds played: " + game.getRoundsPlayed());
             System.out.println("");
             System.out.println("----------------------------------------------");
-            
+
         } else {
             System.out.println("\033[31m Board doesnt exists \033[0m");
         }

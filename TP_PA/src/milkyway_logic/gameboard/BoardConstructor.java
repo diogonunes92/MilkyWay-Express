@@ -7,7 +7,6 @@ import milkyway_logic.cards.EmptySpace;
 import milkyway_logic.cards.Planet;
 import milkyway_logic.cards.Wormhole;
 import milkyway_logic.cards.Card;
-import milkyway_logic.gameplanner.Game;
 import util.Constants;
 
 public class BoardConstructor {
@@ -59,6 +58,8 @@ public class BoardConstructor {
 
         this.gameBoard[6][0] = new Wormhole(true);
         this.gameBoard[0][8] = new Wormhole(true);
+//        First card after the first
+        this.gameBoard[5][0].setIsTurned(true);
 
     }
 }

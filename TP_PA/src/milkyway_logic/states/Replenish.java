@@ -51,45 +51,64 @@ public class Replenish extends State {
     @Override
     public State turnCards() {
 
-        int sShip_posX = getGame().getPlayer().getSpaceship().getPosX();
-        int sShip_posY = getGame().getPlayer().getSpaceship().getPosY();
+        int posX = getGame().getPlayer().getSpaceship().getPosX();
+        int posY = getGame().getPlayer().getSpaceship().getPosY();
 
-        if(sShip_posY+1 < Constants.BOARD_LIMIT_SUP_Y){
-            if (getGame().getBoard()[sShip_posX][sShip_posY + 1] instanceof Card) {
-                getGame().getBoard()[sShip_posX][sShip_posY + 1].setIsTurned(true);
+//        RIGHT 
+        if (posY + 1 < Constants.BOARD_LIMIT_SUP_Y) {
+            if (getGame().getBoard()[posX][posY + 1] instanceof Card) {
+                getGame().getBoard()[posX][posY + 1].setIsTurned(true);
             }
         }
-        
-        if(sShip_posX+1 < Constants.BOARD_LIMIT_SUP_X && sShip_posY+1 < Constants.BOARD_LIMIT_SUP_Y){
-            if (getGame().getBoard()[sShip_posX + 1][sShip_posY + 1] instanceof Card) {
-                getGame().getBoard()[sShip_posX + 1][sShip_posY + 1].setIsTurned(true);
-            }
-        }
-        
-        if(sShip_posX+1 < Constants.BOARD_LIMIT_SUP_X){
-            if (getGame().getBoard()[sShip_posX + 1][sShip_posY] instanceof Card) {
-                getGame().getBoard()[sShip_posX + 1][sShip_posY].setIsTurned(true);
+//        RIGHT DOWN 
+        if (posX + 1 < Constants.BOARD_LIMIT_SUP_X && posY + 1 < Constants.BOARD_LIMIT_SUP_Y) {
+            if (getGame().getBoard()[posX + 1][posY + 1] instanceof Card) {
+                getGame().getBoard()[posX + 1][posY + 1].setIsTurned(true);
             }
         }
 
-        if(sShip_posY-1 > Constants.BOARD_LIMIT_INF_Y){
-            if (getGame().getBoard()[sShip_posX][sShip_posY-1] instanceof Card ) {
-                getGame().getBoard()[sShip_posX][sShip_posY-1].setIsTurned(true);
+//        DOWN CARD
+        if (posX + 1 < Constants.BOARD_LIMIT_SUP_X) {
+            if (getGame().getBoard()[posX + 1][posY] instanceof Card) {
+                getGame().getBoard()[posX + 1][posY].setIsTurned(true);
             }
         }
-        
-        if(sShip_posY-1 > Constants.BOARD_LIMIT_INF_Y && sShip_posX-1 > Constants.BOARD_LIMIT_INF_X){
-            if (getGame().getBoard()[sShip_posX-1][sShip_posY-1] instanceof Card) {
-                getGame().getBoard()[sShip_posX-1][sShip_posY-1].setIsTurned(true);
+
+//        DOWN CARD LEFT
+        if (posX + 1 < Constants.BOARD_LIMIT_SUP_X && posY - 1 < Constants.BOARD_LIMIT_INF_Y) {
+            if (getGame().getBoard()[posX + 1][posY] instanceof Card) {
+                getGame().getBoard()[posX + 1][posY].setIsTurned(true);
             }
         }
-        
-        if(sShip_posY+1 < Constants.BOARD_LIMIT_SUP_Y && sShip_posX-1 > Constants.BOARD_LIMIT_INF_X){
-            if (getGame().getBoard()[sShip_posX-1][sShip_posY+1] instanceof Card) {
-                getGame().getBoard()[sShip_posX-1][sShip_posY+1].setIsTurned(true);
+
+        // LEFT 
+        if (posY - 1 > Constants.BOARD_LIMIT_INF_Y) {
+            if (getGame().getBoard()[posX][posY - 1] instanceof Card) {
+                getGame().getBoard()[posX][posY - 1].setIsTurned(true);
             }
         }
-    
+
+        // LEFT UP
+        if (posY - 1 > Constants.BOARD_LIMIT_INF_Y && posX - 1 > Constants.BOARD_LIMIT_INF_X) {
+            if (getGame().getBoard()[posX - 1][posY - 1] instanceof Card) {
+                getGame().getBoard()[posX - 1][posY - 1].setIsTurned(true);
+            }
+        }
+
+//        UP
+        if (posX - 1 < Constants.BOARD_LIMIT_INF_X) {
+            if (getGame().getBoard()[posX - 1][posY] instanceof Card) {
+                getGame().getBoard()[posX - 1][posY].setIsTurned(true);
+            }
+        }
+
+        //RIGHT UP
+        if (posY + 1 < Constants.BOARD_LIMIT_SUP_Y && posX - 1 > Constants.BOARD_LIMIT_INF_X) {
+            if (getGame().getBoard()[posX - 1][posY + 1] instanceof Card) {
+                getGame().getBoard()[posX - 1][posY + 1].setIsTurned(true);
+            }
+        }
+
         return this;
     }
 
@@ -145,7 +164,7 @@ public class Replenish extends State {
 
     @Override
     public State move(String move) {
-         return this;
+        return this;
     }
 
     @Override

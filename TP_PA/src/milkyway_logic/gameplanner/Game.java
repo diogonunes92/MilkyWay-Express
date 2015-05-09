@@ -121,18 +121,23 @@ public final class Game {
 
     public boolean moveSpaceship(String move) {
 
-//        TODO: check how can we verify the limits from here
-        if (move.equalsIgnoreCase("f") && this.getBoard()[this.getPlayer().getSpaceship().getPosX() - 1][this.getPlayer().getSpaceship().getPosY()] instanceof Card && this.isInsideLimits(this.getPlayer().getSpaceship().getPosX() - 1, this.getPlayer().getSpaceship().getPosY())) {
+        int posX = this.getPlayer().getSpaceship().getPosX();
+        int posY = this.getPlayer().getSpaceship().getPosY();
+
+//        TODO: implement diagonal changes
+//        TODO: if the card is turned
+        if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
+//            his.isInsideLimits(this.getPlayer().getSpaceship().getPosX() - 1, this.getPlayer().getSpaceship().getPosY()
             this.getPlayer().getSpaceship().setPosX(-1);
 
-        } else if (move.equalsIgnoreCase("b") && this.getBoard()[this.getPlayer().getSpaceship().getPosX()][this.getPlayer().getSpaceship().getPosY() + 1] instanceof Card && this.isInsideLimits(this.getPlayer().getSpaceship().getPosX(), this.getPlayer().getSpaceship().getPosY() + 1)) {
+        } else if (move.equalsIgnoreCase("b") && cardVerifier(posX, posY + 1)) {
             this.getPlayer().getSpaceship().setPosY(1);
 
-        } else if (move.equalsIgnoreCase("l") && this.getBoard()[this.getPlayer().getSpaceship().getPosX()][this.getPlayer().getSpaceship().getPosY() - 1] instanceof Card) {
+        } else if (move.equalsIgnoreCase("l") && cardVerifier(posX, posY - 1)) {
             this.getPlayer().getSpaceship().setPosY(-1);
 
-        } else if (move.equalsIgnoreCase("r") && this.getBoard()[this.getPlayer().getSpaceship().getPosX()][this.getPlayer().getSpaceship().getPosY() + 1] instanceof Card) {
-            this.getPlayer().getSpaceship().setPosY(1);
+        } else if (move.equalsIgnoreCase("r") && cardVerifier(posX + 1, posY)) {
+            this.getPlayer().getSpaceship().setPosX(1);
         }
         this.getPlayer().setCoins(-1);
 
@@ -140,16 +145,26 @@ public final class Game {
 
     }
 
-    public boolean isInsideLimits(int posX, int posY) {
+    public boolean cardVerifier(int posX, int posY) {
 
-        if (posX <= Constants.BOARD_LIMIT_INF_X || posX > Constants.BOARD_LIMIT_SUP_X) {
-            return false;
+        if (posX <= Constants.BOARD_LIMIT_INF_X || posX > Constants.BOARD_LIMIT_SUP_X || posY <= Constants.BOARD_LIMIT_INF_Y || posY > Constants.BOARD_LIMIT_SUP_Y) {
 
-        } else if (posY <= Constants.BOARD_LIMIT_INF_Y || posY > Constants.BOARD_LIMIT_SUP_Y) {
-            return false;
+            if (this.getBoard()[posX][posY] instanceof Card) {
+                if (this.getBoard()[posX][posY].getIsTurned()) {
+                    return true;
+                } else {
+                    System.err.println("It's not a turned to move");
+                }
+
+            } else {
+                System.err.println("It's not a card");
+            }
+        } else {
+
+            System.err.println("out of limits");
         }
 
-        return true;
+        return false;
     }
 
     public void saveGame() throws IOException {

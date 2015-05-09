@@ -60,6 +60,6 @@ public class Planet extends Card {
 
     @Override
     public boolean isPirate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.isPirate;
     }
 }
