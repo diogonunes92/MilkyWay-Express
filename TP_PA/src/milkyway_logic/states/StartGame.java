@@ -36,16 +36,6 @@ public class StartGame extends State {
     }
 
     @Override
-    public State pirateAtack() {
-        return this;
-    }
-
-    @Override
-    public State turnCards() {
-        return this;
-    }
-
-    @Override
     public State upgradeWeapon() {
         return this;
     }
@@ -56,12 +46,7 @@ public class StartGame extends State {
     }
 
     @Override
-    public State replenishMarkets() {
-        return this;
-    }
-
-    @Override
-    public State move(String move) {
+    public State move() {
         return this;
     }
 

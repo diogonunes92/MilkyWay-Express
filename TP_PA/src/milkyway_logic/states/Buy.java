@@ -32,7 +32,7 @@ public class Buy extends State {
 
             List<Cube> cubesSpaceship = getGame().getPlayer().getSpaceship().getCargo();
             cargoPrice = prices.get(carga);
-            
+
             if (getGame().getPlayer().getCoins() >= cargoPrice) {
                 getGame().getPlayer().setCoins(-cargoPrice);
                 cubesSpaceship.add(new Cube(carga));
@@ -40,9 +40,9 @@ public class Buy extends State {
                 cubeList.remove(new Cube(carga));
                 getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY()].setCubeList(cubeList);
             }
-            
+
             getGame().setRoundsPlayed();
-            
+
             return this;
         }
         return this;
@@ -55,16 +55,6 @@ public class Buy extends State {
 
     @Override
     public State isFinished() {
-        return this;
-    }
-
-    @Override
-    public State pirateAtack() {
-        return this;
-    }
-
-    @Override
-    public State turnCards() {
         return this;
     }
 
@@ -93,12 +83,7 @@ public class Buy extends State {
     }
 
     @Override
-    public State replenishMarkets() {
-        return this;
-    }
-
-    @Override
-    public State move(String move) {
+    public State move() {
         return this;
     }
 

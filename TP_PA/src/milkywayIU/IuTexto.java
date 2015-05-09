@@ -1,5 +1,6 @@
 package milkywayIU;
 
+import java.lang.management.ManagementFactory;
 import java.util.Scanner;
 import milkyway_logic.cards.EmptySpace;
 import milkyway_logic.cards.Planet;
@@ -88,20 +89,30 @@ public class IuTexto {
                     boolean isCorrect = true;
 
                     while (isCorrect) {
-                        System.out.println(" Option: (Front - F | Back - B | Left - L | Right - R)");
-                        String move = mScanner.next();
+                        System.out.println("(Front - F | Back - B | Left - L | Right - R)");
+                        System.out.println("Option: ");
+                        try {
+                            String move = mScanner.next();
 
-                        if (move.equalsIgnoreCase("f") || move.equalsIgnoreCase("b") || move.equalsIgnoreCase("l") || move.equalsIgnoreCase("r")) {
-                            isCorrect = false;
-//                            game.isInsideLimits(option, option);
-                            this.game.move(move);
-                        } else {
-                            System.out.println(" Incorrect choice");
+                            if (move.equalsIgnoreCase("f") || move.equalsIgnoreCase("b") || move.equalsIgnoreCase("l") || move.equalsIgnoreCase("r")) {
+                                isCorrect = false;
+
+                                if (this.game.moveSpaceship(move)) {
+                                    System.out.println(" Right move");
+                                    this.game.move();
+                                } else {
+                                    System.out.println(" Wrong move");
+                                }
+
+                            } else {
+                                System.out.println(" Incorrect choice");
+                            }
+                        } catch (Exception e) {
                         }
                     }
-
                     isFinish = true;
                     break;
+
                 case 2:
                     this.game.nextState();
                     this.game.replenishMarkets();
@@ -271,6 +282,7 @@ public class IuTexto {
             }
             System.out.println("");
             System.out.println("Rounds played: " + game.getRoundsPlayed());
+            System.out.println("State: " + game.getState().toString());
             System.out.println("");
             System.out.println("----------------------------------------------");
 

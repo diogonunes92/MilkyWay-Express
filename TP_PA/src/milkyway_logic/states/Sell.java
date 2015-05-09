@@ -63,16 +63,6 @@ public class Sell extends State {
     }
 
     @Override
-    public State pirateAtack() {
-        return this;
-    }
-
-    @Override
-    public State turnCards() {
-        return this;
-    }
-
-    @Override
     public State upgradeWeapon() {
         if (getGame().getPlayer().getCoins() == 0) {
             return new StartGame(getGame());
@@ -99,12 +89,7 @@ public class Sell extends State {
     }
 
     @Override
-    public State replenishMarkets() {
-        return this;
-    }
-
-    @Override
-    public State move(String move) {
+    public State move() {
         return this;
     }
 

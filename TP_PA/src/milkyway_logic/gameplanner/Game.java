@@ -3,10 +3,14 @@ package milkyway_logic.gameplanner;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import milkyway_logic.cards.Card;
+import milkyway_logic.cards.Planet;
+import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
 import milkyway_logic.gameboard.BoardConstructor;
+import milkyway_logic.states.Sell;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
 import util.Constants;
@@ -71,8 +75,8 @@ public final class Game {
         this.state = state.constructGame();
     }
 
-    public void move(String move) {
-        this.state = state.move(move);
+    public void move() {
+        this.state = state.move();
     }
 
     public void upgradeWeapon() {
@@ -96,7 +100,17 @@ public final class Game {
     }
 
     public void pirateAtack() {
-        this.state = state.pirateAtack();
+
+        int piratePower, numAtacks, doneAtacks;
+        numAtacks = 1 + (int) (Math.random() * 3);
+        doneAtacks = 0;
+        while (doneAtacks < numAtacks) {
+            piratePower = 1 + (int) (Math.random() * 6);
+            if (this.getPlayer().getSpaceship().getPower() < piratePower) {
+                this.getPlayer().setCoins(this.getPlayer().getCoins() - (piratePower - this.getPlayer().getSpaceship().getPower()));
+            }
+        }
+
     }
 
     public void nextState() {
@@ -104,11 +118,85 @@ public final class Game {
     }
 
     public void replenishMarkets() {
-        this.state = state.replenishMarkets();
+        String color;
+        int randomNum;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 9; j++) {
+
+                if (this.getBoard()[i][j] instanceof Planet) {
+
+                    if (this.getBoard()[i][j].getIsTurned() && !this.getBoard()[i][j].isPirate()) {
+
+                        if (this.getBoard()[i][j].getCubeList().size() < 2) {
+
+                            while (this.getBoard()[i][j].getCubeList().size() < 2) {
+                                randomNum = 1 + (int) (Math.random() * 6);
+
+                                if (randomNum == 1) {
+                                    color = "Red";
+                                } else if (randomNum == 2) {
+                                    color = "Blue";
+                                } else if (randomNum == 3) {
+                                    color = "Yellow";
+                                } else if (randomNum == 4) {
+                                    color = "Black";
+                                } else {
+                                    color = "White";
+                                }
+                                List<Cube> cubeList = this.getBoard()[i][j].getCubeList();
+                                cubeList.add(new Cube(color));
+                                this.getBoard()[i][j].setCubeList(cubeList);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void turnCards() {
-        this.state = state.turnCards();
+        int posX = this.getPlayer().getSpaceship().getPosX();
+        int posY = this.getPlayer().getSpaceship().getPosY();
+
+        //RIGHT 
+        if (cardVerifierTurn(posX, posY + 1)) {
+            this.getBoard()[posX][posY + 1].setIsTurned(true);
+        }
+        //DOWN
+        if (cardVerifierTurn(posX + 1, posY)) {
+            this.getBoard()[posX + 1][posY].setIsTurned(true);
+        }
+
+        //LEFT 
+        if (cardVerifierTurn(posX, posY - 1)) {
+            this.getBoard()[posX][posY - 1].setIsTurned(true);
+        }
+
+        //UP
+        if (cardVerifierTurn(posX - 1, posY)) {
+            this.getBoard()[posX - 1][posY].setIsTurned(true);
+        }
+        
+        //        VERIFY WHY IS NOT OPENING THE ADJACENT PLACES
+//        RIGHT DOWN 
+        if (cardVerifierTurn(posX + 1, posY) && cardVerifierTurn(posX, posY + 1)) {
+            this.getBoard()[posX + 1][posY + 1].setIsTurned(true);
+        }
+
+//        LEFT DOWN
+        if (cardVerifierTurn(posX + 1, posY) && cardVerifierTurn(posX, posY - 1)) {
+            this.getBoard()[posX + 1][posY].setIsTurned(true);
+        }
+
+        // LEFT UP
+        if (cardVerifierTurn(posX, posY - 1) && cardVerifierTurn(posX - 1, posY)) {
+            this.getBoard()[posX - 1][posY - 1].setIsTurned(true);
+        }
+
+        //RIGHT UP
+        if (cardVerifierTurn(posX, posY + 1) && cardVerifierTurn(posX - 1, posY)) {
+            this.getBoard()[posX - 1][posY + 1].setIsTurned(true);
+        }
     }
 
     public static int getRoundsPlayed() {
@@ -124,46 +212,64 @@ public final class Game {
         int posX = this.getPlayer().getSpaceship().getPosX();
         int posY = this.getPlayer().getSpaceship().getPosY();
 
-//        TODO: implement diagonal changes
-//        TODO: if the card is turned
         if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
-//            his.isInsideLimits(this.getPlayer().getSpaceship().getPosX() - 1, this.getPlayer().getSpaceship().getPosY()
-            this.getPlayer().getSpaceship().setPosX(-1);
-
-        } else if (move.equalsIgnoreCase("b") && cardVerifier(posX, posY + 1)) {
-            this.getPlayer().getSpaceship().setPosY(1);
-
+            this.getPlayer().getSpaceship().setPosX(posX - 1);
+            return true;
+        } else if (move.equalsIgnoreCase("b") && cardVerifier(posX + 1, posY)) {
+            this.getPlayer().getSpaceship().setPosX(posX + 1);
+            return true;
         } else if (move.equalsIgnoreCase("l") && cardVerifier(posX, posY - 1)) {
-            this.getPlayer().getSpaceship().setPosY(-1);
-
-        } else if (move.equalsIgnoreCase("r") && cardVerifier(posX + 1, posY)) {
-            this.getPlayer().getSpaceship().setPosX(1);
+            this.getPlayer().getSpaceship().setPosY(posY - 1);
+            return true;
+        } else if (move.equalsIgnoreCase("r") && cardVerifier(posX, posY + 1)) {
+            this.getPlayer().getSpaceship().setPosY(posY + 1);
+            return true;
         }
-        this.getPlayer().setCoins(-1);
 
-        return true;
+        return false;
 
     }
 
     public boolean cardVerifier(int posX, int posY) {
 
-        if (posX <= Constants.BOARD_LIMIT_INF_X || posX > Constants.BOARD_LIMIT_SUP_X || posY <= Constants.BOARD_LIMIT_INF_Y || posY > Constants.BOARD_LIMIT_SUP_Y) {
+        if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
 
             if (this.getBoard()[posX][posY] instanceof Card) {
+
                 if (this.getBoard()[posX][posY].getIsTurned()) {
+                    // if everything passed 
                     return true;
                 } else {
-                    System.err.println("It's not a turned to move");
+                    System.err.println("It's not a turned to card");
+                    return false;
                 }
-
             } else {
                 System.err.println("It's not a card");
             }
         } else {
-
             System.err.println("out of limits");
         }
+        return false;
+    }
 
+    public boolean cardVerifierTurn(int posX, int posY) {
+
+        if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
+
+            if (this.getBoard()[posX][posY] instanceof Card) {
+
+                if (!this.getBoard()[posX][posY].getIsTurned()) {
+                    // if everything passed 
+                    return true;
+                } else {
+                    System.err.println("It's not a turned to card");
+                }
+            } else {
+                System.err.println("It's not a card");
+            }
+        } else {
+            System.err.println("out of limits");
+        }
         return false;
     }
 

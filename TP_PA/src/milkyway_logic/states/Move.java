@@ -34,16 +34,6 @@ public class Move extends State {
     }
 
     @Override
-    public State pirateAtack() {
-        return this;
-    }
-
-    @Override
-    public State turnCards() {
-        return this;
-    }
-
-    @Override
     public State upgradeWeapon() {
         return this;
     }
@@ -54,20 +44,14 @@ public class Move extends State {
     }
 
     @Override
-    public State replenishMarkets() {
-        return this;
-    }
+    public State move() {
+        getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
 
-    @Override
-    public State move(String move) {
-        if(getGame().moveSpaceship(move)){
-            return new Move(getGame());
-        }
         return new Move(getGame());
     }
 
     @Override
     public State nextState() {
-        return new Replenish(getGame());
+        return new Sell(getGame());
     }
 }
