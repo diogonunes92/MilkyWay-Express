@@ -25,7 +25,7 @@ public class Spaceship implements Serializable{
     }
 
     public void setPosY(int posY) {
-        this.posY = this.posY + posY;
+        this.posY = posY;
     }
 
     public int getPosX() {
@@ -33,7 +33,7 @@ public class Spaceship implements Serializable{
     }
 
     public void setPosX(int posX) {
-        this.posX = this.posX + posX;
+        this.posX = posX;
     }
 
     public int getCapacity() {

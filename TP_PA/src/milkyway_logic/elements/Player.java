@@ -21,7 +21,7 @@ public class Player implements Serializable{
     }
 
     public void setCoins(int coins) {
-        this.coins = this.coins + coins;
+        this.coins = coins;
     }
 
     public String getName() {

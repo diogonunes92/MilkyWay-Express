@@ -7,8 +7,8 @@ public class Constants {
     public static final int INITIAL_PLAYER_COINS = 10;
     public static final int INITIAL_SPACESHIP_POSITION_X = 6;
     public static final int INITIAL_SPACESHIP_POSITION_Y = 0;
-    public static final int BOARD_LIMIT_SUP_X = 0;
-    public static final int BOARD_LIMIT_INF_X = 6;
+    public static final int BOARD_LIMIT_SUP_X = 6;
+    public static final int BOARD_LIMIT_INF_X = 0;
     public static final int BOARD_LIMIT_SUP_Y = 8;
     public static final int BOARD_LIMIT_INF_Y = 0;
     
