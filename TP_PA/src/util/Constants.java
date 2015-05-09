@@ -7,9 +7,9 @@ public class Constants {
     public static final int INITIAL_PLAYER_COINS = 10;
     public static final int INITIAL_SPACESHIP_POSITION_X = 6;
     public static final int INITIAL_SPACESHIP_POSITION_Y = 0;
-    public static final int BOARD_LIMIT_SUP_X = 8;
-    public static final int BOARD_LIMIT_INF_X = 0;
-    public static final int BOARD_LIMIT_SUP_Y = 6;
+    public static final int BOARD_LIMIT_SUP_X = 0;
+    public static final int BOARD_LIMIT_INF_X = 6;
+    public static final int BOARD_LIMIT_SUP_Y = 8;
     public static final int BOARD_LIMIT_INF_Y = 0;
     
 
@@ -18,8 +18,8 @@ public class Constants {
     public static final int BLACK_HOLES_TOTAL_CARDS = 4;
     public static final int TOTAL_BOARD_SPACES = 63;
     public static final int TOTAL_CARD_SPACES = 23;
-    public static final String[] PLANET_NAMES = {"Gether", "Kiber", "Reverie", "Tiamat", "Lamarckia", "Arrakis", "Whirl", "Striterax", "Asperta"};//You Can Add More Names
-    public static final boolean[] isPIRATE = {false, false, false, false, false, false, true, true, true};//You Can Add More Amount
+    public static final String[] PLANET_NAMES = {"Gether", "Kiber", "Reverie", "Tiamat", "Lamarckia", "Arrakis", "Whirl", "Striterax", "Asperta"};
+    public static final boolean[] isPIRATE = {false, false, false, false, false, false, true, true, true};
     public static final int[][] BOARD_POSITIONS = {
         {1, 3}, {1, 8}, {2, 2}, {2, 3}, {2, 4}, {2, 6},
         {2, 7}, {2, 8}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5},

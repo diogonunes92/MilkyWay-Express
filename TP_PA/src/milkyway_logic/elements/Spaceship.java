@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spaceship {
-    
+
     private int power;
     private int capacity;
     private int posY;
     private int posX;
     private List<Cube> cargo;
-    
+
     public Spaceship(int posX, int posY) {
         this.power = 3;
         this.cargo = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Spaceship {
     }
 
     public void setPosY(int posY) {
-        this.posY = posY;
+        this.posY = this.posY + posY;
     }
 
     public int getPosX() {
@@ -32,7 +32,7 @@ public class Spaceship {
     }
 
     public void setPosX(int posX) {
-        this.posX = posX;
+        this.posX = this.posX + posX;
     }
 
     public int getCapacity() {
@@ -43,7 +43,6 @@ public class Spaceship {
         this.capacity = capacity;
     }
 
-    
     public int getPower() {
         return power;
     }
@@ -59,6 +58,5 @@ public class Spaceship {
     public void setCargo(List<Cube> cargo) {
         this.cargo = cargo;
     }
-    
-    
+
 }
