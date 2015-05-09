@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
-import milkyway_logic.elements.Spaceship;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
+import util.Constants;
 
 public final class Game {
 
@@ -101,9 +101,23 @@ public final class Game {
         return roundsPlayed;
     }
 
-    public static void setRoundsPlayed(int roundsPlayed) {
-        Game.roundsPlayed = roundsPlayed;
+    public static void setRoundsPlayed() {
+        Game.roundsPlayed++;
     }
+    
+    public boolean isInsideLimits(int posX, int posY){
+        
+        if(posX <= Constants.BOARD_LIMIT_INF_X || posX > Constants.BOARD_LIMIT_SUP_X){
+            return false;
+            
+        } else if(posY <= Constants.BOARD_LIMIT_INF_Y || posY > Constants.BOARD_LIMIT_SUP_Y){
+            return false; 
+        }
+        
+        return true;
+    }
+    
+    
 
     public void saveGame() {
 

@@ -86,9 +86,21 @@ public class IuTexto {
 
             switch (option) {
                 case 1:
-                    System.out.println(" Option: (Front - F | Back - B | Left - L | Right - R)");
-                    String move = mScanner.next();
-                    this.game.move(move);
+                    boolean isCorrect = true;
+                    
+                    while(isCorrect){
+                        System.out.println(" Option: (Front - F | Back - B | Left - L | Right - R)");
+                        String move = mScanner.next();
+                        
+                        if(move.equalsIgnoreCase("f") ||move.equalsIgnoreCase("b")|| move.equalsIgnoreCase("l") || move.equalsIgnoreCase("r")){
+                            isCorrect = false;
+//                            game.isInsideLimits(option, option);
+                            this.game.move(move);
+                        } else{
+                            System.out.println(" Incorrect choice");
+                        }
+                    }
+                    
                     isFinish = true;
                     break;
                 case 2:

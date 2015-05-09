@@ -40,6 +40,9 @@ public class Buy extends State {
                 cubeList.remove(new Cube(carga));
                 getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY()].setCubeList(cubeList);
             }
+            
+            getGame().setRoundsPlayed();
+            
             return this;
         }
         return this;
