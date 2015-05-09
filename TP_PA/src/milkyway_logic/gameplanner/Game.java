@@ -119,6 +119,27 @@ public final class Game {
         Game.roundsPlayed++;
     }
 
+    public boolean moveSpaceship(String move) {
+
+//        TODO: check how can we verify the limits from here
+        if (move.equalsIgnoreCase("f") && this.getBoard()[this.getPlayer().getSpaceship().getPosX() - 1][this.getPlayer().getSpaceship().getPosY()] instanceof Card && this.isInsideLimits(this.getPlayer().getSpaceship().getPosX() - 1, this.getPlayer().getSpaceship().getPosY())) {
+            this.getPlayer().getSpaceship().setPosX(-1);
+
+        } else if (move.equalsIgnoreCase("b") && this.getBoard()[this.getPlayer().getSpaceship().getPosX()][this.getPlayer().getSpaceship().getPosY() + 1] instanceof Card && this.isInsideLimits(this.getPlayer().getSpaceship().getPosX(), this.getPlayer().getSpaceship().getPosY() + 1)) {
+            this.getPlayer().getSpaceship().setPosY(1);
+
+        } else if (move.equalsIgnoreCase("l") && this.getBoard()[this.getPlayer().getSpaceship().getPosX()][this.getPlayer().getSpaceship().getPosY() - 1] instanceof Card) {
+            this.getPlayer().getSpaceship().setPosY(-1);
+
+        } else if (move.equalsIgnoreCase("r") && this.getBoard()[this.getPlayer().getSpaceship().getPosX()][this.getPlayer().getSpaceship().getPosY() + 1] instanceof Card) {
+            this.getPlayer().getSpaceship().setPosY(1);
+        }
+        this.getPlayer().setCoins(-1);
+
+        return true;
+
+    }
+
     public boolean isInsideLimits(int posX, int posY) {
 
         if (posX <= Constants.BOARD_LIMIT_INF_X || posX > Constants.BOARD_LIMIT_SUP_X) {

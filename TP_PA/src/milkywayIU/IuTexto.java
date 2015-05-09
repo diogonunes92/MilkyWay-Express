@@ -1,7 +1,6 @@
 package milkywayIU;
 
 import java.util.Scanner;
-import milkyway_logic.cards.Card;
 import milkyway_logic.cards.EmptySpace;
 import milkyway_logic.cards.Planet;
 import milkyway_logic.cards.Wormhole;

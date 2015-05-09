@@ -60,23 +60,10 @@ public class Move extends State {
 
     @Override
     public State move(String move) {
-
-//        TODO: check how can we verify the limits from here
-        if (move.equalsIgnoreCase("f") && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX() - 1][getGame().getPlayer().getSpaceship().getPosY()] instanceof Card && getGame().isInsideLimits(getGame().getPlayer().getSpaceship().getPosX() - 1, getGame().getPlayer().getSpaceship().getPosY())) {
-            getGame().getPlayer().getSpaceship().setPosX(-1);
-
-        } else if (move.equalsIgnoreCase("b") && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY() + 1] instanceof Card && getGame().isInsideLimits(getGame().getPlayer().getSpaceship().getPosX(), getGame().getPlayer().getSpaceship().getPosY() + 1)) {
-            getGame().getPlayer().getSpaceship().setPosY(1);
-
-        } else if (move.equalsIgnoreCase("l") && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY() - 1] instanceof Card) {
-            getGame().getPlayer().getSpaceship().setPosY(-1);
-
-        } else if (move.equalsIgnoreCase("r") && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY() + 1] instanceof Card) {
-            getGame().getPlayer().getSpaceship().setPosY(1);
+        if(getGame().moveSpaceship(move)){
+            return new Move(getGame());
         }
-        getGame().getPlayer().setCoins(-1);
-
-        return this;
+        return new Move(getGame());
     }
 
     @Override
