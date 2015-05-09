@@ -160,9 +160,14 @@ public class IuTexto {
 
             switch (option) {
                 case 1:
-                    System.out.println("Chose which cargo you want to sell:");
-                    String cargo = mScanner.next();
-                    this.game.sellCargo(cargo);
+                    if (this.game.sellCargoVerifier()) {
+                        System.out.println("Chose which cargo you want to sell:");
+                        String cargo = mScanner.next();
+                        this.game.sellCargo(cargo);
+                    }
+                    else
+                        System.out.println("You're not on a planet or don't have cargo to sell!");
+                        
                     isFinish = true;
                     break;
                 case 2:

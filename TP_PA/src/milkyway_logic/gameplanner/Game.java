@@ -3,6 +3,7 @@ package milkyway_logic.gameplanner;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.List;
 import milkyway_logic.cards.Card;
 import milkyway_logic.cards.Planet;
@@ -10,6 +11,7 @@ import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
 import milkyway_logic.gameboard.BoardConstructor;
+import milkyway_logic.states.Buy;
 import milkyway_logic.states.Sell;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
@@ -159,43 +161,43 @@ public final class Game {
         int posY = this.getPlayer().getSpaceship().getPosY();
 
         //RIGHT 
-        if (cardVerifierTurn(posX, posY + 1)) {
-            this.getBoard()[posX][posY + 1].setIsTurned(true);
-        }
-        //DOWN
         if (cardVerifierTurn(posX + 1, posY)) {
             this.getBoard()[posX + 1][posY].setIsTurned(true);
         }
-
-        //LEFT 
+        //DOWN
         if (cardVerifierTurn(posX, posY - 1)) {
             this.getBoard()[posX][posY - 1].setIsTurned(true);
         }
 
-        //UP
+        //LEFT 
         if (cardVerifierTurn(posX - 1, posY)) {
             this.getBoard()[posX - 1][posY].setIsTurned(true);
         }
-        
+
+        //UP
+        if (cardVerifierTurn(posX, posY + 1)) {
+            this.getBoard()[posX][posY + 1].setIsTurned(true);
+        }
+
         //        VERIFY WHY IS NOT OPENING THE ADJACENT PLACES
 //        RIGHT DOWN 
-        if (cardVerifierTurn(posX + 1, posY) && cardVerifierTurn(posX, posY + 1)) {
-            this.getBoard()[posX + 1][posY + 1].setIsTurned(true);
+        if (cardVerifierTurn(posX + 1, posY - 1)) {
+            this.getBoard()[posX + 1][posY - 1].setIsTurned(true);
         }
 
 //        LEFT DOWN
-        if (cardVerifierTurn(posX + 1, posY) && cardVerifierTurn(posX, posY - 1)) {
-            this.getBoard()[posX + 1][posY].setIsTurned(true);
-        }
-
-        // LEFT UP
-        if (cardVerifierTurn(posX, posY - 1) && cardVerifierTurn(posX - 1, posY)) {
+        if (cardVerifierTurn(posX - 1, posY - 1)) {
             this.getBoard()[posX - 1][posY - 1].setIsTurned(true);
         }
 
-        //RIGHT UP
-        if (cardVerifierTurn(posX, posY + 1) && cardVerifierTurn(posX - 1, posY)) {
+        // LEFT UP
+        if (cardVerifierTurn(posX -1, posY + 1)) {
             this.getBoard()[posX - 1][posY + 1].setIsTurned(true);
+        }
+
+        //RIGHT UP
+        if (cardVerifierTurn(posX+1, posY + 1)) {
+            this.getBoard()[posX + 1][posY + 1].setIsTurned(true);
         }
     }
 
@@ -205,6 +207,18 @@ public final class Game {
 
     public static void setRoundsPlayed() {
         Game.roundsPlayed++;
+    }
+
+    public boolean sellCargoVerifier() {
+        if (this.player.getSpaceship().getCargo().isEmpty()) {
+            return false;
+        }
+
+        if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
+            return true;
+        }
+
+        return false;
     }
 
     public boolean moveSpaceship(String move) {
@@ -240,7 +254,7 @@ public final class Game {
                     // if everything passed 
                     return true;
                 } else {
-                    System.err.println("It's not a turned to card");
+                    System.err.println("It's not a turned card!");
                     return false;
                 }
             } else {
@@ -262,7 +276,7 @@ public final class Game {
                     // if everything passed 
                     return true;
                 } else {
-                    System.err.println("It's not a turned to card");
+                    System.err.println("The card is already turned!");
                 }
             } else {
                 System.err.println("It's not a card");
@@ -275,12 +289,12 @@ public final class Game {
 
     public void saveGame() throws IOException {
 
-        try{
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("save_file_milky_way.txt"));
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("save_file_milky_way.txt"));
 
-        objectOutputStream.writeObject(player);
-        objectOutputStream.writeInt(roundsPlayed);
-        objectOutputStream.write(bankCoins);
+            objectOutputStream.writeObject(player);
+            objectOutputStream.writeInt(roundsPlayed);
+            objectOutputStream.write(bankCoins);
 
 // create two students objects and add them in a list. create a course
 // object and add the list of students to a list
@@ -302,9 +316,9 @@ public final class Game {
 // object as well all objects that it referes to.
 // it writes only those objects that implement serializable
 //        objectOutputStream.writeObject(course);
-        objectOutputStream.flush();
-        objectOutputStream.close();
-        }catch (IOException e){
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        } catch (IOException e) {
             System.err.println("erro");
         }
     }
