@@ -40,8 +40,8 @@ public class Replenish extends State {
         doneAtacks = 0;
         while (doneAtacks < numAtacks) {
             piratePower = 1 + (int) (Math.random() * 6);
-            if (getGame().getSpaceship().getPower() < piratePower) {
-                getGame().setMyCoins(getGame().getMyCoins() - (piratePower - getGame().getSpaceship().getPower()));
+            if (getGame().getPlayer().getSpaceship().getPower() < piratePower) {
+                getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - (piratePower - getGame().getPlayer().getSpaceship().getPower()));
             }
         }
 
@@ -51,8 +51,8 @@ public class Replenish extends State {
     @Override
     public State turnCards() {
 
-        int sShip_posX = getGame().getSpaceship().getPosX();
-        int sShip_posY = getGame().getSpaceship().getPosY();
+        int sShip_posX = getGame().getPlayer().getSpaceship().getPosX();
+        int sShip_posY = getGame().getPlayer().getSpaceship().getPosY();
 
         if(sShip_posY+1 < Constants.BOARD_LIMIT_SUP_Y){
             if (getGame().getBoard()[sShip_posX][sShip_posY + 1] instanceof Card) {

@@ -194,28 +194,29 @@ public class IuTexto {
 
     public void seeCargoForSale() {
         int i = 0;
-        System.out.println("Planet: " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPlanetName());
+        System.out.println("Planet: " + this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getPlanetName());
 
-        while (i < this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getCubeList().size()) {
-            System.out.println(this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getCubeList().get(i).getColor());
+        while (i < this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getCubeList().size()) {
+            System.out.println(this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getCubeList().get(i).getColor());
         }
     }
 
     public void seePricesOnPlanet() {
-        System.out.println("Planet: " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPlanetName());
 
-        System.out.println("Blue" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Blue"));
-        System.out.println("Red" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Red"));
-        System.out.println("Yellow" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Yellow"));
-        System.out.println("Black" + " : " + this.game.getBoard()[this.game.getSpaceship().getPosX()][this.game.getSpaceship().getPosY()].getPrices().get("Black"));
+        System.out.println("Planet: " + this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getPlanetName());
+
+        System.out.println("Blue" + " : " + this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getPrices().get("Blue"));
+        System.out.println("Red" + " : " + this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getPrices().get("Red"));
+        System.out.println("Yellow" + " : " + this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getPrices().get("Yellow"));
+        System.out.println("Black" + " : " + this.game.getBoard()[this.game.getPlayer().getSpaceship().getPosX()][this.game.getPlayer().getSpaceship().getPosY()].getPrices().get("Black"));
     }
 
     private void seeCargoOnShip() {
         int i = 0;
 
         System.out.println("Cargo On Ship:");
-        while (i < this.game.getSpaceship().getCargo().size()) {
-            System.out.println(this.game.getSpaceship().getCargo().get(i).getColor());
+        while (i < this.game.getPlayer().getSpaceship().getCargo().size()) {
+            System.out.println(this.game.getPlayer().getSpaceship().getCargo().get(i).getColor());
         }
     }
 
@@ -224,7 +225,12 @@ public class IuTexto {
         String[][] UIGameBoard = new String[7][9];
 
         if (game.getBoard() != null) {
-
+            
+            System.out.println("----------------------------------------------");
+            System.out.println("Player name: " + game.getPlayer().getName());
+            System.out.println("Player coins: " + game.getPlayer().getCoins());
+            System.out.println("");
+            
             for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 9; j++) {
 
@@ -244,7 +250,7 @@ public class IuTexto {
                             UIGameBoard[i][j] = "[   ]";
                         }
                     }
-                    if (this.game.getSpaceship().getPosX() == i && this.game.getSpaceship().getPosY() == j) {
+                    if (this.game.getPlayer().getSpaceship().getPosX() == i && this.game.getPlayer().getSpaceship().getPosY() == j) {
                         System.out.print("\033[31m" + UIGameBoard[i][j] + "\033[0m");
                     } else {
                         System.out.print(UIGameBoard[i][j]);
@@ -252,6 +258,11 @@ public class IuTexto {
                 }
                 System.out.println("");
             }
+            System.out.println("");
+            System.out.println("Rounds played: " + game.getRoundsPlayed());
+            System.out.println("");
+            System.out.println("----------------------------------------------");
+            
         } else {
             System.out.println("\033[31m Board doesnt exists \033[0m");
         }

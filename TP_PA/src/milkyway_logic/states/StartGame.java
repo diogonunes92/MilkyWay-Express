@@ -1,5 +1,6 @@
 package milkyway_logic.states;
 
+import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
 import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.gameplanner.Game;
@@ -13,18 +14,13 @@ public class StartGame extends State {
 
     @Override
     public State constructGame() {
-        // TODO: Faz sentido ter isto no interface? 
 
         BoardConstructor mBoardConstructor = new BoardConstructor();
         getGame().setBoard(mBoardConstructor.getGameBoard());
-        getGame().setMyCoins(Constants.INITIAL_PLAYER_COINS);
         getGame().setBankCoins(Constants.INITIAL_PLAYER_COINS - Constants.INITIAL_PLAYER_COINS);
         
-        Spaceship mSpaceship = new Spaceship();
-        mSpaceship.setPosX(Constants.INITIAL_SPACESHIP_POSITION_X);
-        mSpaceship.setPosY(Constants.INITIAL_SPACESHIP_POSITION_Y);
-        getGame().setSpaceship(mSpaceship);
-        
+        getGame().setPlayer(new Player(1, "player_1", Constants.INITIAL_PLAYER_COINS, new Spaceship(Constants.INITIAL_SPACESHIP_POSITION_X, Constants.INITIAL_SPACESHIP_POSITION_Y)));
+  
         return new Move(getGame());
     }
 
@@ -40,7 +36,7 @@ public class StartGame extends State {
 
     @Override
     public State isFinished() {
-        if (getGame().getMyCoins() == 0) {
+        if (getGame().getPlayer().getCoins() == 0) {
             System.exit(0);
         }
         return this;

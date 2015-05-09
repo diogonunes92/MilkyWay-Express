@@ -11,11 +11,11 @@ public class Spaceship {
     private int posX;
     private List<Cube> cargo;
     
-    public Spaceship() {
+    public Spaceship(int posX, int posY) {
         this.power = 3;
         this.cargo = new ArrayList<>();
-        this.posX = 0;
-        this.posY = 0;
+        this.posX = posX;
+        this.posY = posY;
         this.capacity = 2;
     }
 

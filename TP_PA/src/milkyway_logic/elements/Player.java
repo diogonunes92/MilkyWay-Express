@@ -1,16 +1,17 @@
 package milkyway_logic.elements;
 
 public class Player {
-    
+
     private final int id;
     private int coins;
     private String name;
     private Spaceship spaceship;
 
-    public Player(int id, int coins, String name) {
+    public Player(int id, String name, int coins, Spaceship spaceShip) {
         this.id = id;
-        this.coins = coins;
         this.name = name;
+        this.coins = coins;
+        this.spaceship = spaceShip;
     }
 
     public int getCoins() {
@@ -27,7 +28,7 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    } 
+    }
 
     public Spaceship getSpaceship() {
         return spaceship;
@@ -36,6 +37,5 @@ public class Player {
     public void setSpaceship(Spaceship spaceship) {
         this.spaceship = spaceship;
     }
-    
-    
+
 }

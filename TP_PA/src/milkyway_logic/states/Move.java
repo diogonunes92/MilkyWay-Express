@@ -26,7 +26,7 @@ public class Move extends State {
 
     @Override
     public State isFinished() {
-        if (getGame().getMyCoins() == 0) {
+        if (getGame().getPlayer().getCoins() == 0) {
             System.exit(0);
         }
 
@@ -61,18 +61,18 @@ public class Move extends State {
     @Override
     public State move(String move) {
 
-        if (move.compareTo("F") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY() + 1] instanceof Card) {
-            getGame().getSpaceship().setPosY(+1);
-            getGame().setMyCoins(-1);
-        } else if (move.compareTo("B") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY() - 1] instanceof Card) {
-            getGame().getSpaceship().setPosY(-1);
-            getGame().setMyCoins(-1);
-        } else if (move.compareTo("L") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX() - 1][getGame().getSpaceship().getPosY()] instanceof Card) {
-            getGame().getSpaceship().setPosX(-1);
-            getGame().setMyCoins(-1);
-        } else if (move.compareTo("R") == 0 && getGame().getBoard()[getGame().getSpaceship().getPosX() + 1][getGame().getSpaceship().getPosY()] instanceof Card) {
-            getGame().getSpaceship().setPosX(+1);
-            getGame().setMyCoins(-1);
+        if (move.compareTo("F") == 0 && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY() + 1] instanceof Card) {
+            getGame().getPlayer().getSpaceship().setPosY(+1);
+            getGame().getPlayer().setCoins(-1);
+        } else if (move.compareTo("B") == 0 && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY() - 1] instanceof Card) {
+            getGame().getPlayer().getSpaceship().setPosY(-1);
+            getGame().getPlayer().setCoins(-1);
+        } else if (move.compareTo("L") == 0 && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX() - 1][getGame().getPlayer().getSpaceship().getPosY()] instanceof Card) {
+            getGame().getPlayer().getSpaceship().setPosX(-1);
+            getGame().getPlayer().setCoins(-1);
+        } else if (move.compareTo("R") == 0 && getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX() + 1][getGame().getPlayer().getSpaceship().getPosY()] instanceof Card) {
+            getGame().getPlayer().getSpaceship().setPosX(+1);
+            getGame().getPlayer().setCoins(-1);
         }
 
         return this;

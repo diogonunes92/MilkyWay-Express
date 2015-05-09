@@ -21,24 +21,24 @@ public class Buy extends State {
     public State buyCargo(String carga) {
         if (getGame().getBankCoins() == 0) {
             return new StartGame(getGame());
-        } else if ((getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY()] instanceof Planet)
-                && (getGame().getSpaceship().getCargo().size() < 2 || getGame().getSpaceship().getCapacity() == 3 && getGame().getSpaceship().getCargo().size() < 3)) {
+        } else if ((getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY()] instanceof Planet)
+                && (getGame().getPlayer().getSpaceship().getCargo().size() < 2 || getGame().getPlayer().getSpaceship().getCapacity() == 3 && getGame().getPlayer().getSpaceship().getCargo().size() < 3)) {
 
             int cargoPrice;
             HashMap<String, Integer> prices;
-            List<Cube> cubeList = getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY()].getCubeList();
+            List<Cube> cubeList = getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY()].getCubeList();
 
-            prices = getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY()].getPrices();
+            prices = getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY()].getPrices();
 
-            List<Cube> cubesSpaceship = getGame().getSpaceship().getCargo();
+            List<Cube> cubesSpaceship = getGame().getPlayer().getSpaceship().getCargo();
             cargoPrice = prices.get(carga);
             
-            if (getGame().getMyCoins() >= cargoPrice) {
-                getGame().setMyCoins(-cargoPrice);
+            if (getGame().getPlayer().getCoins() >= cargoPrice) {
+                getGame().getPlayer().setCoins(-cargoPrice);
                 cubesSpaceship.add(new Cube(carga));
-                getGame().getSpaceship().setCargo(cubesSpaceship);
+                getGame().getPlayer().getSpaceship().setCargo(cubesSpaceship);
                 cubeList.remove(new Cube(carga));
-                getGame().getBoard()[getGame().getSpaceship().getPosX()][getGame().getSpaceship().getPosY()].setCubeList(cubeList);
+                getGame().getBoard()[getGame().getPlayer().getSpaceship().getPosX()][getGame().getPlayer().getSpaceship().getPosY()].setCubeList(cubeList);
             }
             return this;
         }
@@ -67,24 +67,24 @@ public class Buy extends State {
 
     @Override
     public State upgradeWeapon() {
-        if (getGame().getMyCoins() == 0) {
+        if (getGame().getPlayer().getCoins() == 0) {
             return new StartGame(getGame());
         }
 
-        if (getGame().getSpaceship().getPower() < 6 && getGame().getMyCoins() >= 4) {
-            getGame().getSpaceship().setPower(+1);
+        if (getGame().getPlayer().getSpaceship().getPower() < 6 && getGame().getPlayer().getCoins() >= 4) {
+            getGame().getPlayer().getSpaceship().setPower(+1);
         }
         return this;
     }
 
     @Override
     public State upgradeCargo() {
-        if (getGame().getMyCoins() == 0) {
+        if (getGame().getPlayer().getCoins() == 0) {
             return new StartGame(getGame());
         }
 
-        if (getGame().getSpaceship().getCargo().size() == 2) {
-            getGame().getSpaceship().setCapacity(+1);
+        if (getGame().getPlayer().getSpaceship().getCargo().size() == 2) {
+            getGame().getPlayer().getSpaceship().setCapacity(+1);
         }
         return this;
     }

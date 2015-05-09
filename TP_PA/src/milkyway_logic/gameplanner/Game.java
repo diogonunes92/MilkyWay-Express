@@ -12,12 +12,10 @@ public final class Game {
 
     private State state;
     private Player player;
-
-    private Spaceship spaceship;
+    private Card[][] board;
     private static int bankCoins;
 
-    private Card[][] board;
-    private int myCoins;
+    private static int roundsPlayed = 0;
 
     public Game() {
         state = new StartGame(this);
@@ -39,14 +37,6 @@ public final class Game {
         this.player = player;
     }
 
-    public Spaceship getSpaceship() {
-        return spaceship;
-    }
-
-    public void setSpaceship(Spaceship spaceship) {
-        this.spaceship = spaceship;
-    }
-
     public Card[][] getBoard() {
         return board;
     }
@@ -63,14 +53,6 @@ public final class Game {
         Game.bankCoins = bankCoins;
     }
 
-    public int getMyCoins() {
-        return myCoins;
-    }
-
-    public void setMyCoins(int myCoins) {
-        this.myCoins = myCoins;
-    }
-
     public void constructGame() {
         this.state = state.constructGame();
     }
@@ -82,23 +64,23 @@ public final class Game {
     public void upgradeWeapon() {
         this.state = state.upgradeWeapon();
     }
-    
+
     public void upgradeCargo() {
         this.state = state.upgradeCargo();
     }
-    
+
     public void buyCargo(String carga) {
         this.state = state.buyCargo(carga);
     }
-    
+
     public void sellCargo(String carga) {
         this.state = state.sellCargo(carga);
     }
-    
+
     public void isFinished() {
         this.state = state.isFinished();
     }
-    
+
     public void pirateAtack() {
         this.state = state.pirateAtack();
     }
@@ -106,20 +88,28 @@ public final class Game {
     public void nextState() {
         this.state = state.nextState();
     }
-    
-    public void replenishMarkets(){
+
+    public void replenishMarkets() {
         this.state = state.replenishMarkets();
     }
-    
-    public void turnCards(){
+
+    public void turnCards() {
         this.state = state.turnCards();
     }
 
-    public void saveGame(){
+    public static int getRoundsPlayed() {
+        return roundsPlayed;
+    }
+
+    public static void setRoundsPlayed(int roundsPlayed) {
+        Game.roundsPlayed = roundsPlayed;
+    }
+
+    public void saveGame() {
 
         try {
             PrintWriter writer = new PrintWriter("MilkyWayExpress_savefile.txt", "UTF-8");
-            writer.println(myCoins);
+            writer.println("");
             writer.println(bankCoins);
             writer.close();
 
@@ -127,4 +117,5 @@ public final class Game {
             System.out.println("An error ocurred when it was writing the file.");
         }
     }
+
 }
