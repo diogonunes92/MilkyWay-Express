@@ -1,7 +1,10 @@
 package milkywayIU;
 
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import milkyway_logic.cards.EmptySpace;
 import milkyway_logic.cards.Planet;
 import milkyway_logic.cards.Wormhole;
@@ -79,14 +82,15 @@ public class IuTexto {
             System.out.println(" ::::::  MILKY WAY EXPRESS :: MOVE  ::::::::::");
             System.out.println(" 1. Mover");
             System.out.println(" 2. Next Fase");
+            System.out.println(" 3. Quit game");
 
             System.out.print(" Option: ");
             Scanner mScanner = new Scanner(System.in);
             int option = mScanner.nextInt();
+            boolean isCorrect = true;
 
             switch (option) {
                 case 1:
-                    boolean isCorrect = true;
 
                     while (isCorrect) {
                         System.out.println("(Front - F | Back - B | Left - L | Right - R)");
@@ -119,6 +123,18 @@ public class IuTexto {
                     this.game.turnCards();
                     isFinish = true;
                     break;
+                case 3:
+                    iuSaveGame();
+
+                    if (mScanner.nextInt() == 1) {
+                        try {
+                            game.saveGame();
+                        } catch (IOException ex) {
+                            Logger.getLogger(IuTexto.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+
+                    }
             }
         }
     }
@@ -206,8 +222,6 @@ public class IuTexto {
     }
 
     public void iuSaveGame() {
-
-        System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
         System.out.println(" Do you wanna save the game?");
         System.out.println(" 1. Yes");
         System.out.println(" 2. No");

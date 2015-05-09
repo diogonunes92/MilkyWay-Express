@@ -275,6 +275,7 @@ public final class Game {
 
     public void saveGame() throws IOException {
 
+        try{
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("save_file_milky_way.txt"));
 
         objectOutputStream.writeObject(player);
@@ -303,6 +304,9 @@ public final class Game {
 //        objectOutputStream.writeObject(course);
         objectOutputStream.flush();
         objectOutputStream.close();
+        }catch (IOException e){
+            System.err.println("erro");
+        }
     }
 
     public void loadGame() throws IOException {
