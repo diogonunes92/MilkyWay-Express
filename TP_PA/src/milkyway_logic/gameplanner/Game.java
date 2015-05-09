@@ -90,6 +90,7 @@ public final class Game {
     }
 
     public void buyCargo(String carga) {
+        System.out.println("Cheguei ao game bro!");
         this.state = state.buyCargo(carga);
     }
 
@@ -216,6 +217,13 @@ public final class Game {
         Game.roundsPlayed++;
     }
 
+    public boolean onPlanetVerifier() {
+        if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean sellCargoVerifier() {
         if (this.player.getSpaceship().getCargo().isEmpty()) {
             return false;
@@ -226,6 +234,23 @@ public final class Game {
         }
 
         return false;
+    }
+
+    public boolean verifyLoser() {
+        return player.getCoins() <= 0;
+    }
+
+    public boolean verifyFinishedGame() {
+        for (int x = 0; x < Constants.BOARD_LIMIT_SUP_X; x++) {
+            for (int y = 0; y < Constants.BOARD_LIMIT_SUP_Y; y++) {
+                if (board[x][y] instanceof Card) {
+                    if (!board[x][y].getIsTurned()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public boolean verifyPirateAttack() {

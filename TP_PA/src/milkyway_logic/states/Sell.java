@@ -64,27 +64,20 @@ public class Sell extends State {
 
     @Override
     public State upgradeWeapon() {
-        if (getGame().getPlayer().getCoins() == 0) {
-            return new StartGame(getGame());
-        }
 
         if (getGame().getPlayer().getSpaceship().getPower() < 6 && getGame().getPlayer().getCoins() >= 4) {
-            getGame().getPlayer().getSpaceship().setPower(+1);
+            getGame().getPlayer().getSpaceship().setPower(getGame().getPlayer().getSpaceship().getPower()+1);
+            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins()-4);
         }
-
         return this;
     }
 
     @Override
     public State upgradeCargo() {
-        if (getGame().getPlayer().getCoins() == 0) {
-            return new StartGame(getGame());
-        }
-
         if (getGame().getPlayer().getSpaceship().getCargo().size() == 2) {
-            getGame().getPlayer().getSpaceship().setCapacity(+1);
+            getGame().getPlayer().getSpaceship().setCapacity(getGame().getPlayer().getSpaceship().getCapacity()+1);
+            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins()-4);
         }
-
         return this;
     }
 
