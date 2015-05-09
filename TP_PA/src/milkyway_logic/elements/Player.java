@@ -1,6 +1,8 @@
 package milkyway_logic.elements;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable{
 
     private final int id;
     private int coins;

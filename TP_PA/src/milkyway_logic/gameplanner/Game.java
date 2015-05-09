@@ -1,9 +1,12 @@
 package milkyway_logic.gameplanner;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
+import milkyway_logic.elements.Spaceship;
+import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.State;
 import util.Constants;
@@ -19,6 +22,17 @@ public final class Game {
 
     public Game() {
         state = new StartGame(this);
+    }
+
+    public boolean initialize() {
+
+        BoardConstructor mBoardConstructor = new BoardConstructor();
+        this.setBoard(mBoardConstructor.getGameBoard());
+        this.setBankCoins(Constants.INITIAL_PLAYER_COINS - Constants.INITIAL_PLAYER_COINS);
+
+        this.setPlayer(new Player(1, "player_1", Constants.INITIAL_PLAYER_COINS, new Spaceship(Constants.INITIAL_SPACESHIP_POSITION_X, Constants.INITIAL_SPACESHIP_POSITION_Y)));
+
+        return true;
     }
 
     public State getState() {
@@ -104,32 +118,71 @@ public final class Game {
     public static void setRoundsPlayed() {
         Game.roundsPlayed++;
     }
-    
-    public boolean isInsideLimits(int posX, int posY){
-        
-        if(posX <= Constants.BOARD_LIMIT_INF_X || posX > Constants.BOARD_LIMIT_SUP_X){
+
+    public boolean isInsideLimits(int posX, int posY) {
+
+        if (posX <= Constants.BOARD_LIMIT_INF_X || posX > Constants.BOARD_LIMIT_SUP_X) {
             return false;
-            
-        } else if(posY <= Constants.BOARD_LIMIT_INF_Y || posY > Constants.BOARD_LIMIT_SUP_Y){
-            return false; 
+
+        } else if (posY <= Constants.BOARD_LIMIT_INF_Y || posY > Constants.BOARD_LIMIT_SUP_Y) {
+            return false;
         }
-        
+
         return true;
     }
-    
-    
 
-    public void saveGame() {
+    public void saveGame() throws IOException {
 
-        try {
-            PrintWriter writer = new PrintWriter("MilkyWayExpress_savefile.txt", "UTF-8");
-            writer.println("");
-            writer.println(bankCoins);
-            writer.close();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("save_file_milky_way.txt"));
 
-        } catch (IOException e) {
-            System.out.println("An error ocurred when it was writing the file.");
-        }
+        objectOutputStream.writeObject(player);
+        objectOutputStream.writeInt(roundsPlayed);
+        objectOutputStream.write(bankCoins);
+
+// create two students objects and add them in a list. create a course
+// object and add the list of students to a list
+//        Student student1 = new Student();
+//        student1.setAge(30);
+//        student1.setName("Student1");
+//
+//        Student student2 = new Student();
+//        student2.setAge(31);
+//        student2.setName("Student2");
+//
+//        Course course = new Course();
+//        course.setName("Java IO");
+//        List<Student> students = new ArrayList<>();
+//        students.add(student1);
+//        students.add(student2);
+//        course.setStudents(students);
+// write the course object to the objectoutputstream. This writes the
+// object as well all objects that it referes to.
+// it writes only those objects that implement serializable
+//        objectOutputStream.writeObject(course);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+    }
+
+    public void loadGame() throws IOException {
+// the object input stream reads the objects back from the file and
+// creates java objects out of them. It recreates all
+// references that were present when the objects were written
+//        ObjectInputStream objectInputStream = new ObjectInputStream(
+//                new FileInputStream("javaObjects.txt"));
+//
+//// start getting the objects out in the order in which they were written
+//        Date date = (Date) objectInputStream.readObject();
+//        System.out.println(date);
+//        System.out.println(objectInputStream.readBoolean());
+//        System.out.println(objectInputStream.readFloat());
+//
+//// get the course object
+//        Course readCourse = (Course) objectInputStream.readObject();
+//        System.out.println(readCourse.getName());
+//        Student student1Read = readCourse.getStudents().get(0);
+//        System.out.println(student1Read.getAge());
+//        System.out.println(student1Read.getName());
+//        objectInputStream.close();
     }
 
 }

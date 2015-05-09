@@ -1,10 +1,11 @@
 package milkyway_logic.cards;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import milkyway_logic.elements.Cube;
 
-public abstract class Card{
+public abstract class Card implements Serializable{
     private boolean isTurned;
 
     public Card() {

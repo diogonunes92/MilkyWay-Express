@@ -1,9 +1,10 @@
 package milkyway_logic.elements;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Spaceship {
+public class Spaceship implements Serializable{
 
     private int power;
     private int capacity;
