@@ -106,17 +106,13 @@ public final class Game {
 
         int piratePower, numAtacks, doneAtacks, powerDiference;
         numAtacks = 1 + (int) (Math.random() * 3);
-        System.out.println("Number of Attacks: " + numAtacks);
-        System.out.println("Your Power: " + this.player.getSpaceship().getPower());
         int playerCoins = this.getPlayer().getCoins();
         doneAtacks = 0;
         while (doneAtacks < numAtacks) {
             piratePower = 1 + (int) (Math.random() * 6);
-            System.out.println("Pirate's Power: " + piratePower);
             if (this.getPlayer().getSpaceship().getPower() < piratePower) {
                 powerDiference = piratePower - this.getPlayer().getSpaceship().getPower();
                 this.getPlayer().setCoins(playerCoins - powerDiference);
-                System.out.println("Ataque infligindo!");
             }
             doneAtacks++;
         }
@@ -260,7 +256,6 @@ public final class Game {
     public boolean verifyPirateAttack() {
         int isPirateAttack = 1 + (int) (Math.random() * 2);
         if (isPirateAttack == 1) {
-            System.out.println("You are under a pirate atack!");
             return true;
         } else {
             return false;

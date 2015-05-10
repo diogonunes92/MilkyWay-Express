@@ -158,6 +158,7 @@ public class IuTexto {
                         this.game.nextState();
                         this.game.replenishMarkets();
                         if (this.game.verifyPirateAttack()) {
+                            System.out.println("You are under a pirate atack!");
                             this.game.pirateAtack();
                         }
                         this.game.turnCards();

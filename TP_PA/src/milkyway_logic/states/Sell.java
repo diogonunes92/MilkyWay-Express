@@ -33,7 +33,6 @@ public class Sell extends State {
             int cargoPrice;
             HashMap<String, Integer> prices = getGame().getBoard()[PosX][PosY].getPrices();
             List<Cube> cubeListPlanet = getGame().getBoard()[PosX][PosY].getCubeList();
-            System.out.println("AZUL PREÇO -> " + prices.get("blue"));
             //^FETCHES CUBE LIST PLANET
 
             List<Cube> cubesSpaceship = getGame().getPlayer().getSpaceship().getCargo();
