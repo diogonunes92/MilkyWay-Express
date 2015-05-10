@@ -143,21 +143,25 @@ public final class Game {
                                 randomNum = 1 + (int) (Math.random() * 6);
 
                                 if (randomNum == 1) {
-                                    color = "Red";
+                                    color = "red";
                                 } else if (randomNum == 2) {
-                                    color = "Blue";
+                                    color = "blue";
                                 } else if (randomNum == 3) {
-                                    color = "Yellow";
+                                    color = "yellow";
                                 } else if (randomNum == 4) {
-                                    color = "Black";
+                                    color = "black";
                                 } else {
-                                    color = "White";
+                                    color = "white";
                                 }
                                 List<Cube> cubeList = this.getBoard()[i][j].getCubeList();
                                 cubeList.add(new Cube(color));
                                 this.getBoard()[i][j].setCubeList(cubeList);
                             }
                         }
+                    } else if (this.getBoard()[i][j].getIsTurned() && this.getBoard()[i][j].isPirate()) {
+                        List<Cube> cubeList = this.getBoard()[i][j].getCubeList();
+                        cubeList.add(new Cube("black"));
+                        this.getBoard()[i][j].setCubeList(cubeList);
                     }
                 }
             }
@@ -267,6 +271,9 @@ public final class Game {
 
         int posX = this.getPlayer().getSpaceship().getPosX();
         int posY = this.getPlayer().getSpaceship().getPosY();
+        
+        System.out.println("POSX -> " + posX);
+        System.out.println("POSY -> " + posY);
 
         if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
             this.getPlayer().getSpaceship().setPosX(posX - 1);

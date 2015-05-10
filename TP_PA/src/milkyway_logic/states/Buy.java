@@ -22,23 +22,19 @@ public class Buy extends State {
 
         int PosX = getGame().getPlayer().getSpaceship().getPosX();
         int PosY = getGame().getPlayer().getSpaceship().getPosY();
-        if (getGame().getBankCoins() == 0) {
-            return new Move(getGame());
-        }
+        
         if (getGame().getBoard()[PosX][PosY] instanceof Planet) {
             if (getGame().getPlayer().getSpaceship().getCargo().size() < 2) {
                 int cargoPrice;
                 HashMap<String, Integer> prices = getGame().getBoard()[PosX][PosY].getPrices();
                 List<Cube> cubeList = getGame().getBoard()[PosX][PosY].getCubeList();
-                System.out.println("CUBE_LIST [0] - > " + cubeList.get(0));
 
                 //^THIS FETCHS PLANET'S PRICES AND CUBES FOR SALE 
-                System.out.println("CARGO - > " + cargo);
                 List<Cube> cubesSpaceship = getGame().getPlayer().getSpaceship().getCargo();
-                cargoPrice = prices.get(cargo);
-                System.out.println("CARGO PRICE -> " + cargoPrice);
+                cargoPrice = prices.get(cargo.toLowerCase());
                 //^THIS FETCHS THE CUBES FROM THE SPACESHIP AND THE PRICES FROM CARGOS ON PLANET
                 if (getGame().getPlayer().getCoins() >= cargoPrice) {
+
                     getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - cargoPrice);
                     cubesSpaceship.add(new Cube(cargo));
                     getGame().getPlayer().getSpaceship().setCargo(cubesSpaceship);
@@ -50,7 +46,6 @@ public class Buy extends State {
                 }
 
                 getGame().setRoundsPlayed();
-
                 return this;
 
             } else if (getGame().getPlayer().getSpaceship().isCargoUpdated() && getGame().getPlayer().getSpaceship().getCargo().size() < 3) {
@@ -75,12 +70,10 @@ public class Buy extends State {
                 }
 
                 getGame().setRoundsPlayed();
-       System.out.println("RETURN THIS 2" );
 
                 return this;
             }
         }
-       System.out.println("RETURN THIS " );
 
         return this;
     }

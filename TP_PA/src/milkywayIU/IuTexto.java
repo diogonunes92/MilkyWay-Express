@@ -78,14 +78,14 @@ public class IuTexto {
         clearConsole();
         printBoard();
         isFinish = false;
-        
+
         if (this.game.verifyLoser()) {
-                System.out.println("");
-                System.out.println(" ::::::  GAME OVER  ::::::::::");
-                System.out.println(" IT HAS BEEN A PLEASURE BUT");
-                System.out.println(" IT APPEARS YOU HAVE RUN OUT");
-                System.out.println(" OF COINS! BETTER LUCK NEXT TIME :( ");
-                System.exit(0);
+            System.out.println("");
+            System.out.println(" ::::::  GAME OVER  ::::::::::");
+            System.out.println(" IT HAS BEEN A PLEASURE BUT");
+            System.out.println(" IT APPEARS YOU HAVE RUN OUT");
+            System.out.println(" OF COINS! BETTER LUCK NEXT TIME :( ");
+            System.exit(0);
         }
 
         if (this.game.verifyFinishedGame()) {
@@ -180,6 +180,12 @@ public class IuTexto {
 
                     }
             }
+
+            if (game.getBoard()[game.getPlayer().getSpaceship().getPosX()][game.getPlayer().getSpaceship().getPosY()] instanceof Planet
+                    && game.getBoard()[game.getPlayer().getSpaceship().getPosX()][game.getPlayer().getSpaceship().getPosY()].isPirate()) {
+                game.pirateAtack();
+            }
+
         }
     }
 
@@ -287,6 +293,7 @@ public class IuTexto {
                         String cargo = mScanner.next();
                         System.out.println(cargo);
                         this.game.buyCargo(cargo);
+                        isFinish = true;
                     } else {
                         System.out.println("You're not on a planet!");
                     }
