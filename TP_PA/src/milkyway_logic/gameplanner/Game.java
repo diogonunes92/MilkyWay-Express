@@ -272,8 +272,8 @@ public final class Game {
         int posX = this.getPlayer().getSpaceship().getPosX();
         int posY = this.getPlayer().getSpaceship().getPosY();
         
-        System.out.println("POSX -> " + posX);
-        System.out.println("POSY -> " + posY);
+//        System.out.println("POSX -> " + posX);
+//        System.out.println("POSY -> " + posY);
 
         if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
             this.getPlayer().getSpaceship().setPosX(posX - 1);
@@ -303,14 +303,14 @@ public final class Game {
                     // if everything passed 
                     return true;
                 } else {
-                    System.err.println("It's not a turned card!");
+//                    System.err.println("It's not a turned card!");
                     return false;
                 }
             } else {
-                System.err.println("It's not a card");
+//                System.err.println("It's not a card");
             }
         } else {
-            System.err.println("out of limits");
+//            System.err.println("out of limits");
         }
         return false;
     }
@@ -325,13 +325,13 @@ public final class Game {
                     // if everything passed 
                     return true;
                 } else {
-                    System.err.println("The card is already turned!");
+//                    System.err.println("The card is already turned!");
                 }
             } else {
-                System.err.println("It's not a card");
+//                System.err.println("It's not a card");
             }
         } else {
-            System.err.println("out of limits");
+//            System.err.println("out of limits");
         }
         return false;
     }
