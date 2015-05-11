@@ -2,6 +2,7 @@ package milkywayIU;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,24 +52,32 @@ public class IuTexto {
             System.out.println(" 4. Sair");
 
             System.out.print(" Option: ");
-            Scanner mScanner = new Scanner(System.in);
-            int option = mScanner.nextInt();
 
-            switch (option) {
-                case 1:
-                    game.constructGame();
-                    isFinish = true;
-                    break;
-                case 2:
+            int option;
 
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    isFinish = true;
-                    isExit = true;
-                    System.out.println("See you next time, mate!");
-                    break;
+            try {
+                Scanner mScanner = new Scanner(System.in);
+                option = mScanner.nextInt();
+
+                switch (option) {
+                    case 1:
+                        game.constructGame();
+                        isFinish = true;
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        isFinish = true;
+                        isExit = true;
+                        System.out.println("See you next time, mate!");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("Wrong caracter");
+                iuStartGame();
             }
         }
     }
@@ -147,7 +156,9 @@ public class IuTexto {
                             } else {
                                 System.out.println(" Incorrect choice");
                             }
-                        } catch (Exception e) {
+                        } catch (InputMismatchException e) {
+                            System.err.println("Wrong caracter");
+                            iuMove();
                         }
                     }
                     isFinish = true;
@@ -174,8 +185,10 @@ public class IuTexto {
                     if (mScanner.nextInt() == 1) {
                         try {
                             game.saveGame();
+
                         } catch (IOException ex) {
-                            Logger.getLogger(IuTexto.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(IuTexto.class
+                                    .getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
 
@@ -212,52 +225,73 @@ public class IuTexto {
             System.out.println(" 4. Update Weapon");
             System.out.println(" 5. Update Cargo");
             System.out.println(" 6. Next Fase");
+            System.out.println(" 7. Quit game");
 
-            System.out.print(" Option: ");
-            Scanner mScanner = new Scanner(System.in);
-            int option = mScanner.nextInt();
+            try {
+                System.out.print(" Option: ");
 
-            switch (option) {
-                case 1:
-                    if (this.game.sellCargoVerifier()) {
-                        System.out.println("Chose which cargo you want to sell:");
-                        String cargo = mScanner.next();
-                        this.game.sellCargo(cargo);
-                    } else {
-                        System.out.println("You're not on a planet or don't have cargo to sell!");
-                    }
+                Scanner mScanner = new Scanner(System.in);
+                int option = mScanner.nextInt();
 
-                    isFinish = true;
-                    break;
-                case 2:
-                    if (this.game.onPlanetVerifier()) {
-                        seePricesOnPlanet();
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
-                case 3:
-                    seeCargoOnShip();
-                    break;
-                case 4:
-                    if (this.game.onPlanetVerifier()) {
-                        this.game.upgradeWeapon();
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
-                case 5:
-                    if (this.game.onPlanetVerifier()) {
-                        this.game.upgradeCargo();
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
+                switch (option) {
+                    case 1:
+                        if (this.game.sellCargoVerifier()) {
+                            System.out.println("Chose which cargo you want to sell:");
+                            String cargo = mScanner.next();
+                            this.game.sellCargo(cargo);
+                        } else {
+                            System.out.println("You're not on a planet or don't have cargo to sell!");
+                        }
 
-                case 6:
-                    this.game.nextState();
-                    isFinish = true;
-                    return;
+                        isFinish = true;
+                        break;
+                    case 2:
+                        if (this.game.onPlanetVerifier()) {
+                            seePricesOnPlanet();
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+                    case 3:
+                        seeCargoOnShip();
+                        break;
+                    case 4:
+                        if (this.game.onPlanetVerifier()) {
+                            this.game.upgradeWeapon();
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+                    case 5:
+                        if (this.game.onPlanetVerifier()) {
+                            this.game.upgradeCargo();
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+
+                    case 6:
+                        this.game.nextState();
+                        isFinish = true;
+                        return;
+                    case 7:
+                        iuSaveGame();
+
+                        if (mScanner.nextInt() == 1) {
+                            try {
+                                game.saveGame();
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(IuTexto.class
+                                        .getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+
+                        }
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("Wrong caracter");
+                iuMove();
             }
         }
     }
@@ -282,59 +316,80 @@ public class IuTexto {
             System.out.println(" 4. Update Weapon");
             System.out.println(" 5. Update Cargo");
             System.out.println(" 6. Next Fase");
+            System.out.println(" 7. Quit game");
 
-            System.out.print(" Option: ");
-            Scanner mScanner = new Scanner(System.in);
-            int option = mScanner.nextInt();
+            try {
+                System.out.print(" Option: ");
+                Scanner mScanner = new Scanner(System.in);
+                int option = mScanner.nextInt();
 
-            switch (option) {
-                case 1:
-                    if (this.game.onPlanetVerifier()) {
-                        System.out.println("Chose which cargo you want to buy:");
-                        String cargo = mScanner.next();
-                        System.out.println(cargo);
-                        this.game.buyCargo(cargo);
+                switch (option) {
+                    case 1:
+                        if (this.game.onPlanetVerifier()) {
+                            System.out.println("Chose which cargo you want to buy:");
+                            String cargo = mScanner.next();
+                            System.out.println(cargo);
+                            this.game.buyCargo(cargo);
+                            isFinish = true;
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+                    case 2:
+                        if (this.game.onPlanetVerifier()) {
+                            seePricesOnPlanet();
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+                    case 3:
+                        if (this.game.onPlanetVerifier()) {
+                            seeCargoForSale();
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+
+                    case 4:
+                        if (this.game.onPlanetVerifier()) {
+                            this.game.upgradeWeapon();
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+                    case 5:
+                        if (this.game.onPlanetVerifier()) {
+                            this.game.upgradeCargo();
+                        } else {
+                            System.out.println("You're not on a planet!");
+                        }
+                        break;
+                    case 6:
+                        this.game.nextState();
                         isFinish = true;
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
-                case 2:
-                    if (this.game.onPlanetVerifier()) {
-                        seePricesOnPlanet();
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
-                case 3:
-                    if (this.game.onPlanetVerifier()) {
-                        seeCargoForSale();
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
+                        break;
 
-                case 4:
-                    if (this.game.onPlanetVerifier()) {
-                        this.game.upgradeWeapon();
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
-                case 5:
-                    if (this.game.onPlanetVerifier()) {
-                        this.game.upgradeCargo();
-                    } else {
-                        System.out.println("You're not on a planet!");
-                    }
-                    break;
-                case 6:
-                    this.game.nextState();
-                    isFinish = true;
-                    break;
+                    case 7:
+                        iuSaveGame();
+
+                        if (mScanner.nextInt() == 1) {
+                            try {
+                                game.saveGame();
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(IuTexto.class
+                                        .getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+
+                        }
+                }
+
+            } catch (InputMismatchException e) {
+                System.err.println("Wrong caracter");
+                iuMove();
             }
         }
-
     }
 
     public void iuSaveGame() {

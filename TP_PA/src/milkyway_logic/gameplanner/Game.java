@@ -339,6 +339,7 @@ public final class Game {
             objectOutputStream.writeObject(player);
             objectOutputStream.writeInt(roundsPlayed);
             objectOutputStream.write(bankCoins);
+            objectOutputStream.writeObject(board);
 
 // create two students objects and add them in a list. create a course
 // object and add the list of students to a list
@@ -366,27 +367,4 @@ public final class Game {
             System.err.println("erro");
         }
     }
-
-    public void loadGame() throws IOException {
-// the object input stream reads the objects back from the file and
-// creates java objects out of them. It recreates all
-// references that were present when the objects were written
-//        ObjectInputStream objectInputStream = new ObjectInputStream(
-//                new FileInputStream("javaObjects.txt"));
-//
-//// start getting the objects out in the order in which they were written
-//        Date date = (Date) objectInputStream.readObject();
-//        System.out.println(date);
-//        System.out.println(objectInputStream.readBoolean());
-//        System.out.println(objectInputStream.readFloat());
-//
-//// get the course object
-//        Course readCourse = (Course) objectInputStream.readObject();
-//        System.out.println(readCourse.getName());
-//        Student student1Read = readCourse.getStudents().get(0);
-//        System.out.println(student1Read.getAge());
-//        System.out.println(student1Read.getName());
-//        objectInputStream.close();
-    }
-
 }
