@@ -1,7 +1,6 @@
 package milkywayIU;
 
 import java.io.IOException;
-import java.lang.management.ManagementFactory;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -49,7 +48,7 @@ public class IuTexto {
             System.out.println(" 1. Start game");
             System.out.println(" 2. Load previous game");
             System.out.println(" 3. Credits");
-            System.out.println(" 4. Sair");
+            System.out.println(" 4. Quit");
 
             System.out.print(" Option: ");
 
@@ -65,9 +64,17 @@ public class IuTexto {
                         isFinish = true;
                         break;
                     case 2:
-
+                        System.out.println("Not implemented yet");
                         break;
                     case 3:
+                        System.out.println("");
+                        System.out.println("Course: Programação Avançada");
+                        System.out.println("v.1.0");
+                        System.out.println("");
+                        System.out.println("Programmers:");
+                        System.out.println("Marco Barbosa, n21200304");
+                        System.out.println("Diogo Nunes, n21200809");
+                        System.out.println("");
                         break;
                     case 4:
                         isFinish = true;

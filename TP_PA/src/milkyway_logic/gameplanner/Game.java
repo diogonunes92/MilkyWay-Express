@@ -266,10 +266,9 @@ public final class Game {
 
         int posX = this.getPlayer().getSpaceship().getPosX();
         int posY = this.getPlayer().getSpaceship().getPosY();
-        
+
 //        System.out.println("POSX -> " + posX);
 //        System.out.println("POSY -> " + posY);
-
         if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
             this.getPlayer().getSpaceship().setPosX(posX - 1);
             return true;
@@ -339,30 +338,11 @@ public final class Game {
             objectOutputStream.writeObject(player);
             objectOutputStream.writeInt(roundsPlayed);
             objectOutputStream.write(bankCoins);
-            objectOutputStream.writeObject(board);
+//            objectOutputStream.writeObject(board);
 
-// create two students objects and add them in a list. create a course
-// object and add the list of students to a list
-//        Student student1 = new Student();
-//        student1.setAge(30);
-//        student1.setName("Student1");
-//
-//        Student student2 = new Student();
-//        student2.setAge(31);
-//        student2.setName("Student2");
-//
-//        Course course = new Course();
-//        course.setName("Java IO");
-//        List<Student> students = new ArrayList<>();
-//        students.add(student1);
-//        students.add(student2);
-//        course.setStudents(students);
-// write the course object to the objectoutputstream. This writes the
-// object as well all objects that it referes to.
-// it writes only those objects that implement serializable
-//        objectOutputStream.writeObject(course);
             objectOutputStream.flush();
             objectOutputStream.close();
+            
         } catch (IOException e) {
             System.err.println("erro");
         }
