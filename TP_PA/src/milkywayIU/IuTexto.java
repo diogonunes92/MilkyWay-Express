@@ -153,7 +153,7 @@ public class IuTexto {
                                 isCorrect = false;
 
                                 if (this.game.moveSpaceship(move)) {
-                                    System.out.println(" Right move");
+                                    System.out.println("Correct move");
                                     hasMoved = true;
                                     this.game.move();
                                 } else {
