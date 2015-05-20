@@ -5,9 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import milkyway_logic.cards.EmptySpace;
 import milkyway_logic.cards.Planet;
-import milkyway_logic.cards.Wormhole;
 import milkyway_logic.gameplanner.Game;
 
 import milkyway_logic.states.*;
@@ -39,8 +37,6 @@ public class IuTexto {
     }
 
     private void iuStartGame() {
-
-        clearConsole();
 
         while (!isFinish) {
 
@@ -91,7 +87,6 @@ public class IuTexto {
 
     private void iuMove() {
 
-        clearConsole();
         printBoard();
         isFinish = false;
 
@@ -212,7 +207,6 @@ public class IuTexto {
 
     private void iuSell() {
 
-        clearConsole();
         printBoard();
         isFinish = false;
 
@@ -460,13 +454,7 @@ public class IuTexto {
                     } else {
 
                         if (game.getBoard()[i][j].getIsTurned()) {
-                            if (game.getBoard()[i][j] instanceof Planet) {
-                                UIGameBoard[i][j] = "[ P ]";
-                            } else if (game.getBoard()[i][j] instanceof Wormhole) {
-                                UIGameBoard[i][j] = "[ W ]";
-                            } else if (game.getBoard()[i][j] instanceof EmptySpace) {
-                                UIGameBoard[i][j] = "[ E ]";
-                            }
+                            UIGameBoard[i][j] = game.getBoard()[i][j].getCardString();
                         } else {
                             UIGameBoard[i][j] = "[   ]";
                         }
@@ -487,20 +475,6 @@ public class IuTexto {
 
         } else {
             System.out.println("\033[31m Board doesnt exists \033[0m");
-        }
-    }
-
-    public final static void clearConsole() {
-        try {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (final Exception e) {
-            //  Handle any exceptions.
         }
     }
 
