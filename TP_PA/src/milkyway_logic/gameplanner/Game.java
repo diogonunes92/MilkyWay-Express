@@ -1,9 +1,11 @@
 package milkyway_logic.gameplanner;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.List;
 import milkyway_logic.cards.Card;
 import milkyway_logic.cards.Planet;
@@ -11,15 +13,13 @@ import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
 import milkyway_logic.gameboard.BoardConstructor;
-import milkyway_logic.states.Buy;
-import milkyway_logic.states.Sell;
 import milkyway_logic.states.StartGame;
-import milkyway_logic.states.State;
+import milkyway_logic.states.States;
 import util.Constants;
 
-public final class Game {
+public final class Game implements Serializable{
 
-    private State state;
+    private States state;
     private Player player;
     private Card[][] board;
     private static int bankCoins;
@@ -41,11 +41,11 @@ public final class Game {
         return true;
     }
 
-    public State getState() {
+    public States getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(States state) {
         this.state = state;
     }
 
@@ -330,21 +330,34 @@ public final class Game {
         return false;
     }
 
-    public void saveGame() throws IOException {
-
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("save_file_milky_way.txt"));
-
-            objectOutputStream.writeObject(player);
-            objectOutputStream.writeInt(roundsPlayed);
-            objectOutputStream.write(bankCoins);
-//            objectOutputStream.writeObject(board);
-
-            objectOutputStream.flush();
-            objectOutputStream.close();
-            
-        } catch (IOException e) {
-            System.err.println("erro");
+        public void saveGame(String nomeFicheiro) throws IOException
+    {
+        ObjectOutputStream oout = null;
+        
+        try{
+            oout = new ObjectOutputStream(new FileOutputStream(nomeFicheiro));        
+            oout.writeObject(this);
+        }finally{
+            if(oout != null){
+                oout.close();
+            }
         }
+        
+    }
+    
+    public static Game loadGame(String nomeFicheiro) throws IOException, ClassNotFoundException 
+    {
+        ObjectInputStream oin = null;
+        Game j;
+        
+        try{
+            oin = new ObjectInputStream(new FileInputStream(nomeFicheiro));        
+            j = (Game)oin.readObject();
+            return j;
+        }finally{
+            if(oin != null){
+                oin.close();
+            }
+        }        
     }
 }
