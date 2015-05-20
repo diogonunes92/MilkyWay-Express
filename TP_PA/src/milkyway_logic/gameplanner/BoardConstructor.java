@@ -1,4 +1,4 @@
-package milkyway_logic.gameboard;
+package milkyway_logic.gameplanner;
 
 import java.util.ArrayList;
 import java.util.Collections;

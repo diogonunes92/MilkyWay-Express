@@ -13,11 +13,6 @@ public class Buy extends StatesAdapter {
     }
 
     @Override
-    public StatesAdapter constructGame() {
-        return this;
-    }
-
-    @Override
     public StatesAdapter buyCargo(String cargo) {
 
         int PosX = getGame().getPlayer().getSpaceship().getPosX();
@@ -79,11 +74,6 @@ public class Buy extends StatesAdapter {
     }
 
     @Override
-    public StatesAdapter sellCargo(String carga) {
-        return this;
-    }
-
-    @Override
     public StatesAdapter isFinished() {
         return this;
     }
@@ -106,11 +96,6 @@ public class Buy extends StatesAdapter {
             getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
             getGame().getPlayer().getSpaceship().setIsCargoUpdated(true);
         }
-        return this;
-    }
-
-    @Override
-    public StatesAdapter move() {
         return this;
     }
 
