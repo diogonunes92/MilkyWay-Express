@@ -146,14 +146,8 @@ public class IuTexto {
 
                             if (move.equalsIgnoreCase("f") || move.equalsIgnoreCase("b") || move.equalsIgnoreCase("l") || move.equalsIgnoreCase("r")) {
                                 isCorrect = false;
-
-                                if (this.game.moveSpaceship(move)) {
-                                    System.out.println("Correct move");
-                                    hasMoved = true;
-                                    this.game.move();
-                                } else {
-                                    System.out.println(" Wrong move");
-                                }
+                                hasMoved = true;
+                                this.game.move(move);
 
                             } else {
                                 System.out.println(" Incorrect choice");

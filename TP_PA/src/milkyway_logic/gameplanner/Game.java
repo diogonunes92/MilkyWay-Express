@@ -11,7 +11,6 @@ import milkyway_logic.cards.Card;
 import milkyway_logic.cards.Planet;
 import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Player;
-import milkyway_logic.elements.Spaceship;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.States;
 import util.Constants;
@@ -27,17 +26,6 @@ public final class Game implements Serializable{
 
     public Game() {
         state = new StartGame(this);
-    }
-
-    public boolean initialize() {
-
-        BoardConstructor mBoardConstructor = new BoardConstructor();
-        this.setBoard(mBoardConstructor.getGameBoard());
-        this.setBankCoins(Constants.INITIAL_PLAYER_COINS - Constants.INITIAL_PLAYER_COINS);
-
-        this.setPlayer(new Player(1, "player_1", Constants.INITIAL_PLAYER_COINS, new Spaceship(Constants.INITIAL_SPACESHIP_POSITION_X, Constants.INITIAL_SPACESHIP_POSITION_Y)));
-
-        return true;
     }
 
     public States getState() {
@@ -76,8 +64,8 @@ public final class Game implements Serializable{
         this.state = state.constructGame();
     }
 
-    public void move() {
-        this.state = state.move();
+    public void move(String move) {
+        this.state = state.move(move);
     }
 
     public void upgradeWeapon() {
@@ -259,53 +247,6 @@ public final class Game implements Serializable{
         } else {
             return false;
         }
-    }
-
-    public boolean moveSpaceship(String move) {
-
-        int posX = this.getPlayer().getSpaceship().getPosX();
-        int posY = this.getPlayer().getSpaceship().getPosY();
-
-//        System.out.println("POSX -> " + posX);
-//        System.out.println("POSY -> " + posY);
-        if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
-            this.getPlayer().getSpaceship().setPosX(posX - 1);
-            return true;
-        } else if (move.equalsIgnoreCase("b") && cardVerifier(posX + 1, posY)) {
-            this.getPlayer().getSpaceship().setPosX(posX + 1);
-            return true;
-        } else if (move.equalsIgnoreCase("l") && cardVerifier(posX, posY - 1)) {
-            this.getPlayer().getSpaceship().setPosY(posY - 1);
-            return true;
-        } else if (move.equalsIgnoreCase("r") && cardVerifier(posX, posY + 1)) {
-            this.getPlayer().getSpaceship().setPosY(posY + 1);
-            return true;
-        }
-
-        return false;
-
-    }
-
-    public boolean cardVerifier(int posX, int posY) {
-
-        if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
-
-            if (this.getBoard()[posX][posY] instanceof Card) {
-
-                if (this.getBoard()[posX][posY].getIsTurned()) {
-                    // if everything passed 
-                    return true;
-                } else {
-//                    System.err.println("It's not a turned card!");
-                    return false;
-                }
-            } else {
-//                System.err.println("It's not a card");
-            }
-        } else {
-//            System.err.println("out of limits");
-        }
-        return false;
     }
 
     public boolean cardVerifierTurn(int posX, int posY) {
