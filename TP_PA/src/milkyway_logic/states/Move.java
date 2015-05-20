@@ -3,29 +3,29 @@ package milkyway_logic.states;
 import milkyway_logic.cards.Card;
 import milkyway_logic.gameplanner.Game;
 
-public class Move extends State {
+public class Move extends StatesAdapter {
 
     public Move(Game game) {
         super(game);
     }
 
     @Override
-    public State constructGame() {
+    public StatesAdapter constructGame() {
         return this;
     }
 
     @Override
-    public State buyCargo(String carga) {
+    public StatesAdapter buyCargo(String carga) {
         return this;
     }
 
     @Override
-    public State sellCargo(String carga) {
+    public StatesAdapter sellCargo(String carga) {
         return this;
     }
 
     @Override
-    public State isFinished() {
+    public StatesAdapter isFinished() {
         if (getGame().getPlayer().getCoins() == 0) {
             System.exit(0);
         }
@@ -34,24 +34,24 @@ public class Move extends State {
     }
 
     @Override
-    public State upgradeWeapon() {
+    public StatesAdapter upgradeWeapon() {
         return this;
     }
 
     @Override
-    public State upgradeCargo() {
+    public StatesAdapter upgradeCargo() {
         return this;
     }
 
     @Override
-    public State move() {
+    public StatesAdapter move() {
         getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
 
         return new Move(getGame());
     }
 
     @Override
-    public State nextState() {
+    public StatesAdapter nextState() {
         return new Sell(getGame());
     }
 }

@@ -6,19 +6,19 @@ import milkyway_logic.elements.Cube;
 import milkyway_logic.cards.Planet;
 import milkyway_logic.gameplanner.Game;
 
-public class Buy extends State {
+public class Buy extends StatesAdapter {
 
     public Buy(Game game) {
         super(game);
     }
 
     @Override
-    public State constructGame() {
+    public StatesAdapter constructGame() {
         return this;
     }
 
     @Override
-    public State buyCargo(String cargo) {
+    public StatesAdapter buyCargo(String cargo) {
 
         int PosX = getGame().getPlayer().getSpaceship().getPosX();
         int PosY = getGame().getPlayer().getSpaceship().getPosY();
@@ -79,17 +79,17 @@ public class Buy extends State {
     }
 
     @Override
-    public State sellCargo(String carga) {
+    public StatesAdapter sellCargo(String carga) {
         return this;
     }
 
     @Override
-    public State isFinished() {
+    public StatesAdapter isFinished() {
         return this;
     }
 
     @Override
-    public State upgradeWeapon() {
+    public StatesAdapter upgradeWeapon() {
 
         if (getGame().getPlayer().getSpaceship().getPower() < 6 && getGame().getPlayer().getCoins() >= 4) {
             getGame().getPlayer().getSpaceship().setPower(getGame().getPlayer().getSpaceship().getPower() + 1);
@@ -100,7 +100,7 @@ public class Buy extends State {
     }
 
     @Override
-    public State upgradeCargo() {
+    public StatesAdapter upgradeCargo() {
         if (getGame().getPlayer().getSpaceship().getCargo().size() == 2) {
             getGame().getPlayer().getSpaceship().setCapacity(getGame().getPlayer().getSpaceship().getCapacity() + 1);
             getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
@@ -110,12 +110,12 @@ public class Buy extends State {
     }
 
     @Override
-    public State move() {
+    public StatesAdapter move() {
         return this;
     }
 
     @Override
-    public State nextState() {
+    public StatesAdapter nextState() {
         return new Move(getGame());
     }
 

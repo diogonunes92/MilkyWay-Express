@@ -25,7 +25,7 @@ public class IuTexto {
 
     void run() {
         while (!isExit) {
-            State mState = game.getState();
+            States mState = game.getState();
             if (mState instanceof StartGame) {
                 iuStartGame();
             } else if (mState instanceof Move) {
@@ -191,7 +191,7 @@ public class IuTexto {
 
                     if (mScanner.nextInt() == 1) {
                         try {
-                            game.saveGame();
+                            game.saveGame("ola");
 
                         } catch (IOException ex) {
                             Logger.getLogger(IuTexto.class
@@ -286,7 +286,7 @@ public class IuTexto {
 
                         if (mScanner.nextInt() == 1) {
                             try {
-                                game.saveGame();
+                                game.saveGame("ola");
 
                             } catch (IOException ex) {
                                 Logger.getLogger(IuTexto.class
@@ -381,7 +381,7 @@ public class IuTexto {
 
                         if (mScanner.nextInt() == 1) {
                             try {
-                                game.saveGame();
+                                game.saveGame("ola");
 
                             } catch (IOException ex) {
                                 Logger.getLogger(IuTexto.class

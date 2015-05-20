@@ -2,14 +2,14 @@ package milkyway_logic.states;
 
 import milkyway_logic.gameplanner.Game;
 
-public class StartGame extends State {
+public class StartGame extends StatesAdapter {
 
     public StartGame(Game game) {
         super(game);
     }
 
     @Override
-    public State constructGame() {
+    public StatesAdapter constructGame() {
 
         if (getGame().initialize()) {
             return new Move(getGame());
@@ -18,17 +18,17 @@ public class StartGame extends State {
     }
 
     @Override
-    public State buyCargo(String carga) {
+    public StatesAdapter buyCargo(String carga) {
         return this;
     }
 
     @Override
-    public State sellCargo(String carga) {
+    public StatesAdapter sellCargo(String carga) {
         return this;
     }
 
     @Override
-    public State isFinished() {
+    public StatesAdapter isFinished() {
         if (getGame().getPlayer().getCoins() == 0) {
             System.exit(0);
         }
@@ -36,22 +36,22 @@ public class StartGame extends State {
     }
 
     @Override
-    public State upgradeWeapon() {
+    public StatesAdapter upgradeWeapon() {
         return this;
     }
 
     @Override
-    public State upgradeCargo() {
+    public StatesAdapter upgradeCargo() {
         return this;
     }
 
     @Override
-    public State move() {
+    public StatesAdapter move() {
         return this;
     }
 
     @Override
-    public State nextState() {
+    public StatesAdapter nextState() {
         return new Move(getGame());
     }
 }
