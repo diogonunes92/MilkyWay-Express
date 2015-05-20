@@ -12,7 +12,6 @@ import milkyway_logic.cards.Planet;
 import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Player;
 import milkyway_logic.elements.Spaceship;
-import milkyway_logic.gameboard.BoardConstructor;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.States;
 import util.Constants;
