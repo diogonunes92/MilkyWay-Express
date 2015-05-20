@@ -49,10 +49,6 @@ public class Planet extends Card {
         return planetName;
     }
 
-    /**
-     *
-     * @param planetName
-     */
     @Override
     public void setPlanetName(String planetName) {
         this.planetName = planetName;
@@ -61,5 +57,10 @@ public class Planet extends Card {
     @Override
     public boolean isPirate() {
         return this.isPirate;
+    }
+
+    @Override
+    public String getCardString() {
+        return "[ P ]";
     }
 }

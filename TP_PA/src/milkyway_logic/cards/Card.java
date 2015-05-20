@@ -20,6 +20,7 @@ public abstract class Card implements Serializable{
         this.isTurned = isTurned;
     }
     
+    public abstract String getCardString();
     public abstract List<Cube> getCubeList();
     public abstract void setCubeList(List<Cube> cubeList);
     public abstract HashMap<String, Integer> getPrices();
