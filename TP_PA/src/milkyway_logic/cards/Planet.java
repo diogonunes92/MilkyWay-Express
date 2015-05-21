@@ -20,6 +20,20 @@ public class Planet extends Card {
         this.isPirate = isPirate;
     }
 
+    public String toStringPrices() {
+        return "Planet{" + "prices=" + prices + '}';
+    }
+
+
+    public String toStringCargo(){
+        String cargo ="Planet Cargo { ";
+        
+        for(int i=0;i<cubeList.size();i++){
+            cargo = " "+cubeList.get(i);
+        }
+        return cargo;
+    }
+        
     @Override
     public List<Cube> getCubeList() {
         return cubeList;

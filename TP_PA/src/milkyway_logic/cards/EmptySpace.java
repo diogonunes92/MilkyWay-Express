@@ -54,4 +54,14 @@ public class EmptySpace extends Card {
         return "[ E ]";
     }
 
+    @Override
+    public String toStringPrices() {
+        return "";
+    }
+
+    @Override
+    public String toStringCargo() {
+        return "";
+    }
+
 }

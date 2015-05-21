@@ -93,7 +93,7 @@ public final class Game implements Serializable {
 
     public String verifyPirateAttack() {
         int isPirateAttack = 1 + (int) (Math.random() * 2);
-        
+
         if (isPirateAttack == 1) {
             pirateAtack();
             return "You're being attacked by Pirates";
@@ -104,20 +104,23 @@ public final class Game implements Serializable {
 
     public void pirateAtack() {
 
-        int piratePower, numAtacks, doneAtacks, powerDiference;
-        numAtacks = 1 + (int) (Math.random() * 3);
-        int playerCoins = this.getPlayer().getCoins();
-        doneAtacks = 0;
-        
-        while (doneAtacks < numAtacks) {
-            piratePower = 1 + (int) (Math.random() * 6);
-            
-            if (this.getPlayer().getSpaceship().getPower() < piratePower) {
-                powerDiference = piratePower - this.getPlayer().getSpaceship().getPower();
-                this.getPlayer().setCoins(playerCoins - powerDiference);
+        if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet
+                && board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()].isPirate()) {
+            int piratePower, numAtacks, doneAtacks, powerDiference;
+            numAtacks = 1 + (int) (Math.random() * 3);
+            int playerCoins = this.getPlayer().getCoins();
+            doneAtacks = 0;
 
+            while (doneAtacks < numAtacks) {
+                piratePower = 1 + (int) (Math.random() * 6);
+
+                if (this.getPlayer().getSpaceship().getPower() < piratePower) {
+                    powerDiference = piratePower - this.getPlayer().getSpaceship().getPower();
+                    this.getPlayer().setCoins(playerCoins - powerDiference);
+
+                }
+                doneAtacks++;
             }
-            doneAtacks++;
         }
     }
 
@@ -144,18 +147,39 @@ public final class Game implements Serializable {
         return false;
     }
 
-    public boolean sellCargoVerifier() {
+    public String sellCargoVerifier(String cargo) {
         if (this.player.getSpaceship().getCargo().isEmpty()) {
-            return false;
+            return "Your cargo is empty";
         }
 
         if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
-            return true;
+            sellCargo(cargo);
         }
 
-        return false;
+        return "You're not on a planet";
     }
 
+    public String seePricesOnPlanet() {
+
+        if ((board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet)) {
+            return (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()].toStringPrices());
+        } else {
+            return "You're not on a planet!";
+        }
+
+    }
+    
+    public String seeCargoOnPlanet() {
+
+        if ((board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet)) {
+            return (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()].toStringPrices());
+        } else {
+            return "You're not on a planet!";
+        }
+
+    }
+    
+    
     public boolean verifyLoser() {
         return player.getCoins() <= 0;
     }
@@ -200,5 +224,31 @@ public final class Game implements Serializable {
                 oin.close();
             }
         }
+    }
+
+    public String upgradeWeaponVerifier() {
+        if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
+            upgradeWeapon();
+            return "The Power was upgraded!";
+        }
+        return "You're not on a planet!";
+
+    }
+
+    public String upgradeCargoVerifier() {
+        if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
+            upgradeCargo();
+            return "The Cargo was upgraded!";
+        }
+        return "You're not on a planet!";
+
+    }
+
+    public String buyCargoVerifier(String cargo) {
+
+        if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
+            buyCargo(cargo);
+        }
+        return "You're not on a planet";
     }
 }

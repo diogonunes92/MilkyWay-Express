@@ -184,11 +184,7 @@ public class IuTexto {
                     }
             }
 
-            // TODO: VERIFICAR ISTO
-            if (game.getBoard()[game.getPlayer().getSpaceship().getPosX()][game.getPlayer().getSpaceship().getPosY()] instanceof Planet
-                    && game.getBoard()[game.getPlayer().getSpaceship().getPosX()][game.getPlayer().getSpaceship().getPosY()].isPirate()) {
-                game.pirateAtack();
-            }
+            game.pirateAtack();
 
         }
     }
@@ -218,39 +214,21 @@ public class IuTexto {
 
                 switch (option) {
                     case 1:
-                        if (this.game.sellCargoVerifier()) {
-                            System.out.println("Chose which cargo you want to sell:");
-                            String cargo = mScanner.next();
-                            this.game.sellCargo(cargo);
-                        } else {
-                            System.out.println("You're not on a planet or don't have cargo to sell!");
-                        }
-
+                        System.out.println("Chose which cargo you want to sell:");
+                        String cargo = mScanner.next();
+                        System.out.println(this.game.sellCargoVerifier(cargo));
                         isFinish = true;
                         break;
                     case 2:
-                        if (this.game.onPlanetVerifier()) {
-                            seePricesOnPlanet();
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
-                        break;
+                        System.out.println(this.game.seePricesOnPlanet());
                     case 3:
                         seeCargoOnShip();
                         break;
                     case 4:
-                        if (this.game.onPlanetVerifier()) {
-                            this.game.upgradeWeapon();
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
+                        System.out.println(this.game.upgradeWeaponVerifier());
                         break;
                     case 5:
-                        if (this.game.onPlanetVerifier()) {
-                            this.game.upgradeCargo();
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
+                        System.out.println(this.game.upgradeCargoVerifier());
                         break;
 
                     case 6:
@@ -281,7 +259,6 @@ public class IuTexto {
 
     private void iuBuy() {
         isFinish = false;
-        
 
         while (!isFinish) {
 
@@ -303,45 +280,25 @@ public class IuTexto {
 
                 switch (option) {
                     case 1:
-                        if (this.game.onPlanetVerifier()) {
-                            System.out.println("Chose which cargo you want to buy:");
-                            String cargo = mScanner.next();
-                            System.out.println(cargo);
-                            this.game.buyCargo(cargo);
-                            isFinish = true;
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
+                        System.out.println("Chose which cargo you want to buy:");
+                        String cargo = mScanner.next();
+                        System.out.println(cargo);
+                        isFinish = true;
+                        System.out.println(this.game.buyCargoVerifier(cargo));
                         break;
                     case 2:
-                        if (this.game.onPlanetVerifier()) {
-                            seePricesOnPlanet();
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
+                        System.out.println(this.game.seePricesOnPlanet());
                         break;
                     case 3:
-                        if (this.game.onPlanetVerifier()) {
-                            seeCargoForSale();
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
+                        System.out.println(this.game.seeCargoOnPlanet());
                         break;
-
                     case 4:
-                        if (this.game.onPlanetVerifier()) {
-                            this.game.upgradeWeapon();
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
+                        System.out.println(this.game.upgradeWeaponVerifier());
                         break;
                     case 5:
-                        if (this.game.onPlanetVerifier()) {
-                            this.game.upgradeCargo();
-                        } else {
-                            System.out.println("You're not on a planet!");
-                        }
+                        System.out.println(this.game.upgradeCargoVerifier());
                         break;
+
                     case 6:
                         this.game.nextState();
                         isFinish = true;
@@ -389,19 +346,6 @@ public class IuTexto {
         }
     }
 
-    public void seePricesOnPlanet() {
-
-        int posX = this.game.getPlayer().getSpaceship().getPosX();
-        int posY = this.game.getPlayer().getSpaceship().getPosY();
-
-        System.out.println("Planet: " + this.game.getBoard()[posX][this.game.getPlayer().getSpaceship().getPosY()].getPlanetName());
-
-        System.out.println("Blue" + " : " + this.game.getBoard()[posX][posY].getPrices().get("blue"));
-        System.out.println("Red" + " : " + this.game.getBoard()[posX][posY].getPrices().get("red"));
-        System.out.println("Yellow" + " : " + this.game.getBoard()[posX][posY].getPrices().get("yellow"));
-        System.out.println("Black" + " : " + this.game.getBoard()[posX][posY].getPrices().get("black"));
-    }
-
     private void seeCargoOnShip() {
         int i = 0;
 
@@ -444,7 +388,7 @@ public class IuTexto {
                 System.out.println("");
             }
             System.out.println("");
-            System.out.println("Spaceship Power: " + game.getPlayer().getSpaceship().getPower() +  "          " + "Spaceship Capacity: " + game.getPlayer().getSpaceship().getCapacity());
+            System.out.println("Spaceship Power: " + game.getPlayer().getSpaceship().getPower() + "          " + "Spaceship Capacity: " + game.getPlayer().getSpaceship().getCapacity());
             System.out.println("----------------------------------------------");
 
         } else {

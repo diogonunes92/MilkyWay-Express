@@ -28,4 +28,6 @@ public abstract class Card implements Serializable{
     public abstract String getPlanetName();
     public abstract boolean isPirate();
     public abstract void setPlanetName(String planetName);
+    public abstract String toStringPrices();
+    public abstract String toStringCargo();
 }

@@ -23,6 +23,7 @@ public class Spaceship implements Serializable{
         this.isCargoUpdated = false;
     }
 
+
     
     public int getPosY() {
         return posY;
