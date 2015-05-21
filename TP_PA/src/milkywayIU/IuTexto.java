@@ -87,7 +87,6 @@ public class IuTexto {
 
     private void iuMove() {
 
-        printBoard();
         isFinish = false;
 
         if (this.game.verifyLoser()) {
@@ -97,35 +96,30 @@ public class IuTexto {
             System.out.println(" IT APPEARS YOU HAVE RUN OUT");
             System.out.println(" OF COINS! BETTER LUCK NEXT TIME :( ");
             System.exit(0);
-        }
 
-        if (this.game.verifyFinishedGame()) {
+        } else if (this.game.verifyFinishedGame()) {
+
             if (this.game.verifyLoser()) {
                 System.out.println("");
                 System.out.println(" ::::::  GAME OVER  ::::::::::");
                 System.out.println(" IT HAS BEEN A PLEASURE BUT");
                 System.out.println(" IT APPEARS YOU HAVE RUN OUT");
                 System.out.println(" OF COINS! BETTER LUCK NEXT TIME :( ");
-                System.exit(0);
+
             } else {
                 System.out.println("");
                 System.out.println(" ::::::  CONGRATULATIONS  ::::::::::");
                 System.out.println(" YOU'VE JUST CONQUERED THE ENTIRE   ");
                 System.out.println(" UNIVERSE AND HAVE PAYED YOUR DEBT");
                 System.out.println(" YOU'RE JUST LIKE THE LANNISTERS :) ");
-                System.exit(0);
             }
+            System.exit(0);
         }
 
         while (!isFinish) {
 
-            System.out.println("");
-            System.out.println("Player name: " + game.getPlayer().getName());
-            System.out.println("Player coins: " + game.getPlayer().getCoins());
-            System.out.println("Spaceship Power: " + game.getPlayer().getSpaceship().getPower());
-            System.out.println("Spaceship Capacity: " + game.getPlayer().getSpaceship().getCapacity());
-            System.out.println("");
             System.out.println(" ::::::  MILKY WAY EXPRESS :: MOVE  ::::::::::");
+            printBoard();
             System.out.println(" 1. Move");
             System.out.println(" 2. Next Fase");
             System.out.println(" 3. Quit game");
@@ -162,13 +156,12 @@ public class IuTexto {
 
                 case 2:
                     if (hasMoved) {
+                        this.game.replishMarkets();
+                        this.game.explore();
                         this.game.nextState();
-                        this.game.replenishMarkets();
-                        if (this.game.verifyPirateAttack()) {
-                            System.out.println("You are under a pirate atack!");
-                            this.game.pirateAtack();
-                        }
-                        this.game.turnCards();
+
+                        System.out.println(this.game.verifyPirateAttack());
+
                         isFinish = true;
                         hasMoved = false;
                     } else {
@@ -191,6 +184,7 @@ public class IuTexto {
                     }
             }
 
+            // TODO: VERIFICAR ISTO
             if (game.getBoard()[game.getPlayer().getSpaceship().getPosX()][game.getPlayer().getSpaceship().getPosY()] instanceof Planet
                     && game.getBoard()[game.getPlayer().getSpaceship().getPosX()][game.getPlayer().getSpaceship().getPosY()].isPirate()) {
                 game.pirateAtack();
@@ -201,19 +195,13 @@ public class IuTexto {
 
     private void iuSell() {
 
-        printBoard();
         isFinish = false;
 
         while (!isFinish) {
 
-            System.out.println("");
-            System.out.println("Player name: " + game.getPlayer().getName());
-            System.out.println("Player coins: " + game.getPlayer().getCoins());
-            System.out.println("Spaceship Power: " + game.getPlayer().getSpaceship().getPower());
-            System.out.println("Spaceship Capacity: " + game.getPlayer().getSpaceship().getCapacity());
-            System.out.println("");
+            System.out.println(" ::::::  MILKY WAY EXPRESS :: SELL  ::::::::::");
+            printBoard();
 
-            System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
             System.out.println(" 1. Sell Cargo");
             System.out.println(" 2. See Prices on Planet");
             System.out.println(" 3. See Cargo on Ship");
@@ -293,18 +281,13 @@ public class IuTexto {
 
     private void iuBuy() {
         isFinish = false;
-        printBoard();
+        
 
         while (!isFinish) {
 
-            System.out.println("");
-            System.out.println("----------------------------------------------");
-            System.out.println("Player name: " + game.getPlayer().getName());
-            System.out.println("Player coins: " + game.getPlayer().getCoins());
-            System.out.println("Spaceship Power: " + game.getPlayer().getSpaceship().getPower());
-            System.out.println("Spaceship Capacity: " + game.getPlayer().getSpaceship().getCapacity());
-            System.out.println("");
-            System.out.println(" :::::::::  MILKY WAY EXPRESS  ::::::::::::");
+            System.out.println(" ::::::  MILKY WAY EXPRESS :: BUY  ::::::::::");
+            printBoard();
+
             System.out.println(" 1. Buy Cargo");
             System.out.println(" 2. See Prices on Planet");
             System.out.println(" 3. See Cargo for Sale");
@@ -436,8 +419,7 @@ public class IuTexto {
         if (game.getBoard() != null) {
 
             System.out.println("----------------------------------------------");
-            System.out.println("Player name: " + game.getPlayer().getName());
-            System.out.println("Player coins: " + game.getPlayer().getCoins());
+            System.out.println("Player name: " + game.getPlayer().getName() + "          " + "Player coins: " + game.getPlayer().getCoins());
             System.out.println("");
 
             for (int i = 0; i < 7; i++) {
@@ -462,9 +444,7 @@ public class IuTexto {
                 System.out.println("");
             }
             System.out.println("");
-            System.out.println("Rounds played: " + game.getRoundsPlayed());
-            System.out.println("State: " + game.getState().toString());
-            System.out.println("");
+            System.out.println("Spaceship Power: " + game.getPlayer().getSpaceship().getPower() +  "          " + "Spaceship Capacity: " + game.getPlayer().getSpaceship().getCapacity());
             System.out.println("----------------------------------------------");
 
         } else {

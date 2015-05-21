@@ -6,16 +6,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.List;
 import milkyway_logic.cards.Card;
 import milkyway_logic.cards.Planet;
-import milkyway_logic.elements.Cube;
 import milkyway_logic.elements.Player;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.States;
 import util.Constants;
 
-public final class Game implements Serializable{
+public final class Game implements Serializable {
 
     private States state;
     private Player player;
@@ -68,6 +66,10 @@ public final class Game implements Serializable{
         this.state = state.move(move);
     }
 
+    public void replishMarkets() {
+        this.state = state.replishMarkets();
+    }
+
     public void upgradeWeapon() {
         this.state = state.upgradeWeapon();
     }
@@ -89,111 +91,42 @@ public final class Game implements Serializable{
         this.state = state.isFinished();
     }
 
+    public String verifyPirateAttack() {
+        int isPirateAttack = 1 + (int) (Math.random() * 2);
+        
+        if (isPirateAttack == 1) {
+            pirateAtack();
+            return "You're being attacked by Pirates";
+        } else {
+            return "";
+        }
+    }
+
     public void pirateAtack() {
 
         int piratePower, numAtacks, doneAtacks, powerDiference;
         numAtacks = 1 + (int) (Math.random() * 3);
         int playerCoins = this.getPlayer().getCoins();
         doneAtacks = 0;
+        
         while (doneAtacks < numAtacks) {
             piratePower = 1 + (int) (Math.random() * 6);
+            
             if (this.getPlayer().getSpaceship().getPower() < piratePower) {
                 powerDiference = piratePower - this.getPlayer().getSpaceship().getPower();
                 this.getPlayer().setCoins(playerCoins - powerDiference);
+
             }
             doneAtacks++;
         }
-
     }
 
     public void nextState() {
         this.state = state.nextState();
     }
 
-    public void replenishMarkets() {
-        String color;
-        int randomNum;
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 9; j++) {
-
-                if (this.getBoard()[i][j] instanceof Planet) {
-
-                    if (this.getBoard()[i][j].getIsTurned() && !this.getBoard()[i][j].isPirate()) {
-
-                        if (this.getBoard()[i][j].getCubeList().size() < 2) {
-
-                            while (this.getBoard()[i][j].getCubeList().size() < 2) {
-                                randomNum = 1 + (int) (Math.random() * 6);
-
-                                if (randomNum == 1) {
-                                    color = "red";
-                                } else if (randomNum == 2) {
-                                    color = "blue";
-                                } else if (randomNum == 3) {
-                                    color = "yellow";
-                                } else if (randomNum == 4) {
-                                    color = "black";
-                                } else {
-                                    color = "white";
-                                }
-                                List<Cube> cubeList = this.getBoard()[i][j].getCubeList();
-                                cubeList.add(new Cube(color));
-                                this.getBoard()[i][j].setCubeList(cubeList);
-                            }
-                        }
-                    } else if (this.getBoard()[i][j].getIsTurned() && this.getBoard()[i][j].isPirate()) {
-                        List<Cube> cubeList = this.getBoard()[i][j].getCubeList();
-                        cubeList.add(new Cube("black"));
-                        this.getBoard()[i][j].setCubeList(cubeList);
-                    }
-                }
-            }
-        }
-    }
-
-    public void turnCards() {
-        int posX = this.getPlayer().getSpaceship().getPosX();
-        int posY = this.getPlayer().getSpaceship().getPosY();
-
-        //RIGHT 
-        if (cardVerifierTurn(posX + 1, posY)) {
-            this.getBoard()[posX + 1][posY].setIsTurned(true);
-        }
-        //DOWN
-        if (cardVerifierTurn(posX, posY - 1)) {
-            this.getBoard()[posX][posY - 1].setIsTurned(true);
-        }
-
-        //LEFT 
-        if (cardVerifierTurn(posX - 1, posY)) {
-            this.getBoard()[posX - 1][posY].setIsTurned(true);
-        }
-
-        //UP
-        if (cardVerifierTurn(posX, posY + 1)) {
-            this.getBoard()[posX][posY + 1].setIsTurned(true);
-        }
-
-        //        VERIFY WHY IS NOT OPENING THE ADJACENT PLACES
-//        RIGHT DOWN 
-        if (cardVerifierTurn(posX + 1, posY - 1)) {
-            this.getBoard()[posX + 1][posY - 1].setIsTurned(true);
-        }
-
-//        LEFT DOWN
-        if (cardVerifierTurn(posX - 1, posY - 1)) {
-            this.getBoard()[posX - 1][posY - 1].setIsTurned(true);
-        }
-
-        // LEFT UP
-        if (cardVerifierTurn(posX - 1, posY + 1)) {
-            this.getBoard()[posX - 1][posY + 1].setIsTurned(true);
-        }
-
-        //RIGHT UP
-        if (cardVerifierTurn(posX + 1, posY + 1)) {
-            this.getBoard()[posX + 1][posY + 1].setIsTurned(true);
-        }
+    public void explore() {
+        this.state = state.explore();
     }
 
     public static int getRoundsPlayed() {
@@ -240,64 +173,32 @@ public final class Game implements Serializable{
         return true;
     }
 
-    public boolean verifyPirateAttack() {
-        int isPirateAttack = 1 + (int) (Math.random() * 2);
-        if (isPirateAttack == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean cardVerifierTurn(int posX, int posY) {
-
-        if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
-
-            if (this.getBoard()[posX][posY] instanceof Card) {
-
-                if (!this.getBoard()[posX][posY].getIsTurned()) {
-                    // if everything passed 
-                    return true;
-                } else {
-//                    System.err.println("The card is already turned!");
-                }
-            } else {
-//                System.err.println("It's not a card");
-            }
-        } else {
-//            System.err.println("out of limits");
-        }
-        return false;
-    }
-
-        public void saveGame(String nomeFicheiro) throws IOException
-    {
+    public void saveGame(String nomeFicheiro) throws IOException {
         ObjectOutputStream oout = null;
-        
-        try{
-            oout = new ObjectOutputStream(new FileOutputStream(nomeFicheiro));        
+
+        try {
+            oout = new ObjectOutputStream(new FileOutputStream(nomeFicheiro));
             oout.writeObject(this);
-        }finally{
-            if(oout != null){
+        } finally {
+            if (oout != null) {
                 oout.close();
             }
         }
-        
+
     }
-    
-    public static Game loadGame(String nomeFicheiro) throws IOException, ClassNotFoundException 
-    {
+
+    public static Game loadGame(String nomeFicheiro) throws IOException, ClassNotFoundException {
         ObjectInputStream oin = null;
         Game j;
-        
-        try{
-            oin = new ObjectInputStream(new FileInputStream(nomeFicheiro));        
-            j = (Game)oin.readObject();
+
+        try {
+            oin = new ObjectInputStream(new FileInputStream(nomeFicheiro));
+            j = (Game) oin.readObject();
             return j;
-        }finally{
-            if(oin != null){
+        } finally {
+            if (oin != null) {
                 oin.close();
             }
-        }        
+        }
     }
 }

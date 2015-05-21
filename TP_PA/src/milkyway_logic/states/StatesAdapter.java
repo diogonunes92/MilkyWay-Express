@@ -54,4 +54,18 @@ public class StatesAdapter implements States {
         return this;
     }
 
+    @Override
+    public States replishMarkets() {
+        return this;
+    }
+
+    @Override
+    public States explore() {
+        return this;
+    }
+
+    @Override
+    public States pirateAttack() {
+        return this;
+    } 
 }
