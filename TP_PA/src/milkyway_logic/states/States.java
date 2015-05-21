@@ -18,4 +18,6 @@ public interface States extends Serializable {
     public States isFinished();
     public States nextState();
 
+    public States moveWormhole(int move_x, int move_y);
+
 }

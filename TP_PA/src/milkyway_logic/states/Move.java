@@ -3,6 +3,7 @@ package milkyway_logic.states;
 import java.util.List;
 import milkyway_logic.cards.Card;
 import milkyway_logic.cards.Planet;
+import milkyway_logic.cards.Wormhole;
 import milkyway_logic.elements.Cube;
 import milkyway_logic.gameplanner.Game;
 import util.Constants;
@@ -22,10 +23,21 @@ public class Move extends StatesAdapter {
     }
 
     @Override
+    public StatesAdapter moveWormhole(int x, int y) {
+
+        if (wormholeVerifier(x, y)) {
+            getGame().getPlayer().getSpaceship().setPosX(x);
+            getGame().getPlayer().getSpaceship().setPosY(y);
+            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins()-1);
+        }
+
+        return this;
+    }
+
+    @Override
     public StatesAdapter move(String move) {
 
         // TODO: implement other directions
-        
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
 
@@ -46,8 +58,8 @@ public class Move extends StatesAdapter {
 
         return new Move(getGame());
     }
-    
-        public boolean cardVerifier(int posX, int posY) {
+
+    public boolean cardVerifier(int posX, int posY) {
 
         if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
 
@@ -71,10 +83,10 @@ public class Move extends StatesAdapter {
 
     @Override
     public States replishMarkets() {
-        
+
         String color;
         int randomNum;
-        
+
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
 
@@ -111,13 +123,13 @@ public class Move extends StatesAdapter {
                 }
             }
         }
-        
+
         return this;
     }
 
     @Override
     public States explore() {
-        
+
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
 
@@ -160,10 +172,10 @@ public class Move extends StatesAdapter {
         if (cardVerifierTurn(posX + 1, posY + 1)) {
             getGame().getBoard()[posX + 1][posY + 1].setIsTurned(true);
         }
-        
+
         return this;
     }
-    
+
     private boolean cardVerifierTurn(int posX, int posY) {
 
         if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
@@ -184,10 +196,22 @@ public class Move extends StatesAdapter {
         }
         return false;
     }
-  
+
     @Override
     public StatesAdapter nextState() {
-        
+
         return new Sell(getGame());
+    }
+
+    private boolean wormholeVerifier(int posX, int posY) {
+
+        if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
+            if (getGame().getBoard()[posX][posY] instanceof Wormhole) {
+                if (getGame().getBoard()[posX][posY].getIsTurned()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

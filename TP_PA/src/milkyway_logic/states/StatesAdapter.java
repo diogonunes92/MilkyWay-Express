@@ -68,4 +68,9 @@ public class StatesAdapter implements States {
     public States pirateAttack() {
         return this;
     } 
+
+    @Override
+    public States moveWormhole(int move_x, int move_y) {
+        return this;
+    }
 }

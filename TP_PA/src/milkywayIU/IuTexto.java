@@ -120,9 +120,10 @@ public class IuTexto {
 
             System.out.println(" ::::::  MILKY WAY EXPRESS :: MOVE  ::::::::::");
             printBoard();
-            System.out.println(" 1. Move");
-            System.out.println(" 2. Next Fase");
-            System.out.println(" 3. Quit game");
+            System.out.println(" 1. Move in Direction");
+            System.out.println(" 2. Move to Wormhole");
+            System.out.println(" 3. Next Fase");
+            System.out.println(" 4. Quit game");
 
             System.out.print(" Option: ");
             Scanner mScanner = new Scanner(System.in);
@@ -142,9 +143,8 @@ public class IuTexto {
                                 isCorrect = false;
                                 hasMoved = true;
                                 this.game.move(move);
-
                             } else {
-                                System.out.println(" Incorrect choice");
+                                System.out.println("Incorrect choice");
                             }
                         } catch (InputMismatchException e) {
                             System.err.println("Wrong caracter");
@@ -155,6 +155,14 @@ public class IuTexto {
                     break;
 
                 case 2:
+                    System.out.println("Enter the wormhole coordinates to which you want to move. (X enter Y)");
+                    int move_x = mScanner.nextInt();
+                    int move_y = mScanner.nextInt();
+                    this.game.moveWormhole(move_x,move_y);
+                    hasMoved = true;                    
+                    break;
+
+                case 3:
                     if (hasMoved) {
                         this.game.replishMarkets();
                         this.game.explore();
@@ -168,7 +176,7 @@ public class IuTexto {
                         System.out.println("You have to move at least once to go forward!");
                     }
                     break;
-                case 3:
+                case 4:
                     iuSaveGame();
 
                     if (mScanner.nextInt() == 1) {

@@ -65,6 +65,10 @@ public final class Game implements Serializable {
     public void move(String move) {
         this.state = state.move(move);
     }
+    
+    public void moveWormhole(int move_x, int move_y){
+        this.state = state.moveWormhole(move_x, move_y);
+    }
 
     public void replishMarkets() {
         this.state = state.replishMarkets();
@@ -79,7 +83,6 @@ public final class Game implements Serializable {
     }
 
     public void buyCargo(String carga) {
-        System.out.println("Cheguei ao game bro!");
         this.state = state.buyCargo(carga);
     }
 
@@ -251,4 +254,6 @@ public final class Game implements Serializable {
         }
         return "You're not on a planet";
     }
+
+
 }
