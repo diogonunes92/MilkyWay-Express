@@ -33,31 +33,48 @@ public class Move extends StatesAdapter {
 
         return this;
     }
-
+    
     @Override
-    public StatesAdapter move(String move) {
+    public StatesAdapter move(int x, int y) {
 
         // TODO: implement other directions
+        System.out.println("Ca estou eu, quem é vivo sempre aparece!");
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
 
-        if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
-            getGame().getPlayer().getSpaceship().setPosX(posX - 1);
-
-        } else if (move.equalsIgnoreCase("b") && cardVerifier(posX + 1, posY)) {
-            getGame().getPlayer().getSpaceship().setPosX(posX + 1);
-
-        } else if (move.equalsIgnoreCase("l") && cardVerifier(posX, posY - 1)) {
-            getGame().getPlayer().getSpaceship().setPosY(posY - 1);
-
-        } else if (move.equalsIgnoreCase("r") && cardVerifier(posX, posY + 1)) {
-            getGame().getPlayer().getSpaceship().setPosY(posY + 1);
+        if (cardVerifier(x, y)) {
+            getGame().getPlayer().getSpaceship().setPosX(x);
+            getGame().getPlayer().getSpaceship().setPosY(y);
         }
-
         getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
 
         return new Move(getGame());
     }
+
+//    //@Override
+//    public StatesAdapter move_v2(String move) {
+//
+//        // TODO: implement other directions
+//        int posX = getGame().getPlayer().getSpaceship().getPosX();
+//        int posY = getGame().getPlayer().getSpaceship().getPosY();
+//
+//        if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
+//            getGame().getPlayer().getSpaceship().setPosX(posX - 1);
+//
+//        } else if (move.equalsIgnoreCase("b") && cardVerifier(posX + 1, posY)) {
+//            getGame().getPlayer().getSpaceship().setPosX(posX + 1);
+//
+//        } else if (move.equalsIgnoreCase("l") && cardVerifier(posX, posY - 1)) {
+//            getGame().getPlayer().getSpaceship().setPosY(posY - 1);
+//
+//        } else if (move.equalsIgnoreCase("r") && cardVerifier(posX, posY + 1)) {
+//            getGame().getPlayer().getSpaceship().setPosY(posY + 1);
+//        }
+//
+//        getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
+//
+//        return new Move(getGame());
+//    }
 
     public boolean cardVerifier(int posX, int posY) {
 

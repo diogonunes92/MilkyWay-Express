@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Observable;
 import milkyway_logic.cards.Card;
 import milkyway_logic.cards.Planet;
 import milkyway_logic.elements.Player;
@@ -13,7 +14,7 @@ import milkyway_logic.states.StartGame;
 import milkyway_logic.states.States;
 import util.Constants;
 
-public final class Game implements Serializable {
+public final class Game extends Observable implements Serializable {
 
     private States state;
     private Player player;
@@ -62,11 +63,11 @@ public final class Game implements Serializable {
         this.state = state.constructGame();
     }
 
-    public void move(String move) {
-        this.state = state.move(move);
+    public void move(int x, int y) {
+        this.state = state.move(x,y);
     }
-    
-    public void moveWormhole(int move_x, int move_y){
+
+    public void moveWormhole(int move_x, int move_y) {
         this.state = state.moveWormhole(move_x, move_y);
     }
 
@@ -128,6 +129,8 @@ public final class Game implements Serializable {
     }
 
     public void nextState() {
+        setChanged();
+        notifyObservers();
         this.state = state.nextState();
     }
 
@@ -171,7 +174,7 @@ public final class Game implements Serializable {
         }
 
     }
-    
+
     public String seeCargoOnPlanet() {
 
         if ((board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet)) {
@@ -181,8 +184,7 @@ public final class Game implements Serializable {
         }
 
     }
-    
-    
+
     public boolean verifyLoser() {
         return player.getCoins() <= 0;
     }
@@ -254,6 +256,5 @@ public final class Game implements Serializable {
         }
         return "You're not on a planet";
     }
-
 
 }

@@ -6,7 +6,7 @@ public interface States extends Serializable {
 
     public States constructGame();
     
-    public States move(String move);
+    public States move(int x, int y);
     public States replishMarkets();
     public States explore();
     public States pirateAttack();

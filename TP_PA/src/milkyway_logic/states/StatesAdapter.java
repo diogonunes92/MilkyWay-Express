@@ -20,7 +20,7 @@ public class StatesAdapter implements States {
     }
 
     @Override
-    public States move(String move) {
+    public States move(int x, int y) {
         return this;
     }
 

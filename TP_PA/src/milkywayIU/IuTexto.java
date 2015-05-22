@@ -134,18 +134,15 @@ public class IuTexto {
                 case 1:
 
                     while (isCorrect) {
-                        System.out.println("(Front - F | Back - B | Left - L | Right - R)");
+                        System.out.println("(x (enter) y)");
                         System.out.println("Option: ");
                         try {
-                            String move = mScanner.next();
-
-                            if (move.equalsIgnoreCase("f") || move.equalsIgnoreCase("b") || move.equalsIgnoreCase("l") || move.equalsIgnoreCase("r")) {
+                            int move_x = mScanner.nextInt();
+                            int move_y = mScanner.nextInt();
                                 isCorrect = false;
                                 hasMoved = true;
-                                this.game.move(move);
-                            } else {
-                                System.out.println("Incorrect choice");
-                            }
+                                this.game.move(move_x, move_y);
+                            
                         } catch (InputMismatchException e) {
                             System.err.println("Wrong caracter");
                             iuMove();

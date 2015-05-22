@@ -14,7 +14,7 @@ public class StartGame extends StatesAdapter {
 
     @Override
     public StatesAdapter constructGame() {
-
+        System.out.println("Estou no constructgame");
         BoardConstructor mBoardConstructor = new BoardConstructor();
         getGame().setBoard(mBoardConstructor.getGameBoard());
         getGame().setBankCoins(Constants.INITIAL_PLAYER_COINS - Constants.INITIAL_PLAYER_COINS);
