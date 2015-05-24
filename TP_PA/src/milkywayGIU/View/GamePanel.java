@@ -8,11 +8,17 @@ package milkywayGIU.View;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import milkyway_logic.gameplanner.Game;
@@ -34,7 +40,6 @@ public class GamePanel extends JPanel implements Observer {
         setupComponents();
         setupLayout();
         registerObservers();
-        this.game.constructGame();
     }
 
     private void setupComponents() {
@@ -69,17 +74,19 @@ public class GamePanel extends JPanel implements Observer {
 
         int row, col;
         Game game;
+        String name_planet;
 
-        GameCell(Game j, int r, int c) {
+        GameCell(Game j, int r, int c, String name) {
             row = r;
             col = c;
             this.game = j;
+            name_planet = name;
 
             setPreferredSize(new Dimension(80, 80));
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent ev) {
-                        System.out.println(game.getState());
+                    System.out.println(game.getState());
                     if (game.getState() instanceof Move) {
                         game.move(row, col);
                         System.out.println("CLICK!");
@@ -96,13 +103,34 @@ public class GamePanel extends JPanel implements Observer {
 
         @Override
         public void paintComponent(Graphics g) {
-
-            //  drawIcon(j, g);
+            try {
+                drawIcon(g, name_planet);
+            } catch (IOException ex) {
+                Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         @Override
         public void update(Observable o, Object arg) {
             repaint();
+        }
+
+        private void drawIcon(Graphics g, String name) throws IOException {
+            Image img = getCardImage();
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+        }
+
+        private Image getCardImage() throws IOException {
+            if (!name_planet.equals("null") && name_planet != null) {
+                System.out.println("nome -> " + name_planet);
+                Image img = ImageIO.read(getClass().getResource("/images/" + name_planet + ".png"));
+                this.name_planet = "";
+                return img;
+            } else {
+                Image img = ImageIO.read(getClass().getResource("/images/Null.png"));
+                this.name_planet = "";
+                return img;
+            }
         }
     };
 
@@ -127,11 +155,21 @@ public class GamePanel extends JPanel implements Observer {
         }
 
         void setupLayout() {
+            GameCell cell;
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            for (int i = 0; i < Constants.BOARD_LIMIT_SUP_X; i++) {
+            for (int i = 0; i < 7; i++) {
                 JPanel p = new JPanel();
-                for (int j = 0; j < Constants.BOARD_LIMIT_SUP_Y; j++) {
-                    GameCell cell = new GameCell(game, i, j);
+                for (int j = 0; j < 9; j++) {
+                    System.out.println("Pos (" + i + "," + j + ") -> " + game.getBoard()[i][j]);
+                    if (game.getBoard()[i][j] != null) {
+                        cell = new GameCell(game, i, j, game.getBoard()[i][j].getPlanetName());
+                        if (!game.getBoard()[i][j].getIsTurned()) {
+                            cell = new GameCell(game, i, j, "card_down");
+                        }
+
+                    } else {
+                        cell = new GameCell(game, i, j, "null");
+                    }
                     cells.add(cell);
                     p.add(cell);
                 }

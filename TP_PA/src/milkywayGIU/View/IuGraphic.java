@@ -30,6 +30,7 @@ public class IuGraphic extends JFrame {
 
     IuGraphic(Game j) {
         game = j;
+        game.constructGame();
         addComponents();
         setVisible(true);
         this.setSize(1000, 900);
