@@ -1,6 +1,8 @@
 package milkyway_logic.elements;
 
-public class Cube {
+import java.io.Serializable;
+
+public class Cube implements Serializable{
 
     private String color;
 
