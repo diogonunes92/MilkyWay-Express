@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Observer {
     NextPhaseBlock nextPhase;
 
     GamePanel(Model model) {
-        
+
         this.model = model;
         this.model.addObserver(this);
         setLayout(new BorderLayout());
@@ -84,7 +84,7 @@ public class GamePanel extends JPanel implements Observer {
             this.model = j;
             name_planet = name;
 
-            setPreferredSize(new Dimension(80, 80));
+            setPreferredSize(new Dimension(60, 60));
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent ev) {
@@ -124,7 +124,6 @@ public class GamePanel extends JPanel implements Observer {
 
         @Override
         public void update(Observable o, Object arg) {
-            repaint();
             getParent().repaint();
             validate();
 
@@ -135,7 +134,7 @@ public class GamePanel extends JPanel implements Observer {
             if (name.equals("Spaceship_v2")) {
                 Image img = getNave();
                 g.drawImage(img, 40, 15, getWidth() / 2, getHeight() / 2, null);
-            
+
             } else if (!name.equals("Null") && name != null) {
                 Image img = getCardImage(name);
                 g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
@@ -195,6 +194,7 @@ public class GamePanel extends JPanel implements Observer {
 
         @Override
         public void update(Observable o, Object arg) {
+            
             if (model.getState() instanceof Move) {
                 currentPhase.setText("Move");
             } else if (model.getState() instanceof Sell) {
@@ -202,11 +202,12 @@ public class GamePanel extends JPanel implements Observer {
             } else if (model.getState() instanceof Buy) {
                 currentPhase.setText("Buy");
             }
-            getParent().repaint();
+            nextPhase.repaint();
         }
 
         private void addListener() {
             nextButton.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent ev) {
                     model.nextState();
                 }
@@ -231,14 +232,13 @@ public class GamePanel extends JPanel implements Observer {
             for (GameCell cell : cells) {
                 model.addObserver(cell);
             }
-
         }
 
         @Override
         public void update(Graphics g) {
             super.update(g); //To change body of generated methods, choose Tools | Templates.
-            getParent().repaint();
-            repaint();
+            //getParent().repaint();
+
         }
 
         @Override
@@ -267,6 +267,5 @@ public class GamePanel extends JPanel implements Observer {
                 add(p);
             }
         }
-
     }
 }
