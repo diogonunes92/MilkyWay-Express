@@ -77,6 +77,9 @@ public class Model extends Observable {
     }
 
     public void nextState() {
+        
+        this.game.replishMarkets();
+        this.game.explore();
         this.game.nextState();
         setChanged();
         notifyObservers();
@@ -91,12 +94,12 @@ public class Model extends Observable {
     public States getState() {
         return this.game.getState();
     }
-    
-    public Player getPlayer(){
+
+    public Player getPlayer() {
         return this.game.getPlayer();
     }
 
-    public Card[][] getBoard(){
+    public Card[][] getBoard() {
         return this.game.getBoard();
     }
 }

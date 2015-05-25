@@ -126,6 +126,8 @@ public class GamePanel extends JPanel implements Observer {
 
                 if (x_spaceship == row && y_spaceship == col) {
                     drawIcon(g, "Spaceship_v2");
+                } else {
+                    drawIcon(g, name_planet);
                 }
 
             } catch (IOException ex) {
@@ -135,6 +137,7 @@ public class GamePanel extends JPanel implements Observer {
 
         @Override
         public void update(Observable o, Object arg) {
+            repaint();
             getParent().repaint();
             validate();
 
@@ -233,7 +236,6 @@ public class GamePanel extends JPanel implements Observer {
 
             model = m;
             model.constructGame();
-            setupLayout();
 
         }
 
@@ -244,7 +246,16 @@ public class GamePanel extends JPanel implements Observer {
 
         }
 
-        void setupLayout() {
+        @Override
+        public void update(Graphics g) {
+            super.update(g); //To change body of generated methods, choose Tools | Templates.
+            getParent().repaint();
+            repaint();
+        }
+
+        
+        @Override
+        public void paintComponent(Graphics g) {
             GameCell cell;
 
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -268,8 +279,7 @@ public class GamePanel extends JPanel implements Observer {
                 }
                 add(p);
             }
-
         }
-    };
 
+    }
 }
