@@ -34,7 +34,7 @@ public class IuGraphic extends JFrame implements Observer{
         m.constructGame();
         addComponents();
         setVisible(true);
-        this.setSize(1000, 900);
+        this.setSize(1400, 675);
         this.setMinimumSize(new Dimension(650, 450));
     }
 
@@ -50,6 +50,6 @@ public class IuGraphic extends JFrame implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        
+        getParent().repaint();
     }
 }

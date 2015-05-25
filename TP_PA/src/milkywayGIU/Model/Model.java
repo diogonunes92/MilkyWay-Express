@@ -6,7 +6,6 @@
 package milkywayGIU.Model;
 
 import java.util.Observable;
-import milkywayGIU.View.IuGraphic;
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
 import milkyway_logic.gameplanner.Game;
@@ -81,14 +80,12 @@ public class Model extends Observable {
         this.game.nextState();
         setChanged();
         notifyObservers();
-
     }
 
     public void explore() {
         this.game.explore();
         setChanged();
         notifyObservers();
-
     }
 
     public States getState() {
