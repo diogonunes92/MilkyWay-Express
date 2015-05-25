@@ -124,7 +124,7 @@ public class GamePanel extends JPanel implements Observer {
 
         @Override
         public void update(Observable o, Object arg) {
-            getParent().repaint();
+            //getParent().repaint();
             validate();
 
         }
@@ -180,12 +180,11 @@ public class GamePanel extends JPanel implements Observer {
 
         private void setupLayout() {
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            JPanel p = new JPanel();
+            JPanel gamePanel = new JPanel();
 
-            p.add(currentPhase);
-            p.add(nextButton);
-            add(p);
-
+            gamePanel.add(currentPhase);
+            gamePanel.add(nextButton);
+            add(gamePanel);
         }
 
         void registerObservers() {
@@ -194,7 +193,7 @@ public class GamePanel extends JPanel implements Observer {
 
         @Override
         public void update(Observable o, Object arg) {
-            
+
             if (model.getState() instanceof Move) {
                 currentPhase.setText("Move");
             } else if (model.getState() instanceof Sell) {
@@ -254,9 +253,7 @@ public class GamePanel extends JPanel implements Observer {
                         cell = new GameCell(model, i, j, model.getBoard()[i][j].getPlanetName());
                         if (!model.getBoard()[i][j].getIsTurned()) {
                             cell = new GameCell(model, i, j, "card_down");
-
                         }
-
                     } else {
                         cell = new GameCell(model, i, j, "null");
                     }
