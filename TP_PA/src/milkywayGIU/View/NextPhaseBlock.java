@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package milkywayGIU.View;
 
 import java.awt.Dimension;
@@ -44,11 +39,11 @@ public class NextPhaseBlock extends JPanel implements Observer {
 
         private void setupLayout() {
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            JPanel p = new JPanel();
+            JPanel gamePanel = new JPanel();
 
-            p.add(currentPhase);
-            p.add(nextButton);
-            add(p);
+            gamePanel.add(currentPhase);
+            gamePanel.add(nextButton);
+            add(gamePanel);
 
         }
 
@@ -77,5 +72,4 @@ public class NextPhaseBlock extends JPanel implements Observer {
                 }
             });
         }
-
     }

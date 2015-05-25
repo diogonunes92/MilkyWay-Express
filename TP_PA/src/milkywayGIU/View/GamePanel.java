@@ -1,26 +1,11 @@
 package milkywayGIU.View;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import milkywayGIU.Model.Model;
-import milkyway_logic.states.*;
 
 public class GamePanel extends JPanel implements Observer {
 
@@ -64,14 +49,10 @@ public class GamePanel extends JPanel implements Observer {
     @Override
     protected void paintBorder(Graphics g) {
         super.paintBorder(g);
-
     }
 
     private void registerObservers() {
         grid.registerObservers();
         nextPhase.registerObservers();
     }
-
-   
-    
 }

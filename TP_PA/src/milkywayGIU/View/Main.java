@@ -8,8 +8,6 @@ public class Main {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         Model m = new Model(new Game());
-
-        new IuGraphic(m);
-
+        IuGraphic iuGraphic = new IuGraphic(m);
     }
 }

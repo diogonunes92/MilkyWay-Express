@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package milkywayGIU.View;
 
 import java.awt.Graphics;
@@ -11,10 +6,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 
-/**
- *
- * @author Diogo
- */
 public class GameGrid extends JPanel {
 
         Model model;
@@ -53,7 +44,6 @@ public class GameGrid extends JPanel {
                         cell = new GameCell(model, i, j, model.getBoard()[i][j].getPlanetName());
                         if (!model.getBoard()[i][j].getIsTurned()) {
                             cell = new GameCell(model, i, j, "card_down");
-
                         }
 
                     } else {
