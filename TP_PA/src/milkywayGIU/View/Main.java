@@ -5,6 +5,7 @@
  */
 package milkywayGIU.View;
 
+import milkywayGIU.Model.Model;
 import milkyway_logic.gameplanner.Game;
 
 public class Main {
@@ -14,7 +15,9 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new IuGraphic(new Game());
+            Model m = new Model(new Game());
+            
+		new IuGraphic(m);
 
 	}
 

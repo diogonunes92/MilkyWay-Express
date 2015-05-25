@@ -129,8 +129,6 @@ public final class Game extends Observable implements Serializable {
     }
 
     public void nextState() {
-        setChanged();
-        notifyObservers();
         this.state = state.nextState();
     }
 

@@ -17,20 +17,21 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import milkywayGIU.Model.Model;
 import milkyway_logic.gameplanner.Game;
 
 /**
  *
  * @author Diogo
  */
-public class IuGraphic extends JFrame {
+public class IuGraphic extends JFrame implements Observer{
 
-    Game game;
+    Model model;
     GamePanel gPanel;
 
-    IuGraphic(Game j) {
-        game = j;
-        game.constructGame();
+    IuGraphic(Model m) {
+        this.model = m;
+        m.constructGame();
         addComponents();
         setVisible(true);
         this.setSize(1000, 900);
@@ -41,9 +42,14 @@ public class IuGraphic extends JFrame {
         
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
-        gPanel = new GamePanel(game);
+        gPanel = new GamePanel(model);
         cp.add(gPanel, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
         
     }
 }

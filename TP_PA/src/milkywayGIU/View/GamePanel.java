@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import milkywayGIU.Model.Model;
 import milkyway_logic.gameplanner.Game;
 import milkyway_logic.states.*;
 import util.Constants;
@@ -32,10 +33,15 @@ import util.Constants;
 public class GamePanel extends JPanel implements Observer {
 
     GameGrid grid;
-    Game game;
+    Model model;
 
     public GamePanel(Game game) {
-        this.game = game;
+
+    }
+
+    GamePanel(Model model) {
+        this.model = model;
+        model.addObserver(this);
         setLayout(new BorderLayout());
         setupComponents();
         setupLayout();
@@ -43,7 +49,7 @@ public class GamePanel extends JPanel implements Observer {
     }
 
     private void setupComponents() {
-        grid = new GameGrid(game);
+        grid = new GameGrid(model);
     }
 
     private void setupLayout() {
@@ -73,22 +79,23 @@ public class GamePanel extends JPanel implements Observer {
     class GameCell extends JPanel implements Observer {
 
         int row, col;
-        Game game;
+        Model model;
         String name_planet;
 
-        GameCell(Game j, int r, int c, String name) {
+        GameCell(Model j, int r, int c, String name) {
             row = r;
             col = c;
-            this.game = j;
+            this.model = j;
             name_planet = name;
 
             setPreferredSize(new Dimension(80, 80));
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent ev) {
-                    System.out.println(game.getState());
-                    if (game.getState() instanceof Move) {
-                        game.move(row, col);
+                    System.out.println(model.getState());
+                    if (model.getState() instanceof Move) {
+                        model.move(row, col);
+                        System.out.println("Pos Spaceship(" + model.getPlayer().getSpaceship().getPosX() + "," + model.getPlayer().getSpaceship().getPosY() + ")");
                         System.out.println("CLICK!");
                     }
                 }
@@ -116,11 +123,17 @@ public class GamePanel extends JPanel implements Observer {
         }
 
         private void drawIcon(Graphics g, String name) throws IOException {
-            Image img = getCardImage();
+            Image img = getCardImage(name);
+            Image img_nave = getNave();
             g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
         }
 
-        private Image getCardImage() throws IOException {
+        private Image getNave() throws IOException {
+            Image img = ImageIO.read(getClass().getResource("/images/Spaceship_v2.png"));
+            return img;
+        }
+
+        private Image getCardImage(String name_planet) throws IOException {
             if (!name_planet.equals("null") && name_planet != null) {
                 System.out.println("nome -> " + name_planet);
                 Image img = ImageIO.read(getClass().getResource("/images/" + name_planet + ".png"));
@@ -136,40 +149,43 @@ public class GamePanel extends JPanel implements Observer {
 
     final class GameGrid extends JPanel {
 
-        Game game;
+        Model model;
         ArrayList<GameCell> cells = new ArrayList<>();
 
-        GameGrid(Game j) {
+        GameGrid(Model m) {
 
-            game = j;
-            System.out.println(this + " " + game);
+            model = m;
+            model.constructGame();
             setupLayout();
 
         }
 
         void registerObservers() {
             for (GameCell cell : cells) {
-                game.addObserver(cell);
+                model.addObserver(cell);
             }
 
         }
 
         void setupLayout() {
             GameCell cell;
+            int x_spaceship = model.getPlayer().getSpaceship().getPosX();
+            int y_spaceship = model.getPlayer().getSpaceship().getPosY();
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
             for (int i = 0; i < 7; i++) {
                 JPanel p = new JPanel();
                 for (int j = 0; j < 9; j++) {
-                    System.out.println("Pos (" + i + "," + j + ") -> " + game.getBoard()[i][j]);
-                    if (game.getBoard()[i][j] != null) {
-                        cell = new GameCell(game, i, j, game.getBoard()[i][j].getPlanetName());
-                        if (!game.getBoard()[i][j].getIsTurned()) {
-                            cell = new GameCell(game, i, j, "card_down");
+                    System.out.println("Pos (" + i + "," + j + ") -> " + model.getBoard()[i][j]);
+                    if (model.getBoard()[i][j] != null) {
+                        cell = new GameCell(model, i, j, model.getBoard()[i][j].getPlanetName());
+                        if (!model.getBoard()[i][j].getIsTurned()) {
+                            cell = new GameCell(model, i, j, "card_down");
                         }
-
+                        
                     } else {
-                        cell = new GameCell(game, i, j, "null");
+                        cell = new GameCell(model, i, j, "null");
                     }
+                    
                     cells.add(cell);
                     p.add(cell);
                 }
