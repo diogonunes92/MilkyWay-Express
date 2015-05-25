@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package milkywayGIU.Model;
 
 import java.util.Observable;
@@ -11,10 +6,6 @@ import milkyway_logic.elements.Player;
 import milkyway_logic.gameplanner.Game;
 import milkyway_logic.states.States;
 
-/**
- *
- * @author Diogo
- */
 public class Model extends Observable {
 
     Game game;
@@ -77,7 +68,7 @@ public class Model extends Observable {
     }
 
     public void nextState() {
-        
+
         this.game.replishMarkets();
         this.game.explore();
         this.game.nextState();

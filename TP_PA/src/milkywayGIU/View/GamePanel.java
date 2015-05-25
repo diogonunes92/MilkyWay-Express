@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package milkywayGIU.View;
 
 import java.awt.BorderLayout;
@@ -13,10 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -24,18 +17,11 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import milkywayGIU.Model.Model;
-import milkyway_logic.gameplanner.Game;
 import milkyway_logic.states.*;
-import util.Constants;
 
-/**
- *
- * @author Diogo
- */
 public class GamePanel extends JPanel implements Observer {
 
     GameGrid grid;
@@ -43,6 +29,7 @@ public class GamePanel extends JPanel implements Observer {
     NextPhaseBlock nextPhase;
 
     GamePanel(Model model) {
+        
         this.model = model;
         this.model.addObserver(this);
         setLayout(new BorderLayout());
@@ -148,6 +135,7 @@ public class GamePanel extends JPanel implements Observer {
             if (name.equals("Spaceship_v2")) {
                 Image img = getNave();
                 g.drawImage(img, 40, 15, getWidth() / 2, getHeight() / 2, null);
+            
             } else if (!name.equals("Null") && name != null) {
                 Image img = getCardImage(name);
                 g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
@@ -253,7 +241,6 @@ public class GamePanel extends JPanel implements Observer {
             repaint();
         }
 
-        
         @Override
         public void paintComponent(Graphics g) {
             GameCell cell;
