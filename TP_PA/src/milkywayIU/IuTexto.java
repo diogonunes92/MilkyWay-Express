@@ -1,14 +1,14 @@
 package milkywayIU;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import milkyway_logic.cards.Planet;
 import milkyway_logic.gameplanner.Game;
 
 import milkyway_logic.states.*;
+import util.Constants;
 
 public class IuTexto {
 
@@ -60,7 +60,7 @@ public class IuTexto {
                         isFinish = true;
                         break;
                     case 2:
-                        System.out.println("Not implemented yet");
+                        loadGameUI();
                         break;
                     case 3:
                         System.out.println("");
@@ -155,8 +155,8 @@ public class IuTexto {
                     System.out.println("Enter the wormhole coordinates to which you want to move. (X enter Y)");
                     int move_x = mScanner.nextInt();
                     int move_y = mScanner.nextInt();
-                    this.game.moveWormhole(move_x,move_y);
-                    hasMoved = true;                    
+                    this.game.moveWormhole(move_x, move_y);
+                    hasMoved = true;
                     break;
 
                 case 3:
@@ -174,21 +174,15 @@ public class IuTexto {
                     }
                     break;
                 case 4:
+
                     iuSaveGame();
 
                     if (mScanner.nextInt() == 1) {
-                        try {
-                            game.saveGame("ola");
-
-                        } catch (IOException ex) {
-                            Logger.getLogger(IuTexto.class
-                                    .getName()).log(Level.SEVERE, null, ex);
-                        }
+                        saveGameUI();
                     } else {
-
+                        System.out.println("See you, mate!");
                     }
             }
-
             game.pirateAtack();
 
         }
@@ -241,18 +235,13 @@ public class IuTexto {
                         isFinish = true;
                         return;
                     case 7:
+
                         iuSaveGame();
 
                         if (mScanner.nextInt() == 1) {
-                            try {
-                                game.saveGame("ola");
-
-                            } catch (IOException ex) {
-                                Logger.getLogger(IuTexto.class
-                                        .getName()).log(Level.SEVERE, null, ex);
-                            }
+                            saveGameUI();
                         } else {
-
+                            System.out.println("See you, mate!");
                         }
                 }
             } catch (InputMismatchException e) {
@@ -310,18 +299,13 @@ public class IuTexto {
                         break;
 
                     case 7:
+
                         iuSaveGame();
 
                         if (mScanner.nextInt() == 1) {
-                            try {
-                                game.saveGame("ola");
-
-                            } catch (IOException ex) {
-                                Logger.getLogger(IuTexto.class
-                                        .getName()).log(Level.SEVERE, null, ex);
-                            }
+                            saveGameUI();
                         } else {
-
+                            System.out.println("See you, mate!");
                         }
                 }
 
@@ -401,4 +385,70 @@ public class IuTexto {
         }
     }
 
+    boolean loadGameUI() {
+
+        BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
+        String opcao, fileName = Constants.FILE_NAME_DEFAULT;
+
+//        try {
+//            opcao = bin.readLine();
+//
+//            if (opcao.length() >= 1) {
+//
+//                if (!new java.io.File(opcao).exists()) {
+//                    System.out.println("File \"" + opcao + "\" doesn't exist!");
+//                    return false;
+//                }
+//
+//                fileName = opcao;
+//            }
+//        } catch (IOException e) {
+//            System.out.println("An error ocureed!");
+//            System.out.println(e);
+//            System.out.println();
+//            return false;
+//        }
+        try {
+            game = Game.loadGame(fileName);
+            System.out.println("Game loaded");
+            System.out.println();
+
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("An error ocureed loading \"" + fileName + "\" file!");
+            System.out.println(e);
+            System.out.println();
+            return false;
+        }
+
+    }
+
+    boolean saveGameUI() {
+
+        BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
+        String opcao, fileName = Constants.FILE_NAME_DEFAULT;
+
+        try {
+            opcao = bin.readLine();
+
+            if (opcao.length() >= 1) {
+                fileName = opcao;
+            }
+
+        } catch (IOException e) {
+            return false;
+        }
+
+        try {
+            game.saveGame(fileName);
+            System.out.println("Game saved!");
+            System.out.println();
+            return true;
+        } catch (IOException e) {
+            System.out.println("An error ocureed saving \"" + fileName + "\" file!");
+            System.out.println(e);
+            System.out.println();
+            return false;
+        }
+    }
 }

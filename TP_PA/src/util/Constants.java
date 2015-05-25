@@ -2,6 +2,8 @@ package util;
 
 public class Constants {
 
+    public static final String FILE_NAME_DEFAULT = "saveFileMilkyway.bin";
+    
     //Game initiation
     public static final int INITIAL_BANK_COINS = 30;
     public static final int INITIAL_PLAYER_COINS = 10;

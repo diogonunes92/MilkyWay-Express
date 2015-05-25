@@ -200,11 +200,11 @@ public final class Game extends Observable implements Serializable {
         return true;
     }
 
-    public void saveGame(String nomeFicheiro) throws IOException {
+    public void saveGame(String fileName) throws IOException {
         ObjectOutputStream oout = null;
 
         try {
-            oout = new ObjectOutputStream(new FileOutputStream(nomeFicheiro));
+            oout = new ObjectOutputStream(new FileOutputStream(fileName));
             oout.writeObject(this);
         } finally {
             if (oout != null) {
@@ -214,12 +214,12 @@ public final class Game extends Observable implements Serializable {
 
     }
 
-    public static Game loadGame(String nomeFicheiro) throws IOException, ClassNotFoundException {
+    public static Game loadGame(String fileName) throws IOException, ClassNotFoundException {
         ObjectInputStream oin = null;
         Game j;
 
         try {
-            oin = new ObjectInputStream(new FileInputStream(nomeFicheiro));
+            oin = new ObjectInputStream(new FileInputStream(fileName));
             j = (Game) oin.readObject();
             return j;
         } finally {
@@ -254,5 +254,4 @@ public final class Game extends Observable implements Serializable {
         }
         return "You're not on a planet";
     }
-
 }
