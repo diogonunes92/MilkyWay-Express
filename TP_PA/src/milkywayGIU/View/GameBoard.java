@@ -14,6 +14,7 @@ public final class GameBoard extends JPanel {
     GameBoard(Model model) {
         this.model = model;
         this.model.constructGame();
+        this.paintComponent(getGraphics());
     }
 
     void registerObservers() {
