@@ -1,5 +1,7 @@
 package util;
 
+import java.awt.Font;
+
 public class Constants {
 
     public static final String FILE_NAME_DEFAULT = "saveFileMilkyway.bin";
@@ -42,5 +44,14 @@ public class Constants {
     // Graphical variables
     public static int WINDOW_WIDTH = 1280;
     public static int HEIGHT = 800;
+    public static int CARD_WIDTH = 80;
+    public static int CARD_HEIGHT = 80;
+    public static int NEXT_PHASE_BLOCK_WIDTH = 40;
+    public static int NEXT_PHASE_BLOCK_HEIGHT = 40;
+
+    //Fonts
+    public static final Font FONT_12 = new Font("Verdana", Font.PLAIN, 12);
+    public static final Font FONT_15 = new Font("Verdana", Font.BOLD, 15);
+    public static final Font FONT_25 = new Font("Verdana", Font.BOLD, 25);
 
 }

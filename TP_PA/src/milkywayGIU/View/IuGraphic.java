@@ -1,9 +1,7 @@
 package milkywayGIU.View;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,62 +15,56 @@ import util.Constants;
 public class IuGraphic extends JFrame implements Observer {
 
     private Model model;
-    private GamePanel gPanel;
+    private GamePanel gamePanel;
     private Container container;
 
     private JMenuBar menuBar;
-    private JMenu menuGame;
-    private JMenuItem menuNewGame, menuLoadGame, menuSaveGame;
-    private JMenu menuHelp;
-    private JMenuItem menuInstructions;
-    private JMenuItem menuCredits;
+    private JMenu menuGame, menuHelp;
+    private JMenuItem menuNewGame, menuLoadGame, menuSaveGame, menuInstructions, menuCredits;
 
-    private final Font Font12 = new Font("Verdana", Font.PLAIN, 12);
-    private final Font Font15 = new Font("Verdana", Font.BOLD, 15);
-    private final Font Font25 = new Font("Verdana", Font.BOLD, 25);
 
     IuGraphic(Model model) {
         this.model = model;
         this.model.constructGame();
-        this.model.addObserver(this);
 
         container = getContentPane();
         container.setLayout(new BorderLayout());
-        gPanel = new GamePanel(model);
-        container.add(gPanel, BorderLayout.CENTER);
+        
+        gamePanel = new GamePanel(model);
+        container.add(gamePanel, BorderLayout.AFTER_LINE_ENDS);
 
-        createComponents();
-        setComponents();
+        setupComponents();
+        setupLayout();
 
         this.setVisible(true);
         this.setSize(Constants.WINDOW_WIDTH, Constants.HEIGHT);
         //this.setResizable(false);
     }
 
-    private void createComponents() {
+    private void setupComponents() {
 
 //         <Menu bar in the top
         menuBar = new JMenuBar();
 
         menuGame = new JMenu("Game");
         menuNewGame = new JMenuItem("Novo Jogo");
-        menuNewGame.setFont(Font12);
+        menuNewGame.setFont(Constants.FONT_12);
         menuSaveGame = new JMenuItem("Salvar Jogo");
-        menuSaveGame.setFont(Font12);
+        menuSaveGame.setFont(Constants.FONT_12);
         menuLoadGame = new JMenuItem("Carregar Jogo");
-        menuLoadGame.setFont(Font12);
+        menuLoadGame.setFont(Constants.FONT_12);
 
         menuHelp = new JMenu("Help");
         menuInstructions = new JMenuItem("Game Instructions");
-        menuInstructions.setFont(Font12);
+        menuInstructions.setFont(Constants.FONT_12);
 
         menuCredits = new JMenu("Credits");
-        menuCredits.setFont(Font12);
+        menuCredits.setFont(Constants.FONT_12);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void setComponents() {
+    private void setupLayout() {
         setJMenuBar(menuBar);
 
         //Game Menu option
@@ -90,7 +82,6 @@ public class IuGraphic extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //area.repaint();
+        
     }
-
 }
