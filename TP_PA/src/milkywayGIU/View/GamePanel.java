@@ -9,41 +9,52 @@ import milkywayGIU.Model.Model;
 
 public class GamePanel extends JPanel implements Observer {
 
-    GameGrid grid;
-    Model model;
-    NextPhaseBlock nextPhase;
+    private GameBoard gameBoard;
+    private Model model;
+    private NextPhaseBlock nextPhaseBlock;
+    
+    private JPanel centerPanel; 
+    private JPanel rightUpPanel;
+    
 
     GamePanel(Model model) {
 
         this.model = model;
         this.model.addObserver(this);
-        setLayout(new BorderLayout());
-        setupComponents();
-        setupLayout();
-        registerObservers();
+        this.setLayout(new BorderLayout());
+        
+        this.setupComponents();
+        this.setupLayout();
+        
+        this.registerObservers();
     }
 
     private void setupComponents() {
-        grid = new GameGrid(model);
-        nextPhase = new NextPhaseBlock(model);
+        
+        gameBoard = new GameBoard(model);
+        nextPhaseBlock = new NextPhaseBlock(model);
+        
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new BorderLayout());
+        
+        rightUpPanel = new JPanel();
+        rightUpPanel.setLayout(new BorderLayout());
     }
 
     private void setupLayout() {
-        JPanel right_up = new JPanel();
-        JPanel center = new JPanel();
-        center.setLayout(new BorderLayout());
-        center.add(grid, BorderLayout.NORTH);
-        right_up.setLayout(new BorderLayout());
-        right_up.add(nextPhase, BorderLayout.EAST);
-        System.out.println("Tou a criar o nextphase");
-        add(right_up, BorderLayout.EAST);
-        add(center, BorderLayout.WEST);
-        validate();
+        
+        centerPanel.add(gameBoard, BorderLayout.NORTH);
+        
+        rightUpPanel.add(nextPhaseBlock, BorderLayout.EAST);
+        
+        this.add(rightUpPanel, BorderLayout.EAST);
+        this.add(centerPanel, BorderLayout.WEST);
+        this.validate();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        getParent().repaint();
+
     }
 
     @Override
@@ -52,7 +63,7 @@ public class GamePanel extends JPanel implements Observer {
     }
 
     private void registerObservers() {
-        grid.registerObservers();
-        nextPhase.registerObservers();
+        gameBoard.registerObservers();
+        nextPhaseBlock.registerObservers();
     }
 }
