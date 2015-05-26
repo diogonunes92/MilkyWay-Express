@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements Observer {
         
         this.add(rightUpPanel, BorderLayout.EAST);
         this.add(centerPanel, BorderLayout.WEST);
-        this.validate();
+        //this.validate();
     }
 
     @Override
@@ -57,13 +57,8 @@ public class GamePanel extends JPanel implements Observer {
 
     }
 
-    @Override
-    protected void paintBorder(Graphics g) {
-        super.paintBorder(g);
-    }
-
     private void registerObservers() {
-        gameBoard.registerObservers();
+        //gameBoard.registerObservers();
         nextPhaseBlock.registerObservers();
     }
 }

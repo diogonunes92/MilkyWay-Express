@@ -61,13 +61,16 @@ public class NextPhaseBlock extends JPanel implements Observer {
         } else if (model.getState() instanceof Buy) {
             currentPhase.setText("Buy");
         }
-        this.repaint();
+        
+        //this.repaint();
     }
 
     private void addListener() {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
+                System.out.println("MODEL EXPLORE");
+                model.explore();
                 model.nextState();
             }
         });

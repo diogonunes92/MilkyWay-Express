@@ -51,31 +51,6 @@ public class Move extends StatesAdapter {
         return new Move(getGame());
     }
 
-//    //@Override
-//    public StatesAdapter move_v2(String move) {
-//
-//        // TODO: implement other directions
-//        int posX = getGame().getPlayer().getSpaceship().getPosX();
-//        int posY = getGame().getPlayer().getSpaceship().getPosY();
-//
-//        if (move.equalsIgnoreCase("f") && cardVerifier(posX - 1, posY)) {
-//            getGame().getPlayer().getSpaceship().setPosX(posX - 1);
-//
-//        } else if (move.equalsIgnoreCase("b") && cardVerifier(posX + 1, posY)) {
-//            getGame().getPlayer().getSpaceship().setPosX(posX + 1);
-//
-//        } else if (move.equalsIgnoreCase("l") && cardVerifier(posX, posY - 1)) {
-//            getGame().getPlayer().getSpaceship().setPosY(posY - 1);
-//
-//        } else if (move.equalsIgnoreCase("r") && cardVerifier(posX, posY + 1)) {
-//            getGame().getPlayer().getSpaceship().setPosY(posY + 1);
-//        }
-//
-//        getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
-//
-//        return new Move(getGame());
-//    }
-
     public boolean cardVerifier(int posX, int posY) {
 
         if (posX >= Constants.BOARD_LIMIT_INF_X && posX <= Constants.BOARD_LIMIT_SUP_X && posY >= Constants.BOARD_LIMIT_INF_Y && posY <= Constants.BOARD_LIMIT_SUP_Y) {
@@ -146,47 +121,55 @@ public class Move extends StatesAdapter {
 
     @Override
     public States explore() {
-
+        System.out.println("Fui chamado (Explore no Move)");
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
 
         //RIGHT 
         if (cardVerifierTurn(posX + 1, posY)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX + 1][posY].setIsTurned(true);
         }
         //DOWN
         if (cardVerifierTurn(posX, posY - 1)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX][posY - 1].setIsTurned(true);
         }
 
         //LEFT 
         if (cardVerifierTurn(posX - 1, posY)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX - 1][posY].setIsTurned(true);
         }
 
         //UP
         if (cardVerifierTurn(posX, posY + 1)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX][posY + 1].setIsTurned(true);
         }
 
         //        VERIFY WHY IS NOT OPENING THE ADJACENT PLACES
 //        RIGHT DOWN 
         if (cardVerifierTurn(posX + 1, posY - 1)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX + 1][posY - 1].setIsTurned(true);
         }
 
 //        LEFT DOWN
         if (cardVerifierTurn(posX - 1, posY - 1)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX - 1][posY - 1].setIsTurned(true);
         }
 
         // LEFT UP
         if (cardVerifierTurn(posX - 1, posY + 1)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX - 1][posY + 1].setIsTurned(true);
         }
 
         //RIGHT UP
         if (cardVerifierTurn(posX + 1, posY + 1)) {
+        System.out.println("Fiz isto");
             getGame().getBoard()[posX + 1][posY + 1].setIsTurned(true);
         }
 

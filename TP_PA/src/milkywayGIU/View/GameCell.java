@@ -20,10 +20,9 @@ public class GameCell extends JPanel implements Observer {
 
     private int row, col;
     private Model model;
-    private String namePlanet;
+    private final String namePlanet;
 
     GameCell(Model j, int r, int c, String name) {
-
         this.row = r;
         this.col = c;
         this.model = j;
@@ -38,8 +37,6 @@ public class GameCell extends JPanel implements Observer {
 
                 if (model.getState() instanceof Move) {
                     model.move(row, col);
-                    System.out.println("Pos Spaceship(" + model.getPlayer().getSpaceship().getPosX() + "," + model.getPlayer().getSpaceship().getPosY() + ")");
-                    System.out.println("CLICK!");
                 }
             }
         });
@@ -53,15 +50,33 @@ public class GameCell extends JPanel implements Observer {
 
     @Override
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         try {
-            this.drawIcon(g, namePlanet);
             int x_spaceship = model.getPlayer().getSpaceship().getPosX();
             int y_spaceship = model.getPlayer().getSpaceship().getPosY();
 
             if (x_spaceship == row && y_spaceship == col) {
-                this.drawIcon(g, "Spaceship_v2");
+                if (model.getBoard()[row][col] != null) {
+                    if (model.getBoard()[row][col].getIsTurned()) {
+                        drawIcon(g, model.getBoard()[row][col].getPlanetName());
+                    } else {
+                        drawIcon(g, "card_down");
+                    }
+                    drawIcon(g, "Spaceship_v2");
+                } else {
+                    drawIcon(g, "Null");
+                    drawIcon(g, "Spaceship_v2");
+                }
             } else {
-                this.drawIcon(g, namePlanet);
+                if (model.getBoard()[row][col] != null) {
+                    if (model.getBoard()[row][col].getIsTurned()) {
+                        drawIcon(g, model.getBoard()[row][col].getPlanetName());
+                    } else {
+                        drawIcon(g, "card_down");
+                    }
+                } else {
+                    drawIcon(g, "Null");
+                }
             }
 
         } catch (IOException ex) {
@@ -71,9 +86,7 @@ public class GameCell extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        // TODO: analyse this method. Is printing the board 
-        
-        revalidate();
+        repaint();
     }
 
     private void drawIcon(Graphics g, String name) throws IOException {

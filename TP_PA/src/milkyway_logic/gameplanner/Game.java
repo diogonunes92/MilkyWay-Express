@@ -133,6 +133,7 @@ public final class Game extends Observable implements Serializable {
     }
 
     public void explore() {
+        System.out.println("Fui chamado (Explore)");
         this.state = state.explore();
     }
 

@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 import milkywayGIU.Model.Model;
 import util.Constants;
 
-public class IuGraphic extends JFrame implements Observer {
+public class IuGraphic extends JFrame {
 
     private Model model;
     private GamePanel gamePanel;
@@ -22,14 +22,13 @@ public class IuGraphic extends JFrame implements Observer {
     private JMenu menuGame, menuHelp;
     private JMenuItem menuNewGame, menuLoadGame, menuSaveGame, menuInstructions, menuCredits;
 
-
     IuGraphic(Model model) {
         this.model = model;
         this.model.constructGame();
 
         container = getContentPane();
         container.setLayout(new BorderLayout());
-        
+
         gamePanel = new GamePanel(model);
         container.add(gamePanel, BorderLayout.AFTER_LINE_ENDS);
 
@@ -65,7 +64,6 @@ public class IuGraphic extends JFrame implements Observer {
     }
 
     private void setupLayout() {
-        setJMenuBar(menuBar);
 
         //Game Menu option
         menuGame.add(menuNewGame);
@@ -78,10 +76,8 @@ public class IuGraphic extends JFrame implements Observer {
         menuHelp.add(menuCredits);
 
         menuBar.add(menuHelp);
+                setJMenuBar(menuBar);
+
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        
-    }
 }

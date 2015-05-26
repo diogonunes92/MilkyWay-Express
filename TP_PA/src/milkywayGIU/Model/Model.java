@@ -4,6 +4,7 @@ import java.util.Observable;
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
 import milkyway_logic.gameplanner.Game;
+import milkyway_logic.states.Move;
 import milkyway_logic.states.States;
 
 public class Model extends Observable {
@@ -17,6 +18,8 @@ public class Model extends Observable {
 
     public void constructGame() {
         this.game.constructGame();
+        setChanged();
+        notifyObservers();
     }
 
     public void move(int x, int y) {
@@ -70,16 +73,17 @@ public class Model extends Observable {
     public void nextState() {
 
         this.game.replishMarkets();
-        this.game.explore();
         this.game.nextState();
         setChanged();
         notifyObservers();
     }
 
     public void explore() {
-        this.game.explore();
-        setChanged();
-        notifyObservers();
+        if (this.game.getState() instanceof Move) {
+            this.game.explore();
+            setChanged();
+            notifyObservers();
+        }
     }
 
     public States getState() {
