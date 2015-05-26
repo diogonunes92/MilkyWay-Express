@@ -18,6 +18,7 @@ public class IuGraphic extends JFrame implements Observer {
 
     private Model model;
     private GamePanel gPanel;
+    private Container container;
 
     private JMenuBar menuBar;
     private JMenu menuGame;
@@ -33,6 +34,12 @@ public class IuGraphic extends JFrame implements Observer {
     IuGraphic(Model model) {
         this.model = model;
         this.model.constructGame();
+        this.model.addObserver(this);
+
+        container = getContentPane();
+        container.setLayout(new BorderLayout());
+        gPanel = new GamePanel(model);
+        container.add(gPanel, BorderLayout.CENTER);
 
         createComponents();
         setComponents();
@@ -43,11 +50,6 @@ public class IuGraphic extends JFrame implements Observer {
     }
 
     private void createComponents() {
-
-        Container contentPanel = getContentPane();
-        contentPanel.setLayout(new BorderLayout());
-        gPanel = new GamePanel(model);
-        contentPanel.add(gPanel, BorderLayout.CENTER);
 
 //         <Menu bar in the top
         menuBar = new JMenuBar();

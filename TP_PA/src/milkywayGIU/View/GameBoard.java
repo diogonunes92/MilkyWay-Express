@@ -6,16 +6,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 
-public class GameGrid extends JPanel {
+public class GameBoard extends JPanel {
 
         Model model;
         ArrayList<GameCell> cells = new ArrayList<>();
 
-        GameGrid(Model m) {
+        GameBoard(Model m) {
 
             model = m;
             model.constructGame();
-
         }
 
         void registerObservers() {
