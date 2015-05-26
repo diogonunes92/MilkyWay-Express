@@ -14,10 +14,6 @@ import milkyway_logic.states.Buy;
 import milkyway_logic.states.Move;
 import milkyway_logic.states.Sell;
 
-/**
- *
- * @author Diogo
- */
 public class NextPhaseBlock extends JPanel implements Observer {
 
         private Model model;

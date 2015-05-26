@@ -3,7 +3,7 @@ package util;
 public class Constants {
 
     public static final String FILE_NAME_DEFAULT = "saveFileMilkyway.bin";
-    
+
     //Game initiation
     public static final int INITIAL_BANK_COINS = 30;
     public static final int INITIAL_PLAYER_COINS = 10;
@@ -13,7 +13,6 @@ public class Constants {
     public static final int BOARD_LIMIT_INF_X = 0;
     public static final int BOARD_LIMIT_SUP_Y = 8;
     public static final int BOARD_LIMIT_INF_Y = 0;
-    
 
     // Game initiation - Board
     public static final int BOARD_TOTAL_CARDS = 25;
@@ -39,5 +38,9 @@ public class Constants {
             {0, 3, 0, 0},
             {0, 0, 3, 0},
             {1, 0, 0, 0}};
+
+    // Graphical variables
+    public static int WINDOW_WIDTH = 1280;
+    public static int HEIGHT = 800;
 
 }
