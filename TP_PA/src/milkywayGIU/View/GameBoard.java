@@ -39,16 +39,7 @@ public final class GameBoard extends JPanel {
         for (int i = 0; i < 7; i++) {
             JPanel cellPanel = new JPanel();
             for (int j = 0; j < 9; j++) {
-                if (model.getBoard()[i][j] != null) {
-                    if (!model.getBoard()[i][j].getIsTurned()) {
-                        cell = new GameCell(model, i, j, "card_down");
-                    }
-                    if (model.getBoard()[i][j].getIsTurned()) {
-                        cell = new GameCell(model, i, j, model.getBoard()[i][j].getPlanetName());
-                    }
-                } else {
-                    cell = new GameCell(model, i, j, "null");
-                }
+                cell = new GameCell(model, i, j);
                 cell.setVisible(true);
                 cells.add(cell);
                 cellPanel.add(cell);
