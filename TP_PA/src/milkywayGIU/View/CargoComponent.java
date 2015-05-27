@@ -3,6 +3,8 @@ package milkywayGIU.View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BorderFactory;
@@ -44,6 +46,13 @@ public class CargoComponent extends JPanel implements Observer {
 
         upgradeCargoButton = new JButton();
 
+        upgradeCargoButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                model.upgradeCargo();
+            }
+        });
     }
 
     private void setupLayout() {
@@ -65,7 +74,7 @@ public class CargoComponent extends JPanel implements Observer {
         thirdCargo.setPreferredSize(new Dimension(20, 20));
         thirdCargo.setBackground(Color.RED);
         thirdCargo.setText("rose");
-        
+
         upgradeCargoButton.setText("Upgrage Cargo");
 
         panel.add(titleLabel);
@@ -84,7 +93,6 @@ public class CargoComponent extends JPanel implements Observer {
     @Override
 
     public void update(Observable o, Object arg) {
-        System.err.println("UpdateCargoComponent");
+        System.out.println("UpdateCargoComponent");
     }
-
 }

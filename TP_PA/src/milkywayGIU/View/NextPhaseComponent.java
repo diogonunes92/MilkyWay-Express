@@ -51,20 +51,6 @@ public class NextPhaseComponent extends JPanel implements Observer {
         model.addObserver(this);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-        if (model.getState() instanceof Move) {
-            currentPhase.setText("Move");
-        } else if (model.getState() instanceof Sell) {
-            currentPhase.setText("Sell");
-        } else if (model.getState() instanceof Buy) {
-            currentPhase.setText("Buy");
-        }
-        
-        //this.repaint();
-    }
-
     private void addListener() {
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -74,5 +60,20 @@ public class NextPhaseComponent extends JPanel implements Observer {
                 model.nextState();
             }
         });
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("UpdateNextPhaseComponent");
+
+        if (model.getState() instanceof Move) {
+            currentPhase.setText("Move");
+        } else if (model.getState() instanceof Sell) {
+            currentPhase.setText("Sell");
+        } else if (model.getState() instanceof Buy) {
+            currentPhase.setText("Buy");
+        }
+
+        //this.repaint();
     }
 }

@@ -3,6 +3,8 @@ package milkywayGIU.View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BorderFactory;
@@ -36,12 +38,27 @@ public class WeaponComponent extends JPanel implements Observer {
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
+        panel = new JPanel();
         titleLabel = new JLabel();
         weaponPowerLabel = new JLabel();
         weaponUpgrade1Button = new JButton();
         weaponUpgrade2Button = new JButton();
 
-        panel = new JPanel();
+        weaponUpgrade1Button.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                model.upgradeWeapon();
+            }
+        });
+
+        weaponUpgrade2Button.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                model.upgradeWeapon();
+            }
+        });
     }
 
     private void setupLayout() {
@@ -75,6 +92,6 @@ public class WeaponComponent extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        
+        System.out.println("UpdateWeaponComponent");
     }
 }
