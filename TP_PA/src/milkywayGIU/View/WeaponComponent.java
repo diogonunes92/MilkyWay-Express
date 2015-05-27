@@ -10,11 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import milkywayGIU.Model.Model;
-import milkyway_logic.states.Buy;
-import milkyway_logic.states.Move;
-import milkyway_logic.states.Sell;
 import util.Constants;
 
 public class WeaponComponent extends JPanel implements Observer {
@@ -29,7 +25,7 @@ public class WeaponComponent extends JPanel implements Observer {
 
         this.setMaximumSize(new Dimension(Constants.RIGHT_PANEL_COMPONENT_WIDTH, Constants.RIGHT_PANEL_COMPONENT_HEIGHT));
         this.setVisible(true);
-        this.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+        this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         this.setBackground(Color.darkGray);
 
         setupComponents();
@@ -50,7 +46,7 @@ public class WeaponComponent extends JPanel implements Observer {
 
     private void setupLayout() {
 
-        panel.setLayout(new GridLayout(4, 2));
+        panel.setLayout(new GridLayout(4, 1));
         panel.setBackground(Color.orange);
 
         titleLabel.setText("WEAPON POWER");
@@ -79,14 +75,6 @@ public class WeaponComponent extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
-        if (model.getState() instanceof Move) {
-
-        } else if (model.getState() instanceof Sell) {
-
-        } else if (model.getState() instanceof Buy) {
-
-        }
+        
     }
-
 }

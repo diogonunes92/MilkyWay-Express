@@ -12,7 +12,6 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.cards.Planet;
@@ -131,7 +130,6 @@ public class GameCell extends JPanel implements Observer {
                             secondCube.setBackground(Color.white);
                             break;
                     }
-
                 }
             }
         }
@@ -178,7 +176,7 @@ public class GameCell extends JPanel implements Observer {
     private Image getCardImage(String name) throws IOException {
 
         if (!name.equals("null") && name != null) {
-            System.out.println("nome -> " + name);
+            //System.out.println("nome -> " + name);
             Image img = ImageIO.read(getClass().getResource("/images/" + name + ".png"));
             return img;
         } else {
