@@ -37,7 +37,7 @@ public class IuGraphic extends JFrame {
 
         this.setVisible(true);
         this.setSize(Constants.WINDOW_WIDTH, Constants.HEIGHT);
-        //this.setResizable(false);
+        this.setResizable(false);
     }
 
     private void setupComponents() {
@@ -76,8 +76,7 @@ public class IuGraphic extends JFrame {
         menuHelp.add(menuCredits);
 
         menuBar.add(menuHelp);
-                setJMenuBar(menuBar);
+        this.setJMenuBar(menuBar);
 
     }
-
 }
