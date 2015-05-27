@@ -21,12 +21,10 @@ public class GamePanel extends JPanel implements Observer {
     private CargoComponent cargoComponent;
 
     private JPanel centerPanel, rightPanel;
-    private JPanel weaponPanel, creditsPanel, cargoPanel, nextPhasePanel;
 
     GamePanel(Model model) {
 
         this.model = model;
-        this.model.addObserver(this);
         this.setLayout(new BorderLayout());
 
         this.setupComponents();
@@ -50,36 +48,41 @@ public class GamePanel extends JPanel implements Observer {
         centerPanel.setLayout(new BorderLayout());
 
         rightPanel = new JPanel();
-        rightPanel.setLayout( new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         rightPanel.setPreferredSize(new Dimension(Constants.RIGHT_PANEL_WIDTH, this.getHeight()));
-
     }
 
     private void setupLayout() {
 
-        centerPanel.add(gameBoard, BorderLayout.WEST);
-        this.add(centerPanel, BorderLayout.WEST);
-
-        rightPanel.add(Box.createRigidArea(new Dimension(0,Constants.RIGHT_PANEL_SPACE)));
-        rightPanel.add(nextPhaseComponent);
-        rightPanel.add(Box.createRigidArea(new Dimension(0,Constants.RIGHT_PANEL_SPACE)));
-        rightPanel.add(weaponComponent);
-        rightPanel.add(Box.createRigidArea(new Dimension(0,Constants.RIGHT_PANEL_SPACE)));
-        rightPanel.add(creditsComponent);
-        rightPanel.add(Box.createRigidArea(new Dimension(0,Constants.RIGHT_PANEL_SPACE)));
-        rightPanel.add(cargoComponent);
+        centerPanel.add(gameBoard);
         
+        rightPanel.add(Box.createRigidArea(new Dimension(0, Constants.RIGHT_PANEL_SPACE)));
+        rightPanel.add(nextPhaseComponent);
+        rightPanel.add(Box.createRigidArea(new Dimension(0, Constants.RIGHT_PANEL_SPACE)));
+        rightPanel.add(weaponComponent);
+        rightPanel.add(Box.createRigidArea(new Dimension(0, Constants.RIGHT_PANEL_SPACE)));
+        rightPanel.add(creditsComponent);
+        rightPanel.add(Box.createRigidArea(new Dimension(0, Constants.RIGHT_PANEL_SPACE)));
+        rightPanel.add(cargoComponent);
+
+        this.add(centerPanel, BorderLayout.WEST);
         this.add(rightPanel, BorderLayout.EAST);
 
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
+    private void registerObservers() {
 
+        model.addObserver(this);
+
+        gameBoard.registerObservers();
+        nextPhaseComponent.registerObservers();
+        creditsComponent.registerObservers();
+        weaponComponent.registerObservers();
+        cargoComponent.registerObservers();
     }
 
-    private void registerObservers() {
-        //gameBoard.registerObservers();
-        nextPhaseComponent.registerObservers();
+    @Override
+    public void update(Observable o, Object arg) {
+        this.repaint();
     }
 }

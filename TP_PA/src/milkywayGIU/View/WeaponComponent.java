@@ -73,6 +73,10 @@ public class WeaponComponent extends JPanel implements Observer {
         this.add(panel);
     }
 
+    void registerObservers() {
+        model.addObserver(this);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
 

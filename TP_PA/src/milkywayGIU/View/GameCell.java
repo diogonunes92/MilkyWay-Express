@@ -6,8 +6,6 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -16,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.cards.Planet;
-import milkyway_logic.elements.Cube;
 import milkyway_logic.states.Move;
 import util.Constants;
 
