@@ -24,12 +24,6 @@ public final class GameBoard extends JPanel {
     }
 
     @Override
-    public void update(Graphics g) {
-        System.out.println("Esta a ser chamado update no GAMEBOARD");
-        revalidate();
-    }
-
-    @Override
     public void paintComponent(Graphics g) {
         cells = new ArrayList();
         GameCell cell = null;
@@ -47,5 +41,11 @@ public final class GameBoard extends JPanel {
             add(cellPanel);
         }
         registerObservers();
+    }
+
+    @Override
+    public void update(Graphics g) {
+        System.out.println("UpdateGameBoard");
+        repaint();
     }
 }

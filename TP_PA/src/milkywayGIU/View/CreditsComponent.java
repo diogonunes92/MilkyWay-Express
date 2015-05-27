@@ -40,13 +40,6 @@ public class CreditsComponent extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
-        if (model.getState() instanceof Move) {
-
-        } else if (model.getState() instanceof Sell) {
-
-        } else if (model.getState() instanceof Buy) {
-
-        }
+        System.err.println("UpdateCreditsComponent");
     }
 }
