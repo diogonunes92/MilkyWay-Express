@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import milkywayGIU.Model.Model;
@@ -18,15 +19,16 @@ import util.Constants;
 public class NextPhaseComponent extends JPanel implements Observer {
 
     private Model model;
-    private JTextField currentPhase;
+    private JLabel currentPhase;
     private JButton nextButton;
 
     public NextPhaseComponent(Model model) {
         this.model = model;
-        this.currentPhase = new JTextField(15);
+        this.currentPhase = new JLabel();
         this.nextButton = new JButton();
         this.nextButton.setText("Next Phase");
         this.currentPhase.setText("Starting Game");
+        currentPhase.setFont(Constants.FONT_25);
 
         setMaximumSize(new Dimension(Constants.RIGHT_PANEL_COMPONENT_WIDTH, Constants.RIGHT_PANEL_COMPONENT_HEIGHT));
 
@@ -73,6 +75,7 @@ public class NextPhaseComponent extends JPanel implements Observer {
         } else if (model.getState() instanceof Buy) {
             currentPhase.setText("Buy");
         }
+        currentPhase.setFont(Constants.FONT_25);
 
         //this.repaint();
     }
