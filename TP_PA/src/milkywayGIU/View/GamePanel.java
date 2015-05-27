@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Observer {
         this.setupLayout();
 
         this.registerObservers();
+
     }
 
     private void setupComponents() {
@@ -79,6 +80,6 @@ public class GamePanel extends JPanel implements Observer {
 
     private void registerObservers() {
         //gameBoard.registerObservers();
-        nextPhaseBlock.registerObservers();
+        nextPhaseComponent.registerObservers();
     }
 }
