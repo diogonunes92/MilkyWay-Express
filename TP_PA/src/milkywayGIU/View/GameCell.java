@@ -12,11 +12,10 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.cards.Planet;
-import milkyway_logic.states.Move;
+import milkyway_logic.states.*;
 import util.Constants;
 
 public class GameCell extends JPanel implements Observer {
@@ -45,6 +44,7 @@ public class GameCell extends JPanel implements Observer {
         });
 
         setupCubes();
+        setupCubeListeners();
     }
 
     @Override
@@ -99,36 +99,47 @@ public class GameCell extends JPanel implements Observer {
                     switch (model.getBoard()[row][col].getCubeList().get(0).getColor()) {
                         case "red":
                             firstCube.setBackground(Color.red);
+                            firstCube.setOpaque(true);
                             break;
                         case "blue":
                             firstCube.setBackground(Color.blue);
+                            firstCube.setOpaque(true);
                             break;
                         case "yellow":
                             firstCube.setBackground(Color.yellow);
+                            firstCube.setOpaque(true);
                             break;
                         case "black":
                             firstCube.setBackground(Color.black);
+                            firstCube.setOpaque(true);
                             break;
                         case "white":
                             firstCube.setBackground(Color.white);
+                            firstCube.setOpaque(true);
                             break;
                     }
-                    
+                }
+                if (model.getBoard()[row][col].getCubeList().size() > 1) {
                     switch (model.getBoard()[row][col].getCubeList().get(1).getColor()) {
                         case "red":
                             secondCube.setBackground(Color.red);
+                            secondCube.setOpaque(true);
                             break;
                         case "blue":
                             secondCube.setBackground(Color.blue);
+                            secondCube.setOpaque(true);
                             break;
                         case "yellow":
                             secondCube.setBackground(Color.yellow);
+                            secondCube.setOpaque(true);
                             break;
                         case "black":
                             secondCube.setBackground(Color.black);
+                            secondCube.setOpaque(true);
                             break;
                         case "white":
                             secondCube.setBackground(Color.white);
+                            secondCube.setOpaque(true);
                             break;
                     }
 
@@ -139,7 +150,6 @@ public class GameCell extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UpdateGameCell");
         repaint();
     }
 
@@ -193,7 +203,35 @@ public class GameCell extends JPanel implements Observer {
         firstCube.setBackground(Color.gray);
         secondCube = new JPanel();
         secondCube.setBackground(Color.gray);
+        firstCube.setOpaque(false);
+        secondCube.setOpaque(false);
         this.add(firstCube);
         this.add(secondCube);
+    }
+
+    private void setupCubeListeners() {
+
+        firstCube.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent ev) {
+                System.out.println(model.getState());
+                if (model.getState() instanceof Buy) {
+                    System.out.println("Ai credo toquei no 1º cubo!");
+                    model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
+                }
+            }
+        });
+
+        secondCube.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent ev) {
+                System.out.println(model.getState());
+
+                if (model.getState() instanceof Buy) {
+                    System.out.println("Ai credo toquei no 2º cubo!");
+                    model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
+                }
+            }
+        });
     }
 };

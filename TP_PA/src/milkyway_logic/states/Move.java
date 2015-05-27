@@ -28,17 +28,16 @@ public class Move extends StatesAdapter {
         if (wormholeVerifier(x, y)) {
             getGame().getPlayer().getSpaceship().setPosX(x);
             getGame().getPlayer().getSpaceship().setPosY(y);
-            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins()-1);
+            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
         }
 
         return this;
     }
-    
+
     @Override
     public StatesAdapter move(int x, int y) {
 
         // TODO: implement other directions
-        System.out.println("Ca estou eu, quem é vivo sempre aparece!");
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
 
@@ -57,13 +56,8 @@ public class Move extends StatesAdapter {
 
             if (getGame().getBoard()[posX][posY] instanceof Card) {
 
-                if (getGame().getBoard()[posX][posY].getIsTurned()) {
-                    // if everything passed 
-                    return true;
-                } else {
+                return getGame().getBoard()[posX][posY].getIsTurned(); // if everything passed
 //                    System.err.println("It's not a turned card!");
-                    return false;
-                }
             } else {
 //                System.err.println("It's not a card");
             }
@@ -76,7 +70,7 @@ public class Move extends StatesAdapter {
     @Override
     public States replishMarkets() {
 
-        String color;
+        String color = "white";
         int randomNum;
 
         for (int i = 0; i < 7; i++) {
@@ -87,6 +81,7 @@ public class Move extends StatesAdapter {
                     if (getGame().getBoard()[i][j].getIsTurned() && !getGame().getBoard()[i][j].isPirate()) {
 
                         if (getGame().getBoard()[i][j].getCubeList().size() < 2) {
+                            List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
 
                             while (getGame().getBoard()[i][j].getCubeList().size() < 2) {
                                 randomNum = 1 + (int) (Math.random() * 6);
@@ -102,11 +97,34 @@ public class Move extends StatesAdapter {
                                 } else {
                                     color = "white";
                                 }
-                                List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
+
                                 cubeList.add(new Cube(color));
                                 getGame().getBoard()[i][j].setCubeList(cubeList);
                             }
+                        } else {
+                            List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
+
+                            if (cubeList.get(0).getColor().equals("white")) {
+                                cubeList.remove(new Cube("white"));
+                            }
+                            if (cubeList.get(1).getColor().equals("white")) {
+                                cubeList.remove(new Cube("white"));
+                            }
+
+                            randomNum = 1 + (int) (Math.random() * 3);
+
+                            if (randomNum == 1) {
+                                color = "red";
+                            } else if (randomNum == 2) {
+                                color = "blue";
+                            } else if (randomNum == 3) {
+                                color = "yellow";
+                            }
+
+                            cubeList.add(new Cube(color));
+                            getGame().getBoard()[i][j].setCubeList(cubeList);
                         }
+                        
                     } else if (getGame().getBoard()[i][j].getIsTurned() && getGame().getBoard()[i][j].isPirate()) {
                         List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
                         cubeList.add(new Cube("black"));
@@ -127,49 +145,42 @@ public class Move extends StatesAdapter {
 
         //RIGHT 
         if (cardVerifierTurn(posX + 1, posY)) {
-        System.out.println("Fiz isto");
             getGame().getBoard()[posX + 1][posY].setIsTurned(true);
         }
         //DOWN
         if (cardVerifierTurn(posX, posY - 1)) {
-        System.out.println("Fiz isto");
             getGame().getBoard()[posX][posY - 1].setIsTurned(true);
         }
 
         //LEFT 
         if (cardVerifierTurn(posX - 1, posY)) {
-        System.out.println("Fiz isto");
             getGame().getBoard()[posX - 1][posY].setIsTurned(true);
         }
 
         //UP
         if (cardVerifierTurn(posX, posY + 1)) {
-        System.out.println("Fiz isto");
             getGame().getBoard()[posX][posY + 1].setIsTurned(true);
         }
 
         //        VERIFY WHY IS NOT OPENING THE ADJACENT PLACES
 //        RIGHT DOWN 
         if (cardVerifierTurn(posX + 1, posY - 1)) {
-        System.out.println("Fiz isto");
             getGame().getBoard()[posX + 1][posY - 1].setIsTurned(true);
         }
 
 //        LEFT DOWN
         if (cardVerifierTurn(posX - 1, posY - 1)) {
-        System.out.println("Fiz isto");
             getGame().getBoard()[posX - 1][posY - 1].setIsTurned(true);
         }
 
         // LEFT UP
         if (cardVerifierTurn(posX - 1, posY + 1)) {
-        System.out.println("Fiz isto");
             getGame().getBoard()[posX - 1][posY + 1].setIsTurned(true);
         }
 
         //RIGHT UP
         if (cardVerifierTurn(posX + 1, posY + 1)) {
-        System.out.println("Fiz isto");
+            System.out.println("Fiz isto");
             getGame().getBoard()[posX + 1][posY + 1].setIsTurned(true);
         }
 
