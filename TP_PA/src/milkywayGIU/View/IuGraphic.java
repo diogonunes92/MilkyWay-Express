@@ -2,9 +2,6 @@ package milkywayGIU.View;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Font;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;

@@ -26,7 +26,7 @@ public final class GameBoard extends JPanel {
     @Override
     public void update(Graphics g) {
         System.out.println("Esta a ser chamado update no GAMEBOARD");
-        repaint();
+        revalidate();
     }
 
     @Override
