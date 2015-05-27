@@ -14,13 +14,35 @@ public final class GameBoard extends JPanel {
     GameBoard(Model model) {
         this.model = model;
         this.model.constructGame();
-        this.paintComponent(getGraphics());
+        System.out.println("Call paint on game board constructor");
+        paintTest(getGraphics());
     }
 
     void registerObservers() {
         cells.stream().forEach((cell) -> {
             model.addObserver(cell);
         });
+    }
+
+    public void paintTest(Graphics g) {
+
+        cells = new ArrayList();
+        GameCell cell = null;
+
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        System.out.println("paint component chamado (game board)");
+        for (int i = 0; i < 7; i++) {
+            JPanel cellPanel = new JPanel();
+            for (int j = 0; j < 9; j++) {
+                cell = new GameCell(model, i, j);
+                cell.setVisible(true);
+                cells.add(cell);
+                cellPanel.add(cell);
+            }
+            add(cellPanel);
+            System.err.println("paintcomponent ");
+        }
+        registerObservers();
     }
 
     @Override
@@ -38,14 +60,10 @@ public final class GameBoard extends JPanel {
                 cells.add(cell);
                 cellPanel.add(cell);
             }
-            add(cellPanel);
+
+            revalidate();
+            System.err.println("paintcomponent ");
         }
         registerObservers();
-    }
-
-    @Override
-    public void update(Graphics g) {
-        System.out.println("UpdateGameBoard");
-        repaint();
     }
 }

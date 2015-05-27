@@ -62,6 +62,6 @@ public class CreditsComponent extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //creditsLabel.setText(String.valueOf(model.getPlayer().getCoins()));
+        creditsLabel.setText(String.valueOf(model.getPlayer().getCoins()));
     }
 }

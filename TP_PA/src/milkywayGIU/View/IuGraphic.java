@@ -54,7 +54,7 @@ public class IuGraphic extends JFrame {
         menuInstructions = new JMenuItem("Game Instructions");
         menuInstructions.setFont(Constants.FONT_12);
 
-        menuCredits = new JMenu("Credits");
+        menuCredits = new JMenuItem("Credits");
         menuCredits.setFont(Constants.FONT_12);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
