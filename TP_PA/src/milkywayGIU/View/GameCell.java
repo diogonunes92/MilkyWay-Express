@@ -1,5 +1,6 @@
 package milkywayGIU.View;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,6 +12,7 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.cards.Planet;
@@ -21,6 +23,8 @@ public class GameCell extends JPanel implements Observer {
 
     private int row, col;
     private Model model;
+    private JPanel firstCube;
+    private JPanel secondCube;
 
     GameCell(Model j, int r, int c) {
         this.row = r;
@@ -39,6 +43,8 @@ public class GameCell extends JPanel implements Observer {
                 }
             }
         });
+
+        setupCubes();
     }
 
     @Override
@@ -60,8 +66,8 @@ public class GameCell extends JPanel implements Observer {
                         drawIcon(g, model.getBoard()[row][col].getPlanetName());
                         if (this.model.getBoard()[row][col] instanceof Planet) {
                             /*for (int i = 0; i < this.model.getBoard()[row][col].getCubeList().size(); i++) {
-                                drawIcon(g, this.model.getBoard()[row][col].getCubeList().get(i).getColor());
-                            }*/
+                             drawIcon(g, this.model.getBoard()[row][col].getCubeList().get(i).getColor());
+                             }*/
                         }
                     } else {
                         drawIcon(g, "card_down");
@@ -85,6 +91,49 @@ public class GameCell extends JPanel implements Observer {
 
         } catch (IOException ex) {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (model.getState() instanceof Move) {
+            if (model.getBoard()[row][col] instanceof Planet) {
+                if (model.getBoard()[row][col].getCubeList().size() > 0) {
+                    switch (model.getBoard()[row][col].getCubeList().get(0).getColor()) {
+                        case "red":
+                            firstCube.setBackground(Color.red);
+                            break;
+                        case "blue":
+                            firstCube.setBackground(Color.blue);
+                            break;
+                        case "yellow":
+                            firstCube.setBackground(Color.yellow);
+                            break;
+                        case "black":
+                            firstCube.setBackground(Color.black);
+                            break;
+                        case "white":
+                            firstCube.setBackground(Color.white);
+                            break;
+                    }
+                    
+                    switch (model.getBoard()[row][col].getCubeList().get(1).getColor()) {
+                        case "red":
+                            secondCube.setBackground(Color.red);
+                            break;
+                        case "blue":
+                            secondCube.setBackground(Color.blue);
+                            break;
+                        case "yellow":
+                            secondCube.setBackground(Color.yellow);
+                            break;
+                        case "black":
+                            secondCube.setBackground(Color.black);
+                            break;
+                        case "white":
+                            secondCube.setBackground(Color.white);
+                            break;
+                    }
+
+                }
+            }
         }
     }
 
@@ -137,5 +186,14 @@ public class GameCell extends JPanel implements Observer {
             img.flush();
             return img;
         }
+    }
+
+    private void setupCubes() {
+        firstCube = new JPanel();
+        firstCube.setBackground(Color.gray);
+        secondCube = new JPanel();
+        secondCube.setBackground(Color.gray);
+        this.add(firstCube);
+        this.add(secondCube);
     }
 };
