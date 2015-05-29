@@ -41,7 +41,7 @@ public class Move extends StatesAdapter {
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
 
-        if (cardVerifier(x, y)) {
+        if (cardVerifier(x, y) && adjacentCardVerifier(x, y)) {
             getGame().getPlayer().getSpaceship().setPosX(x);
             getGame().getPlayer().getSpaceship().setPosY(y);
         }
@@ -227,6 +227,52 @@ public class Move extends StatesAdapter {
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+    private boolean adjacentCardVerifier(int x, int y) {
+        int posX = getGame().getPlayer().getSpaceship().getPosX();
+        int posY = getGame().getPlayer().getSpaceship().getPosY();
+
+        //RIGHT 
+        if (x == posX + 1 && posY == y) {
+            return true;
+        }
+        //DOWN
+        if (x == posX && posY + 1 == y) {
+            return true;
+        }
+
+        //LEFT 
+        if (x == posX - 1 && posY == y) {
+            return true;
+        }
+
+        //UP
+        if (x == posX && posY - 1 == y) {
+            return true;
+        }
+
+        //        VERIFY WHY IS NOT OPENING THE ADJACENT PLACES
+//        RIGHT DOWN 
+        if (x == posX + 1 && posY - 1 == y) {
+            return true;
+        }
+
+//        LEFT DOWN
+        if (x == posX - 1 && posY - 1 == y) {
+            return true;
+        }
+
+        // LEFT UP
+        if (x == posX - 1 && posY + 1 == y) {
+            return true;
+        }
+
+        //RIGHT UP
+        if (x == posX + 1 && posY + 1 == y) {
+            return true;
         }
         return false;
     }
