@@ -64,11 +64,6 @@ public class GameCell extends JPanel implements Observer {
                 if (model.getBoard()[row][col] != null) {
                     if (model.getBoard()[row][col].getIsTurned()) {
                         drawIcon(g, model.getBoard()[row][col].getPlanetName());
-                        if (this.model.getBoard()[row][col] instanceof Planet) {
-                            /*for (int i = 0; i < this.model.getBoard()[row][col].getCubeList().size(); i++) {
-                             drawIcon(g, this.model.getBoard()[row][col].getCubeList().get(i).getColor());
-                             }*/
-                        }
                     } else {
                         drawIcon(g, "card_down");
                     }
@@ -98,22 +93,33 @@ public class GameCell extends JPanel implements Observer {
                 if (model.getBoard()[row][col].getCubeList().size() > 0) {
                     switch (model.getBoard()[row][col].getCubeList().get(0).getColor()) {
                         case "red":
+                            firstCube.setLocation(27, 65);
                             firstCube.setBackground(Color.red);
                             firstCube.setOpaque(true);
                             break;
                         case "blue":
+                            firstCube.setLocation(27, 65);
                             firstCube.setBackground(Color.blue);
                             firstCube.setOpaque(true);
                             break;
                         case "yellow":
+                            firstCube.setLocation(27, 65);
                             firstCube.setBackground(Color.yellow);
                             firstCube.setOpaque(true);
                             break;
                         case "black":
-                            firstCube.setBackground(Color.black);
-                            firstCube.setOpaque(true);
+                            if (!model.getBoard()[row][col].isPirate()) {
+                                firstCube.setLocation(27, 65);
+                                firstCube.setBackground(Color.black);
+                                firstCube.setOpaque(true);
+                            } else {
+                                firstCube.setLocation(35, 65);
+                                firstCube.setBackground(Color.black);
+                                firstCube.setOpaque(true);
+                            }
                             break;
                         case "white":
+                            firstCube.setLocation(27, 65);
                             firstCube.setBackground(Color.white);
                             firstCube.setOpaque(true);
                             break;
@@ -122,22 +128,27 @@ public class GameCell extends JPanel implements Observer {
                 if (model.getBoard()[row][col].getCubeList().size() > 1) {
                     switch (model.getBoard()[row][col].getCubeList().get(1).getColor()) {
                         case "red":
+                            secondCube.setLocation(42, 65);
                             secondCube.setBackground(Color.red);
                             secondCube.setOpaque(true);
                             break;
                         case "blue":
+                            secondCube.setLocation(42, 65);
                             secondCube.setBackground(Color.blue);
                             secondCube.setOpaque(true);
                             break;
                         case "yellow":
+                            secondCube.setLocation(42, 65);
                             secondCube.setBackground(Color.yellow);
                             secondCube.setOpaque(true);
                             break;
                         case "black":
+                            secondCube.setLocation(42, 65);
                             secondCube.setBackground(Color.black);
                             secondCube.setOpaque(true);
                             break;
                         case "white":
+                            secondCube.setLocation(42, 65);
                             secondCube.setBackground(Color.white);
                             secondCube.setOpaque(true);
                             break;
