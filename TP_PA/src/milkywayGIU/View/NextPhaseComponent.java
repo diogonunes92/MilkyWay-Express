@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import milkywayGIU.Model.Model;
@@ -57,14 +58,27 @@ public class NextPhaseComponent extends JPanel implements Observer {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                System.out.println("MODEL EXPLORE");
-                model.explore();
-                model.nextState();
+
+                if (model.getState() instanceof Move) {
+                    if (model.getPlayer().getSpaceship().isHasMoved()) {
+                        System.out.println("MODEL EXPLORE");
+                        model.getPlayer().getSpaceship().setHasMoved(false);
+                        model.explore();
+                        model.nextState();
+                    } else {
+                        JOptionPane.showMessageDialog(getParent(), "You have to move at least once.");
+                    }
+                } else {
+                    model.nextState();
+                }
+
             }
-        });
+        }
+        );
     }
 
     @Override
+
     public void update(Observable o, Object arg) {
         System.out.println("UpdateNextPhaseComponent");
 

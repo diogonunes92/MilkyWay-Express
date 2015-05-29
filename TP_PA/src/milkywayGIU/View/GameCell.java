@@ -12,6 +12,7 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.cards.Planet;
@@ -36,7 +37,6 @@ public class GameCell extends JPanel implements Observer {
             @Override
             public void mousePressed(MouseEvent ev) {
                 System.out.println(model.getState());
-
                 if (model.getState() instanceof Move) {
                     model.move(row, col);
                 }
@@ -94,7 +94,7 @@ public class GameCell extends JPanel implements Observer {
         if (model.getState() instanceof Move) {
             if (model.getBoard()[row][col] instanceof Planet) {
                 if (model.getBoard()[row][col].getCubeList().size() > 0) {
-                    
+
                     switch (model.getBoard()[row][col].getCubeList().get(0).getColor()) {
                         case "red":
                             firstCube.setBackground(Color.red);

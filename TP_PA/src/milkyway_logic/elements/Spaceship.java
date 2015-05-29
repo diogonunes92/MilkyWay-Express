@@ -12,6 +12,7 @@ public class Spaceship implements Serializable{
     private int posX;
     private List<Cube> cargo;
     private boolean isCargoUpdated;
+    private boolean hasMoved;
 
     public Spaceship(int posX, int posY) {
         this.power = 3;
@@ -72,5 +73,16 @@ public class Spaceship implements Serializable{
     public void setIsCargoUpdated(boolean isCargoUpdated) {
         this.isCargoUpdated = isCargoUpdated;
     }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    public boolean isHasMoved() {
+        return hasMoved;
+    }
+
+
+    
 
 }

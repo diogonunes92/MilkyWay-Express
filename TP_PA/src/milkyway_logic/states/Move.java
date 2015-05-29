@@ -45,6 +45,8 @@ public class Move extends StatesAdapter {
             getGame().getPlayer().getSpaceship().setPosX(x);
             getGame().getPlayer().getSpaceship().setPosY(y);
             getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
+            getGame().getPlayer().getSpaceship().setHasMoved(true);
+
         }
 
         return new Move(getGame());
