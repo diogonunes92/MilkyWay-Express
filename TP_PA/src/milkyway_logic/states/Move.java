@@ -147,6 +147,7 @@ public class Move extends StatesAdapter {
         System.out.println("Fui chamado (Explore no Move)");
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
+        
 
         //RIGHT 
         if (cardVerifierTurn(posX + 1, posY)) {
@@ -234,6 +235,10 @@ public class Move extends StatesAdapter {
     private boolean adjacentCardVerifier(int x, int y) {
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
+
+        if(getGame().getBoard()[x][y] instanceof Wormhole && getGame().getBoard()[posX][posY] instanceof Wormhole){
+            return true;
+        }
 
         //RIGHT 
         if (x == posX + 1 && posY == y) {
