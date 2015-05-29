@@ -104,10 +104,15 @@ public class Move extends StatesAdapter {
                         } else {
                             List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
 
+                            System.out.println("vou remover o white");
                             if (cubeList.get(0).getColor().equals("white")) {
+                                System.out.println("Removi o white");
+
                                 cubeList.remove(new Cube("white"));
                             }
                             if (cubeList.get(1).getColor().equals("white")) {
+                                System.out.println("Removi o white");
+
                                 cubeList.remove(new Cube("white"));
                             }
 
@@ -124,8 +129,8 @@ public class Move extends StatesAdapter {
                             cubeList.add(new Cube(color));
                             getGame().getBoard()[i][j].setCubeList(cubeList);
                         }
-                        
-                    } else if (getGame().getBoard()[i][j].getIsTurned() && getGame().getBoard()[i][j].isPirate()) {
+
+                    } else if (getGame().getBoard()[i][j].getIsTurned() && getGame().getBoard()[i][j].isPirate() && getGame().getBoard()[i][j].getCubeList().size() < 1) {
                         List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
                         cubeList.add(new Cube("black"));
                         getGame().getBoard()[i][j].setCubeList(cubeList);

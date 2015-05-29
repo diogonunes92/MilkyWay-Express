@@ -17,13 +17,13 @@ public class Buy extends StatesAdapter {
 
         int PosX = getGame().getPlayer().getSpaceship().getPosX();
         int PosY = getGame().getPlayer().getSpaceship().getPosY();
-        
+
         if (getGame().getBoard()[PosX][PosY] instanceof Planet) {
             if (getGame().getPlayer().getSpaceship().getCargo().size() < 2) {
                 int cargoPrice;
                 HashMap<String, Integer> prices = getGame().getBoard()[PosX][PosY].getPrices();
                 List<Cube> cubeList = getGame().getBoard()[PosX][PosY].getCubeList();
-
+                System.out.println("ESTOU A COMPRAR");
                 //^THIS FETCHS PLANET'S PRICES AND CUBES FOR SALE 
                 List<Cube> cubesSpaceship = getGame().getPlayer().getSpaceship().getCargo();
                 cargoPrice = prices.get(cargo.toLowerCase());
@@ -41,6 +41,14 @@ public class Buy extends StatesAdapter {
                 }
 
                 getGame().setRoundsPlayed();
+                for (int i = 0; i < getGame().getPlayer().getSpaceship().getCargo().size(); i++) {
+                    System.out.println("the cargo on board -> " + getGame().getPlayer().getSpaceship().getCargo().get(i).getColor());
+                }
+                
+                for (int i = 0; i < getGame().getBoard()[PosX][PosY].getCubeList().size(); i++) {
+                    System.out.println("the cargo on planet -> " + getGame().getBoard()[PosX][PosY].getCubeList().get(i).getColor());
+                }
+
                 return this;
 
             } else if (getGame().getPlayer().getSpaceship().isCargoUpdated() && getGame().getPlayer().getSpaceship().getCargo().size() < 3) {

@@ -149,7 +149,6 @@ public class GameCell extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        repaint();
     }
 
     private void drawIcon(Graphics g, String name) throws IOException {
@@ -213,10 +212,15 @@ public class GameCell extends JPanel implements Observer {
         firstCube.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ev) {
-                System.out.println(model.getState());
-                if (model.getState() instanceof Buy) {
+                int x_spaceship = model.getPlayer().getSpaceship().getPosX();
+                int y_spaceship = model.getPlayer().getSpaceship().getPosY();
+                if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
                     System.out.println("Ai credo toquei no 1º cubo!");
-                    model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
+                    System.out.println("Size -> " + model.getPlayer().getSpaceship().getCargo().size());
+                    if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
+                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
+                        firstCube.setOpaque(false);
+                    }
                 }
             }
         });
@@ -224,13 +228,19 @@ public class GameCell extends JPanel implements Observer {
         secondCube.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ev) {
+                int x_spaceship = model.getPlayer().getSpaceship().getPosX();
+                int y_spaceship = model.getPlayer().getSpaceship().getPosY();
                 System.out.println(model.getState());
 
-                if (model.getState() instanceof Buy) {
+                if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
                     System.out.println("Ai credo toquei no 2º cubo!");
-                    model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
+                    if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
+                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
+                        secondCube.setOpaque(false);
+                    }
                 }
             }
-        });
+        }
+        );
     }
 };
