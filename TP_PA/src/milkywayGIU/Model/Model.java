@@ -54,8 +54,7 @@ public class Model extends Observable {
 
     public void buyCargo(String carga) {
         this.game.buyCargo(carga);
-        setChanged();
-        notifyObservers();
+        
     }
 
     public void sellCargo(String carga) {

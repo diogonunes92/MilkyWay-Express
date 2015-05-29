@@ -44,8 +44,8 @@ public class Move extends StatesAdapter {
         if (cardVerifier(x, y) && adjacentCardVerifier(x, y)) {
             getGame().getPlayer().getSpaceship().setPosX(x);
             getGame().getPlayer().getSpaceship().setPosY(y);
+            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
         }
-        getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 1);
 
         return new Move(getGame());
     }

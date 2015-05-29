@@ -88,12 +88,15 @@ public class GameCell extends JPanel implements Observer {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        firstCube.setLocation(27, 65);
+        secondCube.setLocation(42, 65);
+
         if (model.getState() instanceof Move) {
             if (model.getBoard()[row][col] instanceof Planet) {
                 if (model.getBoard()[row][col].getCubeList().size() > 0) {
+                    
                     switch (model.getBoard()[row][col].getCubeList().get(0).getColor()) {
                         case "red":
-                            firstCube.setLocation(27, 65);
                             firstCube.setBackground(Color.red);
                             firstCube.setOpaque(true);
                             break;
@@ -126,9 +129,9 @@ public class GameCell extends JPanel implements Observer {
                     }
                 }
                 if (model.getBoard()[row][col].getCubeList().size() > 1) {
+
                     switch (model.getBoard()[row][col].getCubeList().get(1).getColor()) {
                         case "red":
-                            secondCube.setLocation(42, 65);
                             secondCube.setBackground(Color.red);
                             secondCube.setOpaque(true);
                             break;
@@ -160,6 +163,7 @@ public class GameCell extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        revalidate();
     }
 
     private void drawIcon(Graphics g, String name) throws IOException {
@@ -229,8 +233,9 @@ public class GameCell extends JPanel implements Observer {
                     System.out.println("Ai credo toquei no 1º cubo!");
                     System.out.println("Size -> " + model.getPlayer().getSpaceship().getCargo().size());
                     if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
-                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
                         firstCube.setOpaque(false);
+                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
+                        revalidate();
                     }
                 }
             }
@@ -246,8 +251,9 @@ public class GameCell extends JPanel implements Observer {
                 if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
                     System.out.println("Ai credo toquei no 2º cubo!");
                     if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
-                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
                         secondCube.setOpaque(false);
+                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
+                        revalidate();
                     }
                 }
             }
