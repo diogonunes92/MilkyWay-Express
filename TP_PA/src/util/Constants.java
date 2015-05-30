@@ -44,21 +44,21 @@ public class Constants {
     // Graphical variables
     public static int WINDOW_WIDTH = 1280;
     public static int HEIGHT = 800;
-    
-    public static int CARD_WIDTH = 80;
-    public static int CARD_HEIGHT = 80;
+
+    public static int CARD_WIDTH = 100;
+    public static int CARD_HEIGHT = 100;
 
     public static int RIGHT_PANEL_WIDTH = 320;
 
     public static int RIGHT_PANEL_COMPONENT_WIDTH = 300;
     public static int RIGHT_PANEL_COMPONENT_HEIGHT = 140;
-    
+
     public static int RIGHT_PANEL_SPACE = 40;
+    public static int INSIDE_PANEL_SPACE = 10;
 
     //Fonts
     public static final Font FONT_12 = new Font("Verdana", Font.PLAIN, 12);
     public static final Font FONT_13 = new Font("Verdana", Font.BOLD, 13);
     public static final Font FONT_25 = new Font("Verdana", Font.BOLD, 25);
-    
 
 }
