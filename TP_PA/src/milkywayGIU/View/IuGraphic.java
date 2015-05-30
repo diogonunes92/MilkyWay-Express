@@ -2,10 +2,13 @@ package milkywayGIU.View;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import milkywayGIU.Model.Model;
 import util.Constants;
 
@@ -31,7 +34,9 @@ public class IuGraphic extends JFrame {
 
         setupComponents();
         setupLayout();
+        registListeners();
 
+        this.setTitle("::: MilkyWay Express :::");
         this.setVisible(true);
         this.setSize(Constants.WINDOW_WIDTH, Constants.HEIGHT);
         this.setResizable(false);
@@ -75,5 +80,54 @@ public class IuGraphic extends JFrame {
         menuBar.add(menuHelp);
         this.setJMenuBar(menuBar);
 
+    }
+
+    protected void registListeners() {
+
+        menuNewGame.addActionListener(new MenuNewGame());
+        menuLoadGame.addActionListener(new MenuLoadGame());
+        menuSaveGame.addActionListener(new MenuSaveGame());
+        menuInstructions.addActionListener(new MenuInstructions());
+        menuCredits.addActionListener(new MenuCredits());
+    }
+
+    class MenuNewGame implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(IuGraphic.this, "Implement Instructions");
+        }
+    }
+
+    class MenuSaveGame implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(IuGraphic.this, "Implement Instructions");
+        }
+    }
+
+    class MenuLoadGame implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(IuGraphic.this, "Implement Instructions");
+        }
+    }
+
+    class MenuInstructions implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(IuGraphic.this, "Implement Instructions");
+        }
+    }
+
+    class MenuCredits implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(IuGraphic.this, "Advanced Programming\n" + "Diogo Nunes, 21200000\n" + "Marco Barbosa, 21200304\n", "Credits", JOptionPane.OK_OPTION);
+        }
     }
 }
