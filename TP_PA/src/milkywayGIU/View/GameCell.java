@@ -12,11 +12,11 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.cards.Planet;
-import milkyway_logic.states.*;
+import milkyway_logic.states.Buy;
+import milkyway_logic.states.Move;
 import util.Constants;
 
 public class GameCell extends JPanel implements Observer {
@@ -33,7 +33,13 @@ public class GameCell extends JPanel implements Observer {
 
         this.setPreferredSize(new Dimension(Constants.CARD_WIDTH, Constants.CARD_HEIGHT));
 
-        addMouseListener(new MouseAdapter() {
+        setupCubes();
+        registerListeners();
+    }
+
+    private void registerListeners() {
+
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ev) {
                 System.out.println(model.getState());
@@ -43,14 +49,41 @@ public class GameCell extends JPanel implements Observer {
             }
         });
 
-        setupCubes();
-        setupCubeListeners();
-    }
+        this.firstCube.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent ev) {
+                int x_spaceship = model.getPlayer().getSpaceship().getPosX();
+                int y_spaceship = model.getPlayer().getSpaceship().getPosY();
+                if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
+                    System.out.println("Ai credo toquei no 1º cubo!");
+                    System.out.println("Size -> " + model.getPlayer().getSpaceship().getCargo().size());
+                    if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
+                        firstCube.setOpaque(false);
+                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
+                        revalidate();
+                    }
+                }
+            }
+        });
 
-    @Override
-    public void paintBorder(Graphics g) {
-        super.paintBorder(g);
-        g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+        this.secondCube.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent ev) {
+                int x_spaceship = model.getPlayer().getSpaceship().getPosX();
+                int y_spaceship = model.getPlayer().getSpaceship().getPosY();
+                System.out.println(model.getState());
+
+                if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
+                    System.out.println("Ai credo toquei no 2º cubo!");
+                    if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
+                        secondCube.setOpaque(false);
+                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
+                        revalidate();
+                    }
+                }
+            }
+        }
+        );
     }
 
     @Override
@@ -72,6 +105,8 @@ public class GameCell extends JPanel implements Observer {
                     drawIcon(g, "Null");
                     drawIcon(g, "Spaceship_v2");
                 }
+                g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+
             } else {
                 if (model.getBoard()[row][col] != null) {
                     if (model.getBoard()[row][col].getIsTurned()) {
@@ -79,6 +114,7 @@ public class GameCell extends JPanel implements Observer {
                     } else {
                         drawIcon(g, "card_down");
                     }
+                    g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
                 } else {
                     drawIcon(g, "Null");
                 }
@@ -224,40 +260,5 @@ public class GameCell extends JPanel implements Observer {
 
     private void setupCubeListeners() {
 
-        firstCube.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent ev) {
-                int x_spaceship = model.getPlayer().getSpaceship().getPosX();
-                int y_spaceship = model.getPlayer().getSpaceship().getPosY();
-                if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
-                    System.out.println("Ai credo toquei no 1º cubo!");
-                    System.out.println("Size -> " + model.getPlayer().getSpaceship().getCargo().size());
-                    if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
-                        firstCube.setOpaque(false);
-                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
-                        revalidate();
-                    }
-                }
-            }
-        });
-
-        secondCube.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent ev) {
-                int x_spaceship = model.getPlayer().getSpaceship().getPosX();
-                int y_spaceship = model.getPlayer().getSpaceship().getPosY();
-                System.out.println(model.getState());
-
-                if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
-                    System.out.println("Ai credo toquei no 2º cubo!");
-                    if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
-                        secondCube.setOpaque(false);
-                        model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
-                        revalidate();
-                    }
-                }
-            }
-        }
-        );
     }
 };
