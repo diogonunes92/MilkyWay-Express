@@ -8,12 +8,15 @@ public class Player implements Serializable{
     private int coins;
     private String name;
     private Spaceship spaceship;
+    private boolean isAttacked;
+    private int pirateDamage;
 
     public Player(int id, String name, int coins, Spaceship spaceShip) {
         this.id = id;
         this.name = name;
         this.coins = coins;
         this.spaceship = spaceShip;
+        this.pirateDamage = 0;
     }
 
     public int getCoins() {
@@ -39,5 +42,23 @@ public class Player implements Serializable{
     public void setSpaceship(Spaceship spaceship) {
         this.spaceship = spaceship;
     }
+
+    public boolean isIsAttacked() {
+        return isAttacked;
+    }
+
+    public void setIsAttacked(boolean isAttacked) {
+        this.isAttacked = isAttacked;
+    }
+
+    public int getPirateDamage() {
+        return pirateDamage;
+    }
+
+    public void setPirateDamage(int pirateDamage) {
+        this.pirateDamage = pirateDamage;
+    }
+    
+    
 
 }

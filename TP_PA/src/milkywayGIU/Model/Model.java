@@ -80,6 +80,7 @@ public class Model extends Observable {
     public void explore() {
         if (this.game.getState() instanceof Move) {
             this.game.explore();
+            this.game.verifyPirateAttack();
             setChanged();
             notifyObservers();
         }
@@ -95,5 +96,11 @@ public class Model extends Observable {
 
     public Card[][] getBoard() {
         return this.game.getBoard();
+    }
+    
+    public void pirateAttack(){
+        this.game.pirateAtack(2);
+        setChanged();
+        notifyObservers();
     }
 }

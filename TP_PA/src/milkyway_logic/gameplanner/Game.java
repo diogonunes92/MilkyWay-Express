@@ -64,7 +64,7 @@ public final class Game extends Observable implements Serializable {
     }
 
     public void move(int x, int y) {
-        this.state = state.move(x,y);
+        this.state = state.move(x, y);
     }
 
     public void moveWormhole(int move_x, int move_y) {
@@ -96,32 +96,34 @@ public final class Game extends Observable implements Serializable {
     }
 
     public String verifyPirateAttack() {
-        int isPirateAttack = 1 + (int) (Math.random() * 2);
-
+        int isPirateAttack = 1 + (int) (Math.random() * 6);
         if (isPirateAttack == 1) {
-            pirateAtack();
+            pirateAtack(1);
             return "You're being attacked by Pirates";
         } else {
             return "";
         }
     }
 
-    public void pirateAtack() {
+    public void pirateAtack(int inteiro) {
 
         if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet
-                && board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()].isPirate()) {
+                && board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()].isPirate() || inteiro == 1) {
             int piratePower, numAtacks, doneAtacks, powerDiference;
             numAtacks = 1 + (int) (Math.random() * 3);
-            int playerCoins = this.getPlayer().getCoins();
             doneAtacks = 0;
 
             while (doneAtacks < numAtacks) {
                 piratePower = 1 + (int) (Math.random() * 6);
+                int playerCoins = this.getPlayer().getCoins();
 
                 if (this.getPlayer().getSpaceship().getPower() < piratePower) {
                     powerDiference = piratePower - this.getPlayer().getSpaceship().getPower();
+                    this.getPlayer().setPirateDamage(this.getPlayer().getPirateDamage() + powerDiference);
+                    System.out.println("Player Coins -> " + this.getPlayer().getCoins());
                     this.getPlayer().setCoins(playerCoins - powerDiference);
-
+                    System.out.println("Player Coins -> " + this.getPlayer().getCoins());
+                    this.getPlayer().setIsAttacked(true);
                 }
                 doneAtacks++;
             }

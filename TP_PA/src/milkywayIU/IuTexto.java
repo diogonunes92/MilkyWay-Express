@@ -165,7 +165,7 @@ public class IuTexto {
                         this.game.explore();
                         this.game.nextState();
 
-                        System.out.println(this.game.verifyPirateAttack());
+                        //System.out.println(this.game.verifyPirateAttack());
 
                         isFinish = true;
                         hasMoved = false;
@@ -183,7 +183,7 @@ public class IuTexto {
                         System.out.println("See you, mate!");
                     }
             }
-            game.pirateAtack();
+            game.pirateAtack(2);
 
         }
     }

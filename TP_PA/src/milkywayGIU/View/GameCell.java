@@ -12,6 +12,7 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.cards.Planet;
@@ -45,6 +46,7 @@ public class GameCell extends JPanel implements Observer {
                 System.out.println(model.getState());
                 if (model.getState() instanceof Move) {
                     model.move(row, col);
+                    model.pirateAttack();
                 }
             }
         });
@@ -199,6 +201,13 @@ public class GameCell extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        if (model.getPlayer().isIsAttacked()) {
+            model.getPlayer().setIsAttacked(false);
+            JOptionPane.showMessageDialog(getParent(), "You have been attacked by a pirate! It made "+
+                    model.getPlayer().getPirateDamage()+" damage!");
+            model.getPlayer().setPirateDamage(0);
+        }
+
         revalidate();
     }
 
@@ -210,21 +219,6 @@ public class GameCell extends JPanel implements Observer {
         } else if (!name.equals("Null") && name != null) {
             Image img = getCardImage(name);
             g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-        } else if (name.equals("red")) {
-            Image img = getCardImage(name);
-            g.drawImage(img, 50, 20, getWidth() / 2, getHeight() / 2, null);
-        } else if (name.equals("yellow")) {
-            Image img = getCardImage(name);
-            g.drawImage(img, 50, 20, getWidth() / 2, getHeight() / 2, null);
-        } else if (name.equals("black")) {
-            Image img = getCardImage(name);
-            g.drawImage(img, 50, 20, getWidth() / 2, getHeight() / 2, null);
-        } else if (name.equals("white")) {
-            Image img = getCardImage(name);
-            g.drawImage(img, 50, 20, getWidth() / 2, getHeight() / 2, null);
-        } else if (name.equals("blue")) {
-            Image img = getCardImage(name);
-            g.drawImage(img, 50, 20, getWidth() / 2, getHeight() / 2, null);
         }
         //validate();
     }
