@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Spaceship implements Serializable{
+public class Spaceship implements Serializable {
 
     private int power;
+    private boolean isFirstWeaponUpdated;
+    private boolean isSecondWeaponUpdated;
     private int capacity;
     private int posY;
     private int posX;
@@ -24,8 +26,6 @@ public class Spaceship implements Serializable{
         this.isCargoUpdated = false;
     }
 
-
-    
     public int getPosY() {
         return posY;
     }
@@ -82,7 +82,21 @@ public class Spaceship implements Serializable{
         return hasMoved;
     }
 
+    public boolean isFirstWeaponUpdated() {
+        return isFirstWeaponUpdated;
+    }
 
+    public void setIsFirstWeaponUpdated(boolean isFirstWeaponUpdated) {
+        this.isFirstWeaponUpdated = isFirstWeaponUpdated;
+    }
+
+    public boolean isSecondWeaponUpdated() {
+        return isSecondWeaponUpdated;
+    }
+
+    public void setIsSecondWeaponUpdated(boolean isSecondWeaponUpdated) {
+        this.isSecondWeaponUpdated = isSecondWeaponUpdated;
+    }
     
-
+    
 }

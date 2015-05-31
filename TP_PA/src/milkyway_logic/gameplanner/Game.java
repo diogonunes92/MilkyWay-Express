@@ -234,7 +234,7 @@ public final class Game extends Observable implements Serializable {
 
     public String upgradeWeaponVerifier() {
         if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
-            upgradeWeapon();
+            //upgradeWeapon();
             return "The Power was upgraded!";
         }
         return "You're not on a planet!";

@@ -112,8 +112,16 @@ public class WeaponComponent extends JPanel implements Observer {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 if (model.getState() instanceof Buy) {
-                    model.upgradeWeapon();
+                    if (!model.getPlayer().getSpaceship().isFirstWeaponUpdated()) {
+                        model.upgradeWeapon();
+                    } else {
+                        JOptionPane pane = new JOptionPane("First weapon already updated!");
+                        final JDialog d = pane.createDialog((JFrame) null, "Error");
+                        d.setLocation(500, 300);
+                        d.setVisible(true);
+                    }
                 } else {
                     JOptionPane pane = new JOptionPane("Just on Buy state!");
                     final JDialog d = pane.createDialog((JFrame) null, "Error");
@@ -127,8 +135,23 @@ public class WeaponComponent extends JPanel implements Observer {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 if (model.getState() instanceof Buy) {
-                    model.upgradeWeapon();
+                    if (model.getPlayer().getSpaceship().isFirstWeaponUpdated()) {
+                        if (!model.getPlayer().getSpaceship().isSecondWeaponUpdated()) {
+                            model.upgradeWeapon();
+                        } else {
+                            JOptionPane pane = new JOptionPane("Second weapon already updated!");
+                            final JDialog d = pane.createDialog((JFrame) null, "Error");
+                            d.setLocation(500, 300);
+                            d.setVisible(true);
+                        }
+                    } else {
+                        JOptionPane pane = new JOptionPane("Upgrade other weapon first!");
+                        final JDialog d = pane.createDialog((JFrame) null, "Error");
+                        d.setLocation(500, 300);
+                        d.setVisible(true);
+                    }
                 } else {
                     JOptionPane pane = new JOptionPane("Just on Buy state!");
                     final JDialog d = pane.createDialog((JFrame) null, "Error");
@@ -136,11 +159,17 @@ public class WeaponComponent extends JPanel implements Observer {
                     d.setVisible(true);
                 }
             }
-        });
+        }
+        );
     }
 
     @Override
+
     public void update(Observable o, Object arg) {
         System.out.println("UpdateWeaponComponent");
+
+//        if(model.getState().upgradeWeapon() instanceof Buy){
+        weaponPowerLabel.setText(String.valueOf(this.model.getPlayer().getSpaceship().getPower()));
+//        } 
     }
 }

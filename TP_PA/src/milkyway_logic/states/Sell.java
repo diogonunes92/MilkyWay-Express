@@ -35,10 +35,10 @@ public class Sell extends StatesAdapter {
                     cubesSpaceship.remove(pos);
                 }
                 getGame().getPlayer().getSpaceship().setCargo(cubesSpaceship);
-                
+
                 return this;
             }
-            
+
             if (cubeListPlanet.get(0).getColor().compareTo(cargo) == 0 && cubeListPlanet.get(1).getColor().compareTo(cargo) == 0) {
                 getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() + prices.get(cargo));
 
@@ -77,20 +77,11 @@ public class Sell extends StatesAdapter {
 
     @Override
     public StatesAdapter upgradeWeapon() {
-
-        if (getGame().getPlayer().getSpaceship().getPower() < 6 && getGame().getPlayer().getCoins() >= 4) {
-            getGame().getPlayer().getSpaceship().setPower(getGame().getPlayer().getSpaceship().getPower() + 1);
-            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
-        }
         return this;
     }
 
     @Override
     public StatesAdapter upgradeCargo() {
-        if (getGame().getPlayer().getSpaceship().getCargo().size() == 2) {
-            getGame().getPlayer().getSpaceship().setCapacity(getGame().getPlayer().getSpaceship().getCapacity() + 1);
-            getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
-        }
         return this;
     }
 
