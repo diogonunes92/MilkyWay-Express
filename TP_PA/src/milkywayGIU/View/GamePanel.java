@@ -92,7 +92,7 @@ public class GamePanel extends JPanel implements Observer {
     
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        super.paintComponent(g);
 
         try {
             g.drawImage(getBackgroundImage(), 0, 0, null);
@@ -105,7 +105,6 @@ public class GamePanel extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         System.err.println("UpdateGamePanel");
         this.repaint();
-        
     }
     
     private Image getBackgroundImage() throws IOException {

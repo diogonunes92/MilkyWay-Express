@@ -15,8 +15,7 @@ import util.Constants;
 public class CreditsComponent extends JPanel implements Observer {
 
     private Model model;
-    private JLabel titleLabel, creditsLabel;
-    private JPanel panel;
+    private JLabel titleLabel, creditsLabel, roundsPlayed, pirateAttacks;
 
     public CreditsComponent(Model model) {
         this.model = model;
@@ -24,36 +23,35 @@ public class CreditsComponent extends JPanel implements Observer {
         this.setMaximumSize(new Dimension(Constants.RIGHT_PANEL_COMPONENT_WIDTH, Constants.RIGHT_PANEL_COMPONENT_HEIGHT));
         this.setVisible(true);
         this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        this.setBackground(Color.darkGray);
+        this.setBackground(Color.CYAN);
 
         setupComponents();
         setupLayout();
     }
 
     private void setupComponents() {
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         titleLabel = new JLabel();
         creditsLabel = new JLabel();
-        
-        panel = new JPanel();
+        roundsPlayed = new JLabel();
+        pirateAttacks = new JLabel();
+
     }
 
     private void setupLayout() {
-
-        panel.setLayout(new GridLayout(2, 1));
-        panel.setBackground(Color.red);
         
         titleLabel.setText("CREDITS");
         titleLabel.setFont(Constants.FONT_13);
-        
+        titleLabel.setAlignmentY(CENTER_ALIGNMENT);
+
         creditsLabel.setText(String.valueOf(model.getPlayer().getCoins()));
         creditsLabel.setFont(Constants.FONT_25);
-        
-        panel.add(titleLabel);
-        panel.add(creditsLabel);
-        
-        this.add(panel);
+        creditsLabel.setAlignmentY(CENTER_ALIGNMENT);
+
+        add(titleLabel);
+        add(creditsLabel);
+
     }
 
     void registerObservers() {
