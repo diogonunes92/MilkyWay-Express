@@ -10,6 +10,8 @@ public class Player implements Serializable{
     private Spaceship spaceship;
     private boolean isAttacked;
     private int pirateDamage;
+    private boolean isFinished;
+    private boolean isWinner;
 
     public Player(int id, String name, int coins, Spaceship spaceShip) {
         this.id = id;
@@ -57,6 +59,22 @@ public class Player implements Serializable{
 
     public void setPirateDamage(int pirateDamage) {
         this.pirateDamage = pirateDamage;
+    }
+
+    public boolean isIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(boolean isFinished) {
+        this.isFinished = isFinished;
+    }
+
+    public boolean isIsWinner() {
+        return isWinner;
+    }
+
+    public void setIsWinner(boolean isWinner) {
+        this.isWinner = isWinner;
     }
     
     

@@ -15,14 +15,6 @@ public class Move extends StatesAdapter {
     }
 
     @Override
-    public StatesAdapter isFinished() {
-        if (getGame().getPlayer().getCoins() == 0) {
-            System.exit(0);
-        }
-        return this;
-    }
-
-    @Override
     public StatesAdapter moveWormhole(int x, int y) {
 
         if (wormholeVerifier(x, y)) {
@@ -218,7 +210,7 @@ public class Move extends StatesAdapter {
 
     @Override
     public StatesAdapter nextState() {
-
+        
         return new Sell(getGame());
     }
 
