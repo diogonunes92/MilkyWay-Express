@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,8 +25,9 @@ import util.Constants;
 public class CargoComponent extends JPanel implements Observer {
 
     private final Model model;
-    private JLabel titleLabel, firstCargo, secondCargo, thirdCargo;
-    private JPanel cargoPanel;
+    private JPanel firstCargo, secondCargo, thirdCargo;
+    private JLabel titleLabel;
+    private Box mBox;
     private JButton upgradeCargoButton;
 
     public CargoComponent(Model model) {
@@ -46,11 +47,12 @@ public class CargoComponent extends JPanel implements Observer {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         titleLabel = new JLabel();
-        firstCargo = new JLabel();
-        secondCargo = new JLabel();
-        thirdCargo = new JLabel();
 
-        cargoPanel = new JPanel();
+        firstCargo = new JPanel();
+        secondCargo = new JPanel();
+        thirdCargo = new JPanel();
+
+        mBox = Box.createHorizontalBox();
 
         upgradeCargoButton = new JButton();
     }
@@ -61,32 +63,28 @@ public class CargoComponent extends JPanel implements Observer {
         titleLabel.setFont(Constants.FONT_16);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        cargoPanel.setLayout(new GridLayout(1, 3));
-        cargoPanel.setSize(new Dimension(200, 50));
+        firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+        secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+        thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
 
-        firstCargo.setSize(new Dimension(40, 40));
-        firstCargo.setBackground(Color.BLUE);
-        firstCargo.setText(this.model.getPlayer().getSpaceship().getCargo().get(0).getColor());
-
-        secondCargo.setSize(new Dimension(40, 40));
-        secondCargo.setBackground(Color.yellow);
-        secondCargo.setText("black");
-
-        thirdCargo.setSize(new Dimension(40, 40));
-        thirdCargo.setBackground(Color.RED);
-        thirdCargo.setText("rose");
-
-        cargoPanel.add(firstCargo);
-        cargoPanel.add(secondCargo);
-        cargoPanel.add(thirdCargo);
+        mBox.add(Box.createHorizontalStrut(30));
+        mBox.add(firstCargo);
+        mBox.add(Box.createHorizontalStrut(20));
+        mBox.add(secondCargo);
+        mBox.add(Box.createHorizontalStrut(20));
+        mBox.add(thirdCargo);
+        mBox.add(Box.createHorizontalStrut(30));
 
         upgradeCargoButton.setText("Upgrage Cargo");
         upgradeCargoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(titleLabel);
-        this.add(cargoPanel);
+        this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
+        this.add(mBox);
+        this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
         this.add(upgradeCargoButton);
-
+        this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
     }
 
     void registerObservers() {
@@ -98,7 +96,7 @@ public class CargoComponent extends JPanel implements Observer {
         try {
             g.drawImage(getBackgroundImage(), 0, 0, null);
         } catch (IOException ex) {
-            Logger.getLogger(WeaponComponent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CargoComponent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -112,6 +110,10 @@ public class CargoComponent extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("UpdateCargoComponent");
+
+        firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+        secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+        thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
     }
 
     private void registerListeners() {
