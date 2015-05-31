@@ -82,7 +82,6 @@ public class WeaponComponent extends JPanel implements Observer {
         this.add(weaponUpgrade1Button);
         this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
         this.add(weaponUpgrade2Button);
-
     }
 
     void registerObservers() {
@@ -166,10 +165,9 @@ public class WeaponComponent extends JPanel implements Observer {
     @Override
 
     public void update(Observable o, Object arg) {
-        System.out.println("UpdateWeaponComponent");
-
-//        if(model.getState().upgradeWeapon() instanceof Buy){
-        weaponPowerLabel.setText(String.valueOf(this.model.getPlayer().getSpaceship().getPower()));
-//        } 
+        if (model.getState() instanceof Buy) {
+            System.out.println("UpdateWeaponComponent");
+            weaponPowerLabel.setText(String.valueOf(this.model.getPlayer().getSpaceship().getPower()));
+        }
     }
 }
