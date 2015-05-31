@@ -15,9 +15,13 @@ public class Sell extends StatesAdapter {
 
     @Override
     public StatesAdapter isFinished() {
-        if (getGame().getPlayer().getCoins() <= 0) {
-            System.out.println("Acabou :(");
-            System.exit(0);
+        
+        if(getGame().getPlayer().getCoins() <= 0) {
+            getGame().getPlayer().setIsWinner(false);
+            getGame().getPlayer().setIsFinished(true);
+        }
+        if(getGame().getPlayer().getCoins() > 0 && getGame().getPlayer().isIsFinished()){
+            getGame().getPlayer().setIsWinner(true);
         }
         return this;
     }
@@ -122,6 +126,19 @@ public class Sell extends StatesAdapter {
 
     @Override
     public StatesAdapter nextState() {
+        boolean areAllTurned = true;
+        for(int i = 0; i< 7; i++){
+            for(int j = 0; j < 9; j++){
+                if(getGame().getBoard()[i][j] != null)
+                if(!getGame().getBoard()[i][j].getIsTurned())
+                    areAllTurned = false;
+            }
+        }
+        
+        if(areAllTurned){
+            getGame().getPlayer().setIsFinished(true);
+        }
+        
         isFinished();
         return new Buy(getGame());
     }

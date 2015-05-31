@@ -44,7 +44,7 @@ public class StartGame extends StatesAdapter {
                             List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
 
                             while (getGame().getBoard()[i][j].getCubeList().size() < 2) {
-                                randomNum = 1 + (int) (Math.random() * 6);
+                                randomNum = 1 + (int) (Math.random() * 4);
 
                                 if (randomNum == 1) {
                                     color = "red";
@@ -52,8 +52,6 @@ public class StartGame extends StatesAdapter {
                                     color = "blue";
                                 } else if (randomNum == 3) {
                                     color = "yellow";
-                                } else if (randomNum == 4) {
-                                    color = "black";
                                 } else {
                                     color = "white";
                                 }
