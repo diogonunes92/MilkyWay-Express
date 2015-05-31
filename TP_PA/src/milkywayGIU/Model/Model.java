@@ -1,5 +1,6 @@
 package milkywayGIU.Model;
 
+import java.awt.Color;
 import java.util.Observable;
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
@@ -54,10 +55,11 @@ public class Model extends Observable {
 
     public void buyCargo(String carga) {
         this.game.buyCargo(carga);
-        
+        setChanged();
+        notifyObservers();
     }
 
-    public void sellCargo(String carga) {
+    public void sellCargo(Color carga) {
         this.game.sellCargo(carga);
         setChanged();
         notifyObservers();
@@ -97,8 +99,8 @@ public class Model extends Observable {
     public Card[][] getBoard() {
         return this.game.getBoard();
     }
-    
-    public void pirateAttack(){
+
+    public void pirateAttack() {
         this.game.pirateAtack(2);
         setChanged();
         notifyObservers();

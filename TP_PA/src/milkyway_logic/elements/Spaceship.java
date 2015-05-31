@@ -19,7 +19,6 @@ public class Spaceship implements Serializable {
     public Spaceship(int posX, int posY) {
         this.power = 3;
         this.cargo = new ArrayList<>();
-        this.cargo.add(new Cube("azul"));
         this.posX = posX;
         this.posY = posY;
         this.capacity = 2;

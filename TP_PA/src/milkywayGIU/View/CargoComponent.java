@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
+import milkyway_logic.states.Buy;
 import milkyway_logic.states.Move;
 import util.Constants;
 
@@ -64,10 +65,9 @@ public class CargoComponent extends JPanel implements Observer {
         titleLabel.setFont(Constants.FONT_16);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
-        secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
-        thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
-
+        //firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+        //secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+        //thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
         mBox.add(Box.createHorizontalStrut(30));
         mBox.add(firstCargo);
         mBox.add(Box.createHorizontalStrut(20));
@@ -112,11 +112,23 @@ public class CargoComponent extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         System.out.println("UpdateCargoComponent");
 
-        if (this.model.getState() instanceof Move) {
-            firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
-            //secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(1).getColorObject());
-    //        thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
-        }
+        firstCargo.setBackground(Color.WHITE);
+        secondCargo.setBackground(Color.WHITE);
+        thirdCargo.setBackground(Color.WHITE);
+        
+            if (this.model.getPlayer().getSpaceship().getCargo().size() > 0) {
+                firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+                firstCargo.setOpaque(true);
+            }
+            if (this.model.getPlayer().getSpaceship().getCargo().size() > 1) {
+                secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(1).getColorObject());
+                secondCargo.setOpaque(true);
+            }
+            if (this.model.getPlayer().getSpaceship().getCargo().size() > 2) {
+                thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
+                thirdCargo.setOpaque(true);
+            }
+
 
         revalidate();
     }
@@ -129,6 +141,16 @@ public class CargoComponent extends JPanel implements Observer {
             public void mouseClicked(MouseEvent e) {
                 model.upgradeCargo();
             }
+        });
+
+        firstCargo.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println(firstCargo.getBackground().toString());
+                model.sellCargo(firstCargo.getBackground());
+            }
+
         });
     }
 }

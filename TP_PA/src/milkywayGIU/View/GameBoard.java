@@ -22,7 +22,6 @@ public final class GameBoard extends JPanel {
     }
 
     private void setupComponents() {
-        
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
                 GameCell cell = new GameCell(model, i, j);

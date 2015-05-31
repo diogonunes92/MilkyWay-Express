@@ -1,5 +1,6 @@
 package milkyway_logic.gameplanner;
 
+import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -87,7 +88,7 @@ public final class Game extends Observable implements Serializable {
         this.state = state.buyCargo(carga);
     }
 
-    public void sellCargo(String carga) {
+    public void sellCargo(Color carga) {
         this.state = state.sellCargo(carga);
     }
 
@@ -160,7 +161,7 @@ public final class Game extends Observable implements Serializable {
         }
 
         if (board[player.getSpaceship().getPosX()][player.getSpaceship().getPosY()] instanceof Planet) {
-            sellCargo(cargo);
+            //sellCargo(cargo);
         }
 
         return "You're not on a planet";

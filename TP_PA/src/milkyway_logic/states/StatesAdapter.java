@@ -1,5 +1,6 @@
 package milkyway_logic.states;
 
+import java.awt.Color;
 import milkyway_logic.gameplanner.Game;
 
 public class StatesAdapter implements States {
@@ -40,7 +41,7 @@ public class StatesAdapter implements States {
     }
 
     @Override
-    public States sellCargo(String carga) {
+    public States sellCargo(Color carga) {
         return this;
     }
 
