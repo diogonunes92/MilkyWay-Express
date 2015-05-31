@@ -81,10 +81,6 @@ public class Buy extends StatesAdapter {
         return this;
     }
     
-    @Override
-    public StatesAdapter isFinished() {
-        return this;
-    }
     
     @Override
     public StatesAdapter upgradeWeapon() {

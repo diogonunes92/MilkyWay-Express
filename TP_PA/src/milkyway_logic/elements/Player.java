@@ -16,7 +16,7 @@ public class Player implements Serializable{
     public Player(int id, String name, int coins, Spaceship spaceShip) {
         this.id = id;
         this.name = name;
-        this.coins = coins;
+        this.coins = coins; 
         this.spaceship = spaceShip;
         this.pirateDamage = 0;
     }
@@ -76,7 +76,4 @@ public class Player implements Serializable{
     public void setIsWinner(boolean isWinner) {
         this.isWinner = isWinner;
     }
-    
-    
-
 }

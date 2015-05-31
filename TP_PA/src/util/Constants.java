@@ -65,7 +65,8 @@ public class Constants {
     //Fonts
     public static final Font FONT_12 = new Font("Verdana", Font.PLAIN, 12);
     public static final Font FONT_13 = new Font("Verdana", Font.BOLD, 13);
-    public static final Font FONT_25 = new Font("Verdana", Font.BOLD, 25);
+    public static final Font FONT_20 = new Font("Verdana", Font.BOLD, 20);
     public static final Font FONT_16 = new Font("Verdana", Font.BOLD, 16);
+    public static final Font FONT_25 = new Font("Verdana", Font.BOLD, 25);
 
 }

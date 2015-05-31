@@ -11,7 +11,7 @@ public class Sell extends StatesAdapter {
     public Sell(Game game) {
         super(game);
     }
-    
+
     @Override
     public StatesAdapter isFinished() {
         if (getGame().getPlayer().getCoins() <= 0) {
@@ -20,8 +20,7 @@ public class Sell extends StatesAdapter {
         }
         return this;
     }
-    
-    
+
     @Override
     public StatesAdapter sellCargo(String cargo) {
         int PosX = getGame().getPlayer().getSpaceship().getPosX();
@@ -78,16 +77,6 @@ public class Sell extends StatesAdapter {
         }
         return this;
 
-    }
-
-    @Override
-    public StatesAdapter upgradeWeapon() {
-        return this;
-    }
-
-    @Override
-    public StatesAdapter upgradeCargo() {
-        return this;
     }
 
     @Override
