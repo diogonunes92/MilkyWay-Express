@@ -51,9 +51,10 @@ public class GameCell extends JPanel implements Observer {
 
         firstCube.setBackground(Color.gray);
         firstCube.setOpaque(false);
-
+        firstCube.setSize(10, 10);
         secondCube.setBackground(Color.gray);
         secondCube.setOpaque(false);
+        secondCube.setSize(10, 10);
 
         this.add(firstCube);
         this.add(secondCube);
@@ -104,6 +105,8 @@ public class GameCell extends JPanel implements Observer {
                     if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
                         secondCube.setOpaque(false);
                         model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
+                                System.out.println("Cargo -> " + model.getBoard()[row][col].getCubeList().get(0) + " " +model.getBoard()[row][col].getCubeList().get(1) );
+
                         revalidate();
                     }
                 }
@@ -140,14 +143,21 @@ public class GameCell extends JPanel implements Observer {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         firstCube.setLocation(
-                40, 87);
+                35, 86);
         secondCube.setLocation(
                 55, 87);
+        firstCube.setSize(10, 10);
+        secondCube.setSize(10, 10);
 
         if (model.getState() instanceof Move && model.getBoard()[row][col] instanceof Planet) {
+            
             if (model.getBoard()[row][col].getCubeList().size() > 0) {
+                if(model.getBoard()[row][col].isPirate()){
+                    firstCube.setLocation(45, 87);
+                }
                 firstCube.setBackground(model.getBoard()[row][col].getCubeList().get(0).getColorObject());
                 firstCube.setOpaque(true);
+                
             }
             if (model.getBoard()[row][col].getCubeList().size() > 1) {
                 secondCube.setBackground(model.getBoard()[row][col].getCubeList().get(1).getColorObject());
@@ -158,7 +168,6 @@ public class GameCell extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
         if (model.getPlayer().isIsAttacked()) {
             model.getPlayer().setIsAttacked(false);
             JOptionPane.showMessageDialog(getParent(), "You have been attacked by a pirate! It made " + model.getPlayer().getPirateDamage() + " damage!");

@@ -112,7 +112,10 @@ public class CargoComponent extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         System.out.println("UpdateCargoComponent");
 
-        if (this.model.getState() instanceof Buy) {
+        firstCargo.setBackground(Color.WHITE);
+        secondCargo.setBackground(Color.WHITE);
+        thirdCargo.setBackground(Color.WHITE);
+        
             if (this.model.getPlayer().getSpaceship().getCargo().size() > 0) {
                 firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
                 firstCargo.setOpaque(true);
@@ -125,12 +128,7 @@ public class CargoComponent extends JPanel implements Observer {
                 thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
                 thirdCargo.setOpaque(true);
             }
-            if (this.model.getPlayer().getSpaceship().getCargo().isEmpty()) {
-                firstCargo.setBackground(Color.WHITE);
-                secondCargo.setBackground(Color.WHITE);
-                thirdCargo.setBackground(Color.WHITE);
-            }
-        }
+
 
         revalidate();
     }
