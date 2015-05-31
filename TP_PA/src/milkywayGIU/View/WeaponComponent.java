@@ -69,10 +69,12 @@ public class WeaponComponent extends JPanel implements Observer {
         weaponUpgrade1Button.setBackground(Color.LIGHT_GRAY);
         weaponUpgrade1Button.setText("Upgrade Weapon 1");
         weaponUpgrade1Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        weaponUpgrade1Button.setToolTipText("<html>" + "Cost: <b>4 Credits</b>" + "<br/>Weapon Power: <b>5</b></html>");
 
         weaponUpgrade2Button.setBackground(Color.LIGHT_GRAY);
         weaponUpgrade2Button.setText("Upgrade Weapon 2");
         weaponUpgrade2Button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        weaponUpgrade2Button.setToolTipText("<html>" + "Cost: <b>5 Credits</b>" + "<br/>Weapon Power: <b>6</b></html>");
 
         this.add(Box.createHorizontalStrut(5));
         this.add(titleLabel);
