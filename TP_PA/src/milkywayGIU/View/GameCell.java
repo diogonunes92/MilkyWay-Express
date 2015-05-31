@@ -124,19 +124,25 @@ public class GameCell extends JPanel implements Observer {
 
             if (model.getBoard()[row][col] != null) {
                 if (model.getBoard()[row][col].getIsTurned()) {
-                    drawIcon(g, model.getBoard()[row][col].getPlanetName());
+                    if (model.getBoard()[row][col] instanceof Planet) {
+                        drawIcon(g, model.getBoard()[row][col].getPlanetName());
+                        this.setToolTipText("<html>" + "Name: <b>" + model.getBoard()[row][col].getPlanetName() + "</b><br/>"
+                                + "Pirate: <b>" + String.valueOf(model.getBoard()[row][col].isPirate()) + "</b><br/>"
+                                + "Cargo: <b>" + model.getBoard()[row][col].toStringCargo() + "</b><br/>" + "</html>");
+                    } else {
+                        drawIcon(g, model.getBoard()[row][col].getPlanetName());
+                        this.setToolTipText("<html>" + "Name: <b>" + model.getBoard()[row][col].getPlanetName() + "</b><br/>" + "</html>");
+                    }
                 } else {
-                    drawIcon(g, "card_down");
+                    this.drawIcon(g, "card_down");
+
                 }
                 if (x_spaceship == row && y_spaceship == col) {
-                    drawIcon(g, "Spaceship_v2");
+                    this.drawIcon(g, "Spaceship_v2");
                 }
                 g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
             } else {
-                drawIcon(g, "Null");
-                if (x_spaceship == row && y_spaceship == col) {
-                    drawIcon(g, "Spaceship_v2");
-                }
+                this.drawIcon(g, "Null");
             }
 
         } catch (IOException ex) {
@@ -173,6 +179,7 @@ public class GameCell extends JPanel implements Observer {
             JOptionPane.showMessageDialog(getParent(), "You have been attacked by a pirate! It made " + model.getPlayer().getPirateDamage() + " damage!");
             model.getPlayer().setPirateDamage(0);
         }
+
         revalidate();
     }
 

@@ -77,6 +77,7 @@ public class CargoComponent extends JPanel implements Observer {
         mBox.add(Box.createHorizontalStrut(30));
 
         upgradeCargoButton.setText("Upgrage Cargo");
+        upgradeCargoButton.setBackground(Color.LIGHT_GRAY);
         upgradeCargoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(Box.createRigidArea(new Dimension(0, 5)));

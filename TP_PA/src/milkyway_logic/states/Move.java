@@ -273,4 +273,14 @@ public class Move extends StatesAdapter {
         }
         return false;
     }
+
+    @Override
+    public States pirateAttack() {
+        return super.pirateAttack(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public States isFinished() {
+        return super.isFinished(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

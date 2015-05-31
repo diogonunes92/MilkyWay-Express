@@ -22,8 +22,9 @@ import util.Constants;
 public class NextPhaseComponent extends JPanel implements Observer {
 
     private final Model model;
-    private JLabel currentPhase;
     private JButton nextButton;
+    private JLabel currentStateLabel, titleLabel, creditsLabel;
+    private Box mBox;
 
     public NextPhaseComponent(Model model) {
         this.model = model;
@@ -41,8 +42,12 @@ public class NextPhaseComponent extends JPanel implements Observer {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.currentPhase = new JLabel();
+        this.currentStateLabel = new JLabel();
         this.nextButton = new JButton();
+        this.titleLabel = new JLabel();
+        this.creditsLabel = new JLabel();
+
+        mBox = Box.createHorizontalBox();
     }
 
     private void setupLayout() {
@@ -50,14 +55,28 @@ public class NextPhaseComponent extends JPanel implements Observer {
         nextButton.setText("Next Phase");
         nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        currentPhase.setText(model.getState().toString());
-        currentPhase.setFont(Constants.FONT_25);
-        currentPhase.setAlignmentX(Component.CENTER_ALIGNMENT);
+        currentStateLabel.setText("Move");
+        currentStateLabel.setFont(Constants.FONT_25);
+        currentStateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        titleLabel.setText("CREDITS: ");
+        titleLabel.setFont(Constants.FONT_20);
+        titleLabel.setAlignmentY(CENTER_ALIGNMENT);
+
+        creditsLabel.setText(String.valueOf(model.getPlayer().getCoins()));
+        creditsLabel.setFont(Constants.FONT_20);
+        creditsLabel.setAlignmentY(CENTER_ALIGNMENT);
+
+        mBox.add(titleLabel);
+        mBox.add(Box.createHorizontalStrut(20));
+        mBox.add(creditsLabel);
 
         this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
-        this.add(currentPhase);
-        this.add(Box.createRigidArea(new Dimension(0, 60)));
+        this.add(currentStateLabel);
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
         this.add(nextButton);
+        this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
+        this.add(mBox);
     }
 
     private void registerListener() {
@@ -67,11 +86,14 @@ public class NextPhaseComponent extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ev) {
 
                 if (model.getState() instanceof Move) {
+
                     if (model.getPlayer().getSpaceship().isHasMoved()) {
                         model.getPlayer().getSpaceship().setHasMoved(false);
                         model.explore();
                         model.nextState();
+                        nextButton.setEnabled(true);
                     } else {
+
                         JOptionPane.showMessageDialog(getParent(), "You have to move at least once.");
                     }
                 } else {
@@ -90,12 +112,14 @@ public class NextPhaseComponent extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         System.out.println("UpdateNextPhaseComponent");
 
+        creditsLabel.setText(String.valueOf(model.getPlayer().getCoins()));
+
         if (model.getState() instanceof Move) {
-            currentPhase.setText("Move");
+            currentStateLabel.setText("Move");
         } else if (model.getState() instanceof Sell) {
-            currentPhase.setText("Sell");
+            currentStateLabel.setText("Sell");
         } else if (model.getState() instanceof Buy) {
-            currentPhase.setText("Buy");
+            currentStateLabel.setText("Buy");
         }
     }
 }
