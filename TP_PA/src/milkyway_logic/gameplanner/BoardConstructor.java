@@ -12,7 +12,7 @@ import util.Constants;
 public class BoardConstructor {
 
     private final Card[][] gameBoard;
-    private ArrayList<Card> cardShuffle = new ArrayList<>();
+    private final ArrayList<Card> cardShuffle = new ArrayList<>();
     private HashMap<String, Integer> prices;
 
     public BoardConstructor() {
@@ -52,12 +52,11 @@ public class BoardConstructor {
     private void fillGameBoard() {
 
         for (int row = 0; row < cardShuffle.size(); row++) {
-
             gameBoard[Constants.BOARD_POSITIONS[row][0]][Constants.BOARD_POSITIONS[row][1]] = cardShuffle.get(row);
         }
-
         this.gameBoard[6][0] = new Wormhole(true);
         this.gameBoard[0][8] = new Wormhole(true);
+
 //        First card after the first
         this.gameBoard[5][0].setIsTurned(true);
 

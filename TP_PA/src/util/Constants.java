@@ -16,6 +16,12 @@ public class Constants {
     public static final int BOARD_LIMIT_SUP_Y = 8;
     public static final int BOARD_LIMIT_INF_Y = 0;
 
+    public static final String EMPTY_COLOR = "empty";
+    public static final String BLUE_COLOR = "black";
+    public static final String YELLOW_COLOR = "yellow";
+    public static final String RED_COLOR = "red";
+    public static final String BLACK_COLOR = "black";
+
     // Game initiation - Board
     public static final int BOARD_TOTAL_CARDS = 25;
     public static final int BLACK_HOLES_TOTAL_CARDS = 4;
@@ -43,7 +49,7 @@ public class Constants {
 
     // Graphical variables
     public static int WINDOW_WIDTH = 1280;
-    public static int HEIGHT = 800;
+    public static int HEIGHT = 768;
 
     public static int CARD_WIDTH = 100;
     public static int CARD_HEIGHT = 100;

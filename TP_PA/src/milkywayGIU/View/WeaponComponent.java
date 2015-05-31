@@ -19,9 +19,13 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
+import milkyway_logic.states.Buy;
 import util.Constants;
 
 public class WeaponComponent extends JPanel implements Observer {
@@ -72,6 +76,7 @@ public class WeaponComponent extends JPanel implements Observer {
         weaponUpgrade2Button.setText("Upgrade Weapon 2");
         weaponUpgrade2Button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        this.add(Box.createHorizontalStrut(5));
         this.add(titleLabel);
         this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
         this.add(weaponPowerLabel);
@@ -109,7 +114,14 @@ public class WeaponComponent extends JPanel implements Observer {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                model.upgradeWeapon();
+                if (model.getState() instanceof Buy) {
+                    model.upgradeWeapon();
+                } else {
+                    JOptionPane pane = new JOptionPane("Just on Buy state!");
+                    final JDialog d = pane.createDialog((JFrame) null, "Error");
+                    d.setLocation(500, 300);
+                    d.setVisible(true);
+                }
             }
         });
 
@@ -117,7 +129,14 @@ public class WeaponComponent extends JPanel implements Observer {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                model.upgradeWeapon();
+                if (model.getState() instanceof Buy) {
+                    model.upgradeWeapon();
+                } else {
+                    JOptionPane pane = new JOptionPane("Just on Buy state!");
+                    final JDialog d = pane.createDialog((JFrame) null, "Error");
+                    d.setLocation(500, 300);
+                    d.setVisible(true);
+                }
             }
         });
     }

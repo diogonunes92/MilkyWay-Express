@@ -127,7 +127,7 @@ public class IuGraphic extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(IuGraphic.this, "Advanced Programming\n" + "Diogo Nunes, 21200000\n" + "Marco Barbosa, 21200304\n", "Credits", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(IuGraphic.this, "Advanced Programming Course Project\n\n" + "Diogo Nunes, 21200000\ndiogonuuunes@gmail.com\n\n" + "Marco Barbosa, 21200304\nmarco.de.barbosa@gmail.com\n\n\n", "Credits", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

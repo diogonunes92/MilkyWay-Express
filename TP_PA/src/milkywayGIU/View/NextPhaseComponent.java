@@ -1,16 +1,18 @@
 package milkywayGIU.View;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import milkywayGIU.Model.Model;
 import milkyway_logic.states.Buy;
 import milkyway_logic.states.Move;
@@ -19,49 +21,53 @@ import util.Constants;
 
 public class NextPhaseComponent extends JPanel implements Observer {
 
-    private Model model;
+    private final Model model;
     private JLabel currentPhase;
     private JButton nextButton;
 
     public NextPhaseComponent(Model model) {
         this.model = model;
-        this.currentPhase = new JLabel();
-        this.nextButton = new JButton();
-        this.nextButton.setText("Next Phase");
-        this.currentPhase.setText("Starting Game");
-        currentPhase.setFont(Constants.FONT_25);
 
         setMaximumSize(new Dimension(Constants.RIGHT_PANEL_COMPONENT_WIDTH, Constants.RIGHT_PANEL_COMPONENT_HEIGHT));
-
-        System.out.println("Tou a criar o nextphase");
-
+        this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         this.setVisible(true);
+
+        this.setupComponents();
         this.setupLayout();
-        this.addListener();
+        this.registerListener();
+    }
+
+    private void setupComponents() {
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.currentPhase = new JLabel();
+        this.nextButton = new JButton();
     }
 
     private void setupLayout() {
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        JPanel gamePanel = new JPanel();
 
-        gamePanel.add(currentPhase);
-        gamePanel.add(nextButton);
-        add(gamePanel);
+        nextButton.setText("Next Phase");
+        nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        currentPhase.setText(model.getState().toString());
+        currentPhase.setFont(Constants.FONT_25);
+        currentPhase.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.add(Box.createRigidArea(new Dimension(0, Constants.INSIDE_PANEL_SPACE)));
+        this.add(currentPhase);
+        this.add(Box.createRigidArea(new Dimension(0, 60)));
+        this.add(nextButton);
     }
 
-    void registerObservers() {
-        model.addObserver(this);
-    }
+    private void registerListener() {
 
-    private void addListener() {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
 
                 if (model.getState() instanceof Move) {
                     if (model.getPlayer().getSpaceship().isHasMoved()) {
-                        System.out.println("MODEL EXPLORE");
                         model.getPlayer().getSpaceship().setHasMoved(false);
                         model.explore();
                         model.nextState();
@@ -71,14 +77,16 @@ public class NextPhaseComponent extends JPanel implements Observer {
                 } else {
                     model.nextState();
                 }
-
             }
         }
         );
     }
 
-    @Override
+    void registerObservers() {
+        model.addObserver(this);
+    }
 
+    @Override
     public void update(Observable o, Object arg) {
         System.out.println("UpdateNextPhaseComponent");
 
@@ -89,8 +97,5 @@ public class NextPhaseComponent extends JPanel implements Observer {
         } else if (model.getState() instanceof Buy) {
             currentPhase.setText("Buy");
         }
-        currentPhase.setFont(Constants.FONT_25);
-
-        //this.repaint();
     }
 }
