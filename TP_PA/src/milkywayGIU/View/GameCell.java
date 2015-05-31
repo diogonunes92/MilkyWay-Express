@@ -234,7 +234,7 @@ public class GameCell extends JPanel implements Observer {
     }
 
     private Image getNave() throws IOException {
-        return ImageIO.read(getClass().getResource("/images/spaceship_final.jpg"));
+        return ImageIO.read(getClass().getResource("/images/spaceship_final.png"));
     }
 
     private Image getCardImage(String name) throws IOException {
