@@ -78,11 +78,11 @@ public class GameCell extends JPanel implements Observer {
             public void mousePressed(MouseEvent ev) {
                 int x_spaceship = model.getPlayer().getSpaceship().getPosX();
                 int y_spaceship = model.getPlayer().getSpaceship().getPosY();
-                
+
                 if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
                     System.out.println("Ai credo toquei no 1º cubo!");
                     System.out.println("Size -> " + model.getPlayer().getSpaceship().getCargo().size());
-                    
+
                     if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
                         firstCube.setOpaque(false);
                         model.buyCargo(model.getBoard()[row][col].getCubeList().get(0).getColor());
@@ -139,78 +139,21 @@ public class GameCell extends JPanel implements Observer {
         } catch (IOException ex) {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         firstCube.setLocation(
-                27, 65);
+                40, 87);
         secondCube.setLocation(
-                42, 65);
+                55, 87);
 
         if (model.getState() instanceof Move && model.getBoard()[row][col] instanceof Planet) {
             if (model.getBoard()[row][col].getCubeList().size() > 0) {
-                switch (model.getBoard()[row][col].getCubeList().get(0).getColor()) {
-                    case "red":
-                        firstCube.setBackground(Color.red);
-                        firstCube.setOpaque(true);
-                        break;
-                    case "blue":
-                        firstCube.setLocation(27, 65);
-                        firstCube.setBackground(Color.blue);
-                        firstCube.setOpaque(true);
-                        break;
-                    case "yellow":
-                        firstCube.setLocation(27, 65);
-                        firstCube.setBackground(Color.yellow);
-                        firstCube.setOpaque(true);
-                        break;
-                    case "black":
-                        if (!model.getBoard()[row][col].isPirate()) {
-                            firstCube.setLocation(27, 65);
-                            firstCube.setBackground(Color.black);
-                            firstCube.setOpaque(true);
-                        } else {
-                            firstCube.setLocation(35, 65);
-                            firstCube.setBackground(Color.black);
-                            firstCube.setOpaque(true);
-                        }
-                        break;
-                    case "white":
-                        firstCube.setLocation(27, 65);
-                        firstCube.setBackground(Color.white);
-                        firstCube.setOpaque(true);
-                        break;
-                }
+                firstCube.setBackground(model.getBoard()[row][col].getCubeList().get(0).getColorObject());
+                firstCube.setOpaque(true);
             }
             if (model.getBoard()[row][col].getCubeList().size() > 1) {
-
-                switch (model.getBoard()[row][col].getCubeList().get(1).getColor()) {
-                    case "red":
-                        secondCube.setBackground(Color.red);
-                        secondCube.setOpaque(true);
-                        break;
-                    case "blue":
-                        secondCube.setLocation(42, 65);
-                        secondCube.setBackground(Color.blue);
-                        secondCube.setOpaque(true);
-                        break;
-                    case "yellow":
-                        secondCube.setLocation(42, 65);
-                        secondCube.setBackground(Color.yellow);
-                        secondCube.setOpaque(true);
-                        break;
-                    case "black":
-                        secondCube.setLocation(42, 65);
-                        secondCube.setBackground(Color.black);
-                        secondCube.setOpaque(true);
-                        break;
-                    case "white":
-                        secondCube.setLocation(42, 65);
-                        secondCube.setBackground(Color.white);
-                        secondCube.setOpaque(true);
-                        break;
-                }
+                secondCube.setBackground(model.getBoard()[row][col].getCubeList().get(1).getColorObject());
+                secondCube.setOpaque(true);
             }
         }
-
     }
 
     @Override

@@ -11,7 +11,24 @@ public class Cube implements Serializable {
 
     public Cube(String color) {
         this.color = color;
-        this.bgColor = Color.GRAY;
+        
+        if(null != color)switch (color) {
+            case "red":
+                bgColor = Color.red;
+                break;
+            case "blue":
+                bgColor = Color.blue;
+                break;
+            case "yellow":
+                bgColor = Color.yellow;
+                break;
+            case "white":
+                bgColor = Color.white;
+                break;
+            case "black":
+                bgColor = Color.black;
+                break;
+        }
     }
 
     public String getColor() {
@@ -20,17 +37,34 @@ public class Cube implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
+        
+        if(null != color)switch (color) {
+            case "red":
+                bgColor = Color.red;
+                break;
+            case "blue":
+                bgColor = Color.blue;
+                break;
+            case "yellow":
+                bgColor = Color.yellow;
+                break;
+            case "white":
+                bgColor = Color.white;
+                break;
+            case "black":
+                bgColor = Color.black;
+                break;
+        }
     }
 
     public Color getColorObject() {
-
-        if (this.color.equals(Constants.BLACK_COLOR)) {
-            return bgColor = Color.WHITE;
-        } else if (this.color.equals(Constants.BLUE_COLOR)) {
-            return bgColor = Color.BLUE;
-        } else if (this.color.equals(Constants.RED_COLOR)) {
-            return bgColor = Color.RED;
-        }
+//        if (this.color.equals(Constants.BLACK_COLOR)) {
+//            return bgColor = Color.WHITE;
+//        } else if (this.color.equals(Constants.BLUE_COLOR)) {
+//            return bgColor = Color.BLUE;
+//        } else if (this.color.equals(Constants.RED_COLOR)) {
+//            return bgColor = Color.RED;
+//        }
         return bgColor;
     }
 }

@@ -114,8 +114,8 @@ public class CargoComponent extends JPanel implements Observer {
 
         if (this.model.getState() instanceof Move) {
             firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
-//            secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(1).getColorObject());
-//        thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
+            //secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(1).getColorObject());
+    //        thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
         }
 
         revalidate();
