@@ -1,5 +1,6 @@
 package milkyway_logic.states;
 
+import java.awt.Color;
 import java.io.Serializable;
 
 public interface States extends Serializable {
@@ -14,7 +15,7 @@ public interface States extends Serializable {
     public States upgradeWeapon();
     public States upgradeCargo();
     public States buyCargo(String carga);
-    public States sellCargo(String carga);
+    public States sellCargo(Color carga);
     public States isFinished();
     public States nextState();
 
