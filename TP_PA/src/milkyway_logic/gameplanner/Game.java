@@ -13,7 +13,6 @@ import milkyway_logic.cards.Planet;
 import milkyway_logic.elements.Player;
 import milkyway_logic.states.StartGame;
 import milkyway_logic.states.States;
-import util.Constants;
 
 public final class Game extends Observable implements Serializable {
 

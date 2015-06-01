@@ -277,35 +277,6 @@ public class Move extends StatesAdapter {
     public States pirateAttack() {
         return super.pirateAttack(); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public States isFinished() {
-
-        System.out.println("VERIFIQUEI JOGO");
-        if (getGame().getPlayer().getCoins() <= 0) {
-            getGame().getPlayer().setIsLooser(true);
-
-        } else if (getGame().getPlayer().getCoins() >= 10) {
-
-            boolean isAllCardsTurned = true;
-
-            for (int x = 0; x < Constants.BOARD_LIMIT_SUP_X; x++) {
-                for (int y = 0; y < Constants.BOARD_LIMIT_SUP_Y; y++) {
-
-                    if (getGame().getBoard()[x][y] instanceof Card) {
-                        if (!getGame().getBoard()[x][y].getIsTurned()) {
-                            isAllCardsTurned = false;
-                        }
-                    }
-                }
-            }
-
-            if (isAllCardsTurned) {
-                getGame().getPlayer().setIsWinner(true);
-            }
-        }
-        return this;
-    }
     
     @Override
     public StatesAdapter upgradeCargo() {
