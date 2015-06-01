@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
 import milkyway_logic.states.Buy;
 import milkyway_logic.states.Move;
+import milkyway_logic.states.Sell;
 import util.Constants;
 
 public class CargoComponent extends JPanel implements Observer {
@@ -111,12 +112,14 @@ public class CargoComponent extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UpdateCargoComponent");
 
-        firstCargo.setBackground(Color.WHITE);
-        secondCargo.setBackground(Color.WHITE);
-        thirdCargo.setBackground(Color.WHITE);
-        
+        if (model.getState() instanceof Buy || model.getState() instanceof Sell) {
+            System.out.println("UpdateCargoComponent");
+
+            firstCargo.setBackground(Color.WHITE);
+            secondCargo.setBackground(Color.WHITE);
+            thirdCargo.setBackground(Color.WHITE);
+
             if (this.model.getPlayer().getSpaceship().getCargo().size() > 0) {
                 firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
                 firstCargo.setOpaque(true);
@@ -129,9 +132,8 @@ public class CargoComponent extends JPanel implements Observer {
                 thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
                 thirdCargo.setOpaque(true);
             }
-
-
-        revalidate();
+            revalidate();
+        }
     }
 
     private void registerListeners() {

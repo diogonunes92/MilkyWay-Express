@@ -1,5 +1,6 @@
 package milkywayGIU.View;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -54,6 +55,7 @@ public class NextPhaseComponent extends JPanel implements Observer {
 
         nextButton.setText("Next Phase");
         nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nextButton.setBackground(Color.LIGHT_GRAY);
 
         currentStateLabel.setText("Move");
         currentStateLabel.setFont(Constants.FONT_25);
@@ -93,9 +95,9 @@ public class NextPhaseComponent extends JPanel implements Observer {
                         model.nextState();
                         nextButton.setEnabled(true);
                     } else {
-
                         JOptionPane.showMessageDialog(getParent(), "You have to move at least once.");
                     }
+
                 } else {
                     model.nextState();
                 }
@@ -110,7 +112,6 @@ public class NextPhaseComponent extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UpdateNextPhaseComponent");
 
         creditsLabel.setText(String.valueOf(model.getPlayer().getCoins()));
 

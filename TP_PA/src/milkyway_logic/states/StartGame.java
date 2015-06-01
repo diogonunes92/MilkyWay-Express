@@ -96,7 +96,6 @@ public class StartGame extends StatesAdapter {
                 }
             }
         }
-
         return this;
     }
     
