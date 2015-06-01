@@ -281,12 +281,13 @@ public class Move extends StatesAdapter {
     @Override
     public States isFinished() {
         return super.isFinished(); //To change body of generated methods, choose Tools | Templates.
-=======
+    }
+    
+    @Override
     public StatesAdapter upgradeCargo() {
         getGame().getPlayer().getSpaceship().setCapacity(getGame().getPlayer().getSpaceship().getCapacity() + 1);
         getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
         getGame().getPlayer().getSpaceship().setIsCargoUpdated(true);
         return this;
->>>>>>> diogo_developer
     }
 }

@@ -115,8 +115,6 @@ public class Sell extends StatesAdapter {
     }
 
     @Override
-<<<<<<< HEAD
-=======
     public StatesAdapter upgradeWeapon() {
         return this;
     }
@@ -131,7 +129,7 @@ public class Sell extends StatesAdapter {
         return this;
     }
     @Override
->>>>>>> diogo_developer
+
     public StatesAdapter nextState() {
         boolean areAllTurned = true;
         for(int i = 0; i< 7; i++){
