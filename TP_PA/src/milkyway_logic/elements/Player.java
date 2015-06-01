@@ -12,11 +12,12 @@ public class Player implements Serializable{
     private int pirateDamage;
     private boolean isWinner;
     private boolean isLooser;
+    private boolean cargoSeized;
 
     public Player(int id, String name, int coins, Spaceship spaceShip) {
         this.id = id;
         this.name = name;
-        this.coins = coins; 
+        this.coins = 100; 
         this.spaceship = spaceShip;
         this.pirateDamage = 0;
     }
@@ -76,4 +77,14 @@ public class Player implements Serializable{
     public void setIsLooser(boolean isLooser) {
         this.isLooser = isLooser;
     }
+
+    public boolean isCargoSeized() {
+        return cargoSeized;
+    }
+
+    public void setCargoSeized(boolean cargoSeized) {
+        this.cargoSeized = cargoSeized;
+    }
+    
+    
 }

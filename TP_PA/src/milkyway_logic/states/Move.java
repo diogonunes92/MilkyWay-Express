@@ -1,5 +1,6 @@
 package milkyway_logic.states;
 
+import java.util.Iterator;
 import java.util.List;
 import milkyway_logic.cards.Card;
 import milkyway_logic.cards.Planet;
@@ -78,7 +79,7 @@ public class Move extends StatesAdapter {
                             List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
 
                             while (getGame().getBoard()[i][j].getCubeList().size() < 2) {
-                                randomNum = 1 + (int) (Math.random() * 4);
+                                randomNum = 1 + (int) (Math.random() * 5);
 
                                 if (randomNum == 1) {
                                     color = "red";
@@ -86,6 +87,10 @@ public class Move extends StatesAdapter {
                                     color = "blue";
                                 } else if (randomNum == 3) {
                                     color = "yellow";
+                                } else if (randomNum == 4) {
+                                    verifyBlackCargo();
+                                    System.out.println("OLHA A ANFÂNDEGA!!!!");
+                                    color = "white";
                                 } else {
                                     color = "white";
                                 }
@@ -277,12 +282,26 @@ public class Move extends StatesAdapter {
     public States pirateAttack() {
         return super.pirateAttack(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public StatesAdapter upgradeCargo() {
         getGame().getPlayer().getSpaceship().setCapacity(getGame().getPlayer().getSpaceship().getCapacity() + 1);
         getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
         getGame().getPlayer().getSpaceship().setIsCargoUpdated(true);
         return this;
+    }
+
+    private void verifyBlackCargo() {
+        List<Cube> listCubes = getGame().getPlayer().getSpaceship().getCargo();
+        Iterator<Cube> it = listCubes.iterator();
+        while (it.hasNext()) {
+            if (it.next().getColor().equals("black")) {
+                getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
+                it.remove();
+                getGame().getPlayer().getSpaceship().setCargo(listCubes);
+                getGame().getPlayer().setCargoSeized(true);
+            }
+        }
+
     }
 }

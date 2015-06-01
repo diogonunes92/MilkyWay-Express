@@ -17,6 +17,7 @@ public class Sell extends StatesAdapter {
     public StatesAdapter sellCargo(Color cargo) {
         String cargo_color = null;
 
+        System.out.println("Color -> " + cargo.toString());
         switch (cargo.toString()) {
             case "java.awt.Color[r=255,g=0,b=0]":
                 cargo_color = "red";
@@ -30,7 +31,7 @@ public class Sell extends StatesAdapter {
             case "java.awt.Color[r=255,g=255,b=0]":
                 cargo_color = "yellow";
                 break;
-            case "java.awt.Color[r=0,g=0,b=25]":
+            case "java.awt.Color[r=0,g=0,b=255]":
                 cargo_color = "blue";
                 break;
         }
@@ -47,7 +48,9 @@ public class Sell extends StatesAdapter {
             //^FETCHES CUBE LIST PLANET
 
             List<Cube> cubesSpaceship = getGame().getPlayer().getSpaceship().getCargo();
+            System.out.println(getGame().getBoard()[PosX][PosY].toStringPrices());
             cargoPrice = prices.get(cargo_color);
+            
             if (getGame().getBoard()[PosX][PosY].isPirate()) {
                 getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() + prices.get(cargo_color));
                 //If spaceship is on planet ortherwise it can't sell
@@ -62,7 +65,7 @@ public class Sell extends StatesAdapter {
                 return this;
             }
 
-            if (cubeListPlanet.get(0).getColor().compareTo(cargo_color) == 0 && cubeListPlanet.get(1).getColor().compareTo(cargo_color) == 0) {
+            if (cubeListPlanet.get(0).getColor().equals(cargo_color) || cubeListPlanet.get(1).getColor().equals(cargo_color)) {
                 getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() + prices.get(cargo_color));
                 System.out.println("Entrei no 1º if");
 

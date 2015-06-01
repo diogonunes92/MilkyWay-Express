@@ -16,7 +16,7 @@ public class Buy extends StatesAdapter {
 
     @Override
     public StatesAdapter buyCargo(String cargo) {
-
+        System.out.println("Color Buying -> " + cargo);
         int PosX = getGame().getPlayer().getSpaceship().getPosX();
         int PosY = getGame().getPlayer().getSpaceship().getPosY();
 
@@ -31,7 +31,6 @@ public class Buy extends StatesAdapter {
                 cargoPrice = prices.get(cargo.toLowerCase());
                 //^THIS FETCHS THE CUBES FROM THE SPACESHIP AND THE PRICES FROM CARGOS ON PLANET
                 if (getGame().getPlayer().getCoins() >= cargoPrice) {
-
                     getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - cargoPrice);
                     cubesSpaceship.add(new Cube(cargo));
                     getGame().getPlayer().getSpaceship().setCargo(cubesSpaceship);
@@ -42,7 +41,7 @@ public class Buy extends StatesAdapter {
                     getGame().getBoard()[PosX][PosY].setCubeList(cubeList);
                 }
 
-                getGame().setRoundsPlayed();
+                Game.setRoundsPlayed();
                 for (int i = 0; i < getGame().getPlayer().getSpaceship().getCargo().size(); i++) {
                     System.out.println("the cargo on board -> " + getGame().getPlayer().getSpaceship().getCargo().get(i).getColor());
                 }
@@ -74,7 +73,7 @@ public class Buy extends StatesAdapter {
                     getGame().getBoard()[PosX][PosY].setCubeList(cubeList);
                 }
 
-                getGame().setRoundsPlayed();
+                Game.setRoundsPlayed();
 
                 return this;
             }

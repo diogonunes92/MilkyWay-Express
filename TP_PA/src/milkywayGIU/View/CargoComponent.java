@@ -120,7 +120,8 @@ public class CargoComponent extends JPanel implements Observer {
 
             firstCargo.setBackground(Color.WHITE);
             secondCargo.setBackground(Color.WHITE);
-
+            thirdCargo.setBackground(Color.WHITE);
+            
             if (!model.getPlayer().getSpaceship().isCargoUpdated()) {
                 thirdCargo.setBackground(Color.orange);
             }
@@ -137,7 +138,8 @@ public class CargoComponent extends JPanel implements Observer {
                 thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
                 thirdCargo.setOpaque(true);
             }
-            revalidate();
+            
+            repaint();
         }
     }
 
@@ -163,6 +165,17 @@ public class CargoComponent extends JPanel implements Observer {
 
                 System.out.println(firstCargo.getBackground().toString());
                 model.sellCargo(firstCargo.getBackground());
+            }
+
+        });
+        
+        secondCargo.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                System.out.println(secondCargo.getBackground().toString());
+                model.sellCargo(secondCargo.getBackground());
             }
 
         });
