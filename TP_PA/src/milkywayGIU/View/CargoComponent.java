@@ -18,10 +18,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import milkywayGIU.Model.Model;
-import milkyway_logic.states.Buy;
-import milkyway_logic.states.Move;
+import milkyway_logic.cards.Planet;
 import util.Constants;
 
 public class CargoComponent extends JPanel implements Observer {
@@ -115,21 +115,24 @@ public class CargoComponent extends JPanel implements Observer {
 
         firstCargo.setBackground(Color.WHITE);
         secondCargo.setBackground(Color.WHITE);
-        thirdCargo.setBackground(Color.WHITE);
-        
-            if (this.model.getPlayer().getSpaceship().getCargo().size() > 0) {
-                firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
-                firstCargo.setOpaque(true);
-            }
-            if (this.model.getPlayer().getSpaceship().getCargo().size() > 1) {
-                secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(1).getColorObject());
-                secondCargo.setOpaque(true);
-            }
-            if (this.model.getPlayer().getSpaceship().getCargo().size() > 2) {
-                thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
-                thirdCargo.setOpaque(true);
-            }
+        if (model.getPlayer().getSpaceship().isCargoUpdated()) {
+            thirdCargo.setBackground(Color.white);
+        } else {
+            thirdCargo.setBackground(Color.orange);
+        }
 
+        if (this.model.getPlayer().getSpaceship().getCargo().size() > 0) {
+            firstCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(0).getColorObject());
+            firstCargo.setOpaque(true);
+        }
+        if (this.model.getPlayer().getSpaceship().getCargo().size() > 1) {
+            secondCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(1).getColorObject());
+            secondCargo.setOpaque(true);
+        }
+        if (this.model.getPlayer().getSpaceship().getCargo().size() > 2) {
+            thirdCargo.setBackground(this.model.getPlayer().getSpaceship().getCargo().get(2).getColorObject());
+            thirdCargo.setOpaque(true);
+        }
 
         revalidate();
     }
@@ -140,7 +143,12 @@ public class CargoComponent extends JPanel implements Observer {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                model.upgradeCargo();
+                if (model.getBoard()[model.getPlayer().getSpaceship().getPosX()][model.getPlayer().getSpaceship().getPosY()] instanceof Planet) {
+                    model.upgradeCargo();
+                }else{
+            JOptionPane.showMessageDialog(getParent(), "You're not on a Planet!");
+                }
+                    
             }
         });
 
@@ -148,6 +156,7 @@ public class CargoComponent extends JPanel implements Observer {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                
                 System.out.println(firstCargo.getBackground().toString());
                 model.sellCargo(firstCargo.getBackground());
             }

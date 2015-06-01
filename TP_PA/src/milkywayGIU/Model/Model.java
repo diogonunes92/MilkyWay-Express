@@ -49,8 +49,11 @@ public class Model extends Observable {
 
     public void upgradeCargo() {
         this.game.upgradeCargo();
-        setChanged();
-        notifyObservers();
+        if (this.game.getPlayer().getSpaceship().isCargoUpdated()) {
+            System.out.println("Mudou!");
+            setChanged();
+            notifyObservers();
+        }
     }
 
     public void buyCargo(String carga) {
