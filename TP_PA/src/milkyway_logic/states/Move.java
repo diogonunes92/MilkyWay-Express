@@ -139,7 +139,6 @@ public class Move extends StatesAdapter {
         System.out.println("Fui chamado (Explore no Move)");
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
-        
 
         //RIGHT 
         if (cardVerifierTurn(posX + 1, posY)) {
@@ -208,7 +207,7 @@ public class Move extends StatesAdapter {
 
     @Override
     public StatesAdapter nextState() {
-        
+
         return new Sell(getGame());
     }
 
@@ -228,7 +227,7 @@ public class Move extends StatesAdapter {
         int posX = getGame().getPlayer().getSpaceship().getPosX();
         int posY = getGame().getPlayer().getSpaceship().getPosY();
 
-        if(getGame().getBoard()[x][y] instanceof Wormhole && getGame().getBoard()[posX][posY] instanceof Wormhole){
+        if (getGame().getBoard()[x][y] instanceof Wormhole && getGame().getBoard()[posX][posY] instanceof Wormhole) {
             return true;
         }
 
@@ -282,5 +281,13 @@ public class Move extends StatesAdapter {
     @Override
     public States isFinished() {
         return super.isFinished(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public StatesAdapter upgradeCargo() {
+        getGame().getPlayer().getSpaceship().setCapacity(getGame().getPlayer().getSpaceship().getCapacity() + 1);
+        getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() - 4);
+        getGame().getPlayer().getSpaceship().setIsCargoUpdated(true);
+        return this;
     }
 }
