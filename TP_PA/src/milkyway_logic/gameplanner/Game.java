@@ -21,7 +21,6 @@ public final class Game extends Observable implements Serializable {
     private Player player;
     private Card[][] board;
     private static int bankCoins;
-
     private static int roundsPlayed = 0;
 
     public Game() {
@@ -136,7 +135,6 @@ public final class Game extends Observable implements Serializable {
     }
 
     public void explore() {
-        System.out.println("Fui chamado (Explore)");
         this.state = state.explore();
     }
 
@@ -185,23 +183,6 @@ public final class Game extends Observable implements Serializable {
             return "You're not on a planet!";
         }
 
-    }
-
-    public boolean verifyLoser() {
-        return player.getCoins() <= 0;
-    }
-
-    public boolean verifyFinishedGame() {
-        for (int x = 0; x < Constants.BOARD_LIMIT_SUP_X; x++) {
-            for (int y = 0; y < Constants.BOARD_LIMIT_SUP_Y; y++) {
-                if (board[x][y] instanceof Card) {
-                    if (!board[x][y].getIsTurned()) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
     }
 
     public void saveGame(String fileName) throws IOException {

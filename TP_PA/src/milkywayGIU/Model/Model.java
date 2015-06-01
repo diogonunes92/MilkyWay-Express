@@ -69,7 +69,8 @@ public class Model extends Observable {
     }
 
     public void isFinished() {
-        this.game.isFinished();
+        System.err.println("FUI CHAMADO AQUI ");
+        this.getState().isFinished();
         setChanged();
         notifyObservers();
     }

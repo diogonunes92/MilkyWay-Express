@@ -14,22 +14,9 @@ public class Sell extends StatesAdapter {
     }
 
     @Override
-    public StatesAdapter isFinished() {
-        
-        if(getGame().getPlayer().getCoins() <= 0) {
-            getGame().getPlayer().setIsWinner(false);
-            getGame().getPlayer().setIsFinished(true);
-        }
-        if(getGame().getPlayer().getCoins() > 0 && getGame().getPlayer().isIsFinished()){
-            getGame().getPlayer().setIsWinner(true);
-        }
-        return this;
-    }
-
-    @Override
     public StatesAdapter sellCargo(Color cargo) {
         String cargo_color = null;
-        
+
         switch (cargo.toString()) {
             case "java.awt.Color[r=255,g=0,b=0]":
                 cargo_color = "red";
@@ -47,7 +34,7 @@ public class Sell extends StatesAdapter {
                 cargo_color = "blue";
                 break;
         }
-        
+
         int PosX = getGame().getPlayer().getSpaceship().getPosX();
         int PosY = getGame().getPlayer().getSpaceship().getPosY();
 
@@ -63,11 +50,11 @@ public class Sell extends StatesAdapter {
             cargoPrice = prices.get(cargo_color);
             if (getGame().getBoard()[PosX][PosY].isPirate()) {
                 getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() + prices.get(cargo_color));
-            //If spaceship is on planet ortherwise it can't sell
-            System.out.println("É pirata!");
+                //If spaceship is on planet ortherwise it can't sell
+                System.out.println("É pirata!");
                 int pos = getCubePos(cubesSpaceship, cargo_color);
                 if (pos < 99) {
-            System.out.println("Remove!");
+                    System.out.println("Remove!");
                     cubesSpaceship.remove(pos);
                 }
                 getGame().getPlayer().getSpaceship().setCargo(cubesSpaceship);
@@ -77,21 +64,21 @@ public class Sell extends StatesAdapter {
 
             if (cubeListPlanet.get(0).getColor().compareTo(cargo_color) == 0 && cubeListPlanet.get(1).getColor().compareTo(cargo_color) == 0) {
                 getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() + prices.get(cargo_color));
-            System.out.println("Entrei no 1º if");
+                System.out.println("Entrei no 1º if");
 
                 int pos = getCubePos(cubesSpaceship, cargo_color);
                 if (pos < 99) {
                     cubesSpaceship.remove(pos);
-                                System.out.println("Vendi");
+                    System.out.println("Vendi");
 
                 }
                 getGame().getPlayer().getSpaceship().setCargo(cubesSpaceship);
             } else if ((!cubeListPlanet.get(0).getColor().equals(cargo_color) && cubeListPlanet.get(1).getColor().equals(cargo_color)) || (cubeListPlanet.get(0).getColor().equals(cargo_color) && !cubeListPlanet.get(1).getColor().equals(cargo_color))) {
                 getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() + prices.get(cargo_color) + 1);
-            System.out.println("Entrei 2º If");
+                System.out.println("Entrei 2º If");
                 int pos = getCubePos(cubesSpaceship, cargo_color);
                 if (pos < 99) {
-            System.out.println("Vendi");
+                    System.out.println("Vendi");
                     cubesSpaceship.remove(pos);
                 }
 
@@ -99,11 +86,11 @@ public class Sell extends StatesAdapter {
             } else {
                 getGame().getPlayer().setCoins(getGame().getPlayer().getCoins() + prices.get(cargo_color) + 2);
                 int pos = getCubePos(cubesSpaceship, cargo_color);
-                            System.out.println("Entrei Else");
+                System.out.println("Entrei Else");
 
                 if (pos < 99) {
                     cubesSpaceship.remove(pos);
-                                System.out.println("Vendi");
+                    System.out.println("Vendi");
 
                 }
                 getGame().getPlayer().getSpaceship().setCargo(cubesSpaceship);
@@ -132,19 +119,15 @@ public class Sell extends StatesAdapter {
 
     public StatesAdapter nextState() {
         boolean areAllTurned = true;
-        for(int i = 0; i< 7; i++){
-            for(int j = 0; j < 9; j++){
-                if(getGame().getBoard()[i][j] != null)
-                if(!getGame().getBoard()[i][j].getIsTurned())
-                    areAllTurned = false;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (getGame().getBoard()[i][j] != null) {
+                    if (!getGame().getBoard()[i][j].getIsTurned()) {
+                        areAllTurned = false;
+                    }
+                }
             }
         }
-        
-        if(areAllTurned){
-            getGame().getPlayer().setIsFinished(true);
-        }
-        
-        isFinished();
         return new Buy(getGame());
     }
 

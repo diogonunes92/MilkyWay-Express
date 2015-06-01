@@ -20,6 +20,8 @@ import util.Constants;
 
 public class GamePanel extends JPanel implements Observer {
 
+    private final String TAG = this.getClass().getSimpleName();
+
     private GameBoard gameBoard;
     private final Model model;
 
@@ -104,13 +106,15 @@ public class GamePanel extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.err.println("UpdateGamePanel");
-        if (model.getPlayer().isIsFinished() && model.getPlayer().isIsWinner()) {
+
+        if (model.getPlayer().isIsLooser()) {
+            System.err.println(TAG + " " + "UpdateGameLost");
+            JOptionPane.showMessageDialog(getParent(), "Game Over! You Lose!");
+            System.exit(0);
+        } else if (model.getPlayer().isIsWinner()) {
+            System.err.println(TAG + " " + "UpdateGame win");
             JOptionPane.showMessageDialog(getParent(), "Game Over! You Win!");
             System.exit(0);
-        }else if(model.getPlayer().isIsFinished() && !model.getPlayer().isIsWinner()){
-            JOptionPane.showMessageDialog(getParent(), "Game Over! You Lose!");
-                        System.exit(0);
         }
         this.repaint();
     }

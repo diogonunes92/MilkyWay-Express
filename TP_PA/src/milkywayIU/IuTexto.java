@@ -89,7 +89,7 @@ public class IuTexto {
 
         isFinish = false;
 
-        if (this.game.verifyLoser()) {
+        if (this.game.getPlayer().isIsLooser()) {
             System.out.println("");
             System.out.println(" ::::::  GAME OVER  ::::::::::");
             System.out.println(" IT HAS BEEN A PLEASURE BUT");
@@ -97,22 +97,14 @@ public class IuTexto {
             System.out.println(" OF COINS! BETTER LUCK NEXT TIME :( ");
             System.exit(0);
 
-        } else if (this.game.verifyFinishedGame()) {
+        } else if (this.game.getPlayer().isIsWinner()) {
 
-            if (this.game.verifyLoser()) {
-                System.out.println("");
-                System.out.println(" ::::::  GAME OVER  ::::::::::");
-                System.out.println(" IT HAS BEEN A PLEASURE BUT");
-                System.out.println(" IT APPEARS YOU HAVE RUN OUT");
-                System.out.println(" OF COINS! BETTER LUCK NEXT TIME :( ");
+            System.out.println("");
+            System.out.println(" ::::::  CONGRATULATIONS  ::::::::::");
+            System.out.println(" YOU'VE JUST CONQUERED THE ENTIRE   ");
+            System.out.println(" UNIVERSE AND HAVE PAYED YOUR DEBT");
+            System.out.println(" YOU'RE JUST LIKE THE LANNISTERS :) ");
 
-            } else {
-                System.out.println("");
-                System.out.println(" ::::::  CONGRATULATIONS  ::::::::::");
-                System.out.println(" YOU'VE JUST CONQUERED THE ENTIRE   ");
-                System.out.println(" UNIVERSE AND HAVE PAYED YOUR DEBT");
-                System.out.println(" YOU'RE JUST LIKE THE LANNISTERS :) ");
-            }
             System.exit(0);
         }
 
@@ -139,10 +131,10 @@ public class IuTexto {
                         try {
                             int move_x = mScanner.nextInt();
                             int move_y = mScanner.nextInt();
-                                isCorrect = false;
-                                hasMoved = true;
-                                this.game.move(move_x, move_y);
-                            
+                            isCorrect = false;
+                            hasMoved = true;
+                            this.game.move(move_x, move_y);
+
                         } catch (InputMismatchException e) {
                             System.err.println("Wrong caracter");
                             iuMove();
@@ -164,9 +156,7 @@ public class IuTexto {
                         this.game.replishMarkets();
                         this.game.explore();
                         this.game.nextState();
-
-                        //System.out.println(this.game.verifyPirateAttack());
-
+                        ;
                         isFinish = true;
                         hasMoved = false;
                     } else {
