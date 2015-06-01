@@ -67,6 +67,7 @@ public class Move extends StatesAdapter {
 
         String color = "white";
         int randomNum;
+        int removed = 0;
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
@@ -100,33 +101,29 @@ public class Move extends StatesAdapter {
                             }
                         } else {
                             List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
-
+                            Iterator<Cube> itCube = cubeList.iterator();
                             System.out.println("vou remover o white");
-                            if (cubeList.get(0).getColor().equals("white")) {
-                                System.out.println("Removi o white");
-
-                                cubeList.remove(new Cube("white"));
+                            while (itCube.hasNext()) {
+                                if (itCube.next().getColor().equals("white")) {
+                                    System.out.println("Removi o white");
+                                    itCube.remove();
+                                    removed++;
+                                }
                             }
-                            if (cubeList.get(1).getColor().equals("white")) {
-                                System.out.println("Removi o white");
+                            for (int r = 0; r < removed; r++) {
+                                randomNum = 1 + (int) (Math.random() * 3);
 
-                                cubeList.remove(new Cube("white"));
+                                if (randomNum == 1) {
+                                    color = "red";
+                                } else if (randomNum == 2) {
+                                    color = "blue";
+                                } else if (randomNum == 3) {
+                                    color = "yellow";
+                                }
+                                cubeList.add(new Cube(color));
                             }
-
-                            randomNum = 1 + (int) (Math.random() * 3);
-
-                            if (randomNum == 1) {
-                                color = "red";
-                            } else if (randomNum == 2) {
-                                color = "blue";
-                            } else if (randomNum == 3) {
-                                color = "yellow";
-                            }
-
-                            cubeList.add(new Cube(color));
                             getGame().getBoard()[i][j].setCubeList(cubeList);
                         }
-
                     } else if (getGame().getBoard()[i][j].getIsTurned() && getGame().getBoard()[i][j].isPirate() && getGame().getBoard()[i][j].getCubeList().size() < 1) {
                         List<Cube> cubeList = getGame().getBoard()[i][j].getCubeList();
                         cubeList.add(new Cube("black"));
