@@ -2,14 +2,16 @@ package milkyway_logic.elements;
 
 import java.io.Serializable;
 
-public class Player implements Serializable{
+public class Player implements Serializable {
 
     private final int id;
+    private int number_rounds;
     private int coins;
     private String name;
     private Spaceship spaceship;
     private boolean isAttacked;
     private int pirateDamage;
+    private int pirate_attacks_nr;
     private boolean isWinner;
     private boolean isLooser;
     private boolean cargoSeized;
@@ -17,11 +19,29 @@ public class Player implements Serializable{
     public Player(int id, String name, int coins, Spaceship spaceShip) {
         this.id = id;
         this.name = name;
-        this.coins = 100; 
+        this.coins = 10;
         this.spaceship = spaceShip;
         this.pirateDamage = 0;
+        this.number_rounds = 0;
+        this.pirate_attacks_nr = 0;
     }
 
+    public void roundsPlayed() {
+        this.number_rounds = this.number_rounds + 1;
+    }
+    
+    public void pirateAttackInc(){
+        this.pirate_attacks_nr = this.pirate_attacks_nr + 1;
+    }
+
+    public int getPirateAttackNr(){
+        return this.pirate_attacks_nr;
+    }
+    
+    public int getNumber_rounds() {
+        return number_rounds;
+    }
+    
     public int getCoins() {
         return coins;
     }
@@ -85,6 +105,5 @@ public class Player implements Serializable{
     public void setCargoSeized(boolean cargoSeized) {
         this.cargoSeized = cargoSeized;
     }
-    
-    
+
 }

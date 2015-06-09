@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Observer {
     private WeaponComponent weaponComponent;
     private CreditsComponent creditsComponent;
     private CargoComponent cargoComponent;
+    private InfoComponent infoComponent;
 
     private JPanel centerPanel, rightPanel;
 
@@ -52,6 +53,7 @@ public class GamePanel extends JPanel implements Observer {
         weaponComponent = new WeaponComponent(model);
         cargoComponent = new CargoComponent(model);
         creditsComponent = new CreditsComponent(model);
+        infoComponent = new InfoComponent(model);
 
         // Main Panels
         centerPanel = new JPanel();
@@ -76,8 +78,8 @@ public class GamePanel extends JPanel implements Observer {
         rightPanel.add(Box.createRigidArea(new Dimension(0, Constants.RIGHT_PANEL_SPACE)));
         rightPanel.add(cargoComponent);
         rightPanel.add(Box.createRigidArea(new Dimension(0, Constants.RIGHT_PANEL_SPACE)));
-        rightPanel.add(creditsComponent);
-
+        rightPanel.add(infoComponent);
+        
         this.add(centerPanel, BorderLayout.WEST);
         this.add(rightPanel, BorderLayout.EAST);
     }
@@ -91,6 +93,7 @@ public class GamePanel extends JPanel implements Observer {
         creditsComponent.registerObservers();
         weaponComponent.registerObservers();
         cargoComponent.registerObservers();
+        infoComponent.registerObservers();
     }
 
     @Override

@@ -126,6 +126,7 @@ public final class Game extends Observable implements Serializable {
                 }
                 doneAtacks++;
             }
+            this.getPlayer().pirateAttackInc();
         }
     }
 

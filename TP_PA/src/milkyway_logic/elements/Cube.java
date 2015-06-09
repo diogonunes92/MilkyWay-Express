@@ -2,7 +2,6 @@ package milkyway_logic.elements;
 
 import java.awt.Color;
 import java.io.Serializable;
-import util.Constants;
 
 public class Cube implements Serializable {
 

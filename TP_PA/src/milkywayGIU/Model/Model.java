@@ -51,7 +51,6 @@ public class Model extends Observable {
     public void upgradeCargo() {
         this.game.upgradeCargo();
         if (this.game.getPlayer().getSpaceship().isCargoUpdated()) {
-            System.out.println("Mudou!");
             setChanged();
             notifyObservers();
         }
@@ -72,7 +71,6 @@ public class Model extends Observable {
     public void isFinished() {
 
         if (this.game.getState() instanceof Buy) {
-            System.err.println("FUI CHAMADO AQUI ");
             this.game.isFinished();
             setChanged();
             notifyObservers();
@@ -81,6 +79,9 @@ public class Model extends Observable {
 
     public void nextState() {
 
+        if (this.game.getState() instanceof Move) {
+            this.game.getPlayer().roundsPlayed();
+        }
         this.game.isFinished();
         this.game.replishMarkets();
         this.game.nextState();
