@@ -168,7 +168,6 @@ public class WeaponComponent extends JPanel implements Observer {
 
     public void update(Observable o, Object arg) {
         if (model.getState() instanceof Buy) {
-            System.out.println("UpdateWeaponComponent");
             weaponPowerLabel.setText(String.valueOf(this.model.getPlayer().getSpaceship().getPower()));
         }
     }

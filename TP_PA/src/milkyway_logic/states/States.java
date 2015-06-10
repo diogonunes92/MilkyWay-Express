@@ -18,6 +18,8 @@ public interface States extends Serializable {
     public States sellCargo(Color carga);
     public States isFinished();
     public States nextState();
+    
+    public States newGame();
 
     public States moveWormhole(int move_x, int move_y);
 

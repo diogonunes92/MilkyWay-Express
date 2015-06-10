@@ -27,7 +27,6 @@ public class GamePanel extends JPanel implements Observer {
 
     private NextPhaseComponent nextPhaseComponent;
     private WeaponComponent weaponComponent;
-    private CreditsComponent creditsComponent;
     private CargoComponent cargoComponent;
     private InfoComponent infoComponent;
 
@@ -52,7 +51,6 @@ public class GamePanel extends JPanel implements Observer {
         nextPhaseComponent = new NextPhaseComponent(model);
         weaponComponent = new WeaponComponent(model);
         cargoComponent = new CargoComponent(model);
-        creditsComponent = new CreditsComponent(model);
         infoComponent = new InfoComponent(model);
 
         // Main Panels
@@ -90,7 +88,6 @@ public class GamePanel extends JPanel implements Observer {
 
         gameBoard.registerObservers();
         nextPhaseComponent.registerObservers();
-        creditsComponent.registerObservers();
         weaponComponent.registerObservers();
         cargoComponent.registerObservers();
         infoComponent.registerObservers();
@@ -111,11 +108,9 @@ public class GamePanel extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
 
         if (model.getPlayer().isIsLooser()) {
-            System.err.println(TAG + " " + "UpdateGameLost");
             JOptionPane.showMessageDialog(getParent(), "Game Over! You Lose!");
             System.exit(0);
         } else if (model.getPlayer().isIsWinner()) {
-            System.err.println(TAG + " " + "UpdateGame win");
             JOptionPane.showMessageDialog(getParent(), "Game Over! You Win!");
             System.exit(0);
         }

@@ -74,4 +74,9 @@ public class StatesAdapter implements States {
     public States moveWormhole(int move_x, int move_y) {
         return this;
     }
+    
+    @Override
+    public States newGame(){
+        return new StartGame(new Game());
+    }
 }

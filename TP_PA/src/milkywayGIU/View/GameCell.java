@@ -66,7 +66,6 @@ public class GameCell extends JPanel implements Observer {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent ev) {
-                System.out.println(model.getState());
                 if (model.getState() instanceof Move) {
                     model.move(row, col);
                     model.pirateAttack();
@@ -81,8 +80,6 @@ public class GameCell extends JPanel implements Observer {
                 int y_spaceship = model.getPlayer().getSpaceship().getPosY();
 
                 if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col) {
-                    System.out.println("Ai credo toquei no 1º cubo!");
-                    System.out.println("Size -> " + model.getPlayer().getSpaceship().getCargo().size());
 
                     if (model.getPlayer().getSpaceship().getCargo().size() < 2) {
                         firstCube.setOpaque(false);
@@ -98,11 +95,9 @@ public class GameCell extends JPanel implements Observer {
             public void mousePressed(MouseEvent ev) {
                 int x_spaceship = model.getPlayer().getSpaceship().getPosX();
                 int y_spaceship = model.getPlayer().getSpaceship().getPosY();
-                System.out.println(model.getState());
 
                 if (model.getState() instanceof Buy && x_spaceship == row && y_spaceship == col
                         && model.getBoard()[row][col].getCubeList().size() > 1) {
-                    System.out.println("Ai credo toquei no 2º cubo!");
                     if (model.getPlayer().getSpaceship().getCargo().size() < 3) {
                         secondCube.setOpaque(false);
                         model.buyCargo(model.getBoard()[row][col].getCubeList().get(1).getColor());
@@ -147,41 +142,51 @@ public class GameCell extends JPanel implements Observer {
         } catch (IOException ex) {
             Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        firstCube.setLocation(
-                35, 86);
-        secondCube.setLocation(
-                55, 87);
-        firstCube.setSize(10, 10);
-        secondCube.setSize(10, 10);
 
-        
+        if (model.getBoard()[row][col] instanceof Planet) {
+            if (model.getBoard()[row][col].isPirate()) {
+
+                firstCube.setLocation(
+                        48, 86);
+            } else {
+                firstCube.setLocation(
+                        33, 86);
+                secondCube.setLocation(
+                        55, 87);
+            }
+
+            firstCube.setSize(10, 10);
+            secondCube.setSize(10, 10);
+        }
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg
+    ) {
         if (model.getPlayer().isIsAttacked()) {
             model.getPlayer().setIsAttacked(false);
             JOptionPane.showMessageDialog(getParent(), "You have been attacked by a pirate! It made " + model.getPlayer().getPirateDamage() + " damage!");
             model.getPlayer().setPirateDamage(0);
         }
 
-        if (model.getState() instanceof Move && model.getBoard()[row][col] instanceof Planet) {
+        if (model.getBoard()[row][col] instanceof Planet) {
 
             if (model.getBoard()[row][col].getCubeList().size() > 0) {
                 if (model.getBoard()[row][col].isPirate()) {
-                    firstCube.setLocation(45, 87);
+                    firstCube.setLocation(52, 87);
                 }
-                System.out.println("Fui chamado!! 1º");
                 firstCube.setBackground(model.getBoard()[row][col].getCubeList().get(0).getColorObject());
                 firstCube.setOpaque(true);
             }
             if (model.getBoard()[row][col].getCubeList().size() > 1) {
-                System.out.println("Fui chamado!! 1º");
+                if (model.getBoard()[row][col].isPirate()) {
+                    firstCube.setLocation(52, 87);
+                }
                 secondCube.setBackground(model.getBoard()[row][col].getCubeList().get(1).getColorObject());
                 secondCube.setOpaque(true);
             }
         }
-        
+
         revalidate();
     }
 

@@ -4,12 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import milkywayGIU.Model.Model;
+import milkyway_logic.gameplanner.Game;
 import util.Constants;
 
 public class IuGraphic extends JFrame {
@@ -95,7 +99,9 @@ public class IuGraphic extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(IuGraphic.this, "Implement Instructions");
+            IuGraphic.this.dispose();
+
+            IuGraphic iuGraphic = new IuGraphic(new Model(new Game()));
         }
     }
 
@@ -103,7 +109,11 @@ public class IuGraphic extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(IuGraphic.this, "Implement Instructions");
+            try {
+                model.saveGame();
+            } catch (IOException ex) {
+                Logger.getLogger(IuGraphic.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -111,7 +121,16 @@ public class IuGraphic extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(IuGraphic.this, "Implement Instructions");
+
+            try {
+                Game g = model.loadGame();
+                IuGraphic.this.dispose();
+                IuGraphic iuGraphic = new IuGraphic(new Model(g));
+            } catch (IOException ex) {
+                Logger.getLogger(IuGraphic.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(IuGraphic.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

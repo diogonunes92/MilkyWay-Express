@@ -1,6 +1,7 @@
 package milkywayGIU.Model;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Observable;
 import milkyway_logic.cards.Card;
 import milkyway_logic.elements.Player;
@@ -8,6 +9,7 @@ import milkyway_logic.gameplanner.Game;
 import milkyway_logic.states.Buy;
 import milkyway_logic.states.Move;
 import milkyway_logic.states.States;
+import util.Constants;
 
 public class Model extends Observable {
 
@@ -18,6 +20,9 @@ public class Model extends Observable {
         this.game = g;
     }
 
+    public void newGame(){
+        this.game.getState().newGame();
+    }
     public void constructGame() {
         this.game.constructGame();
         setChanged();
@@ -116,4 +121,11 @@ public class Model extends Observable {
         notifyObservers();
     }
 
+    public Game loadGame() throws IOException, ClassNotFoundException{
+        return Game.loadGame(Constants.FILE_NAME_DEFAULT);
+    }
+
+    public void saveGame() throws IOException {
+        this.game.saveGame(Constants.FILE_NAME_DEFAULT);
+    }
 }
